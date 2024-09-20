@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mark Lamin">
+
+<title>Abstract Linear Algebra for (Bio) Statisticians</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="vectorSpaces_files/libs/clipboard/clipboard.min.js"></script>
+<script src="vectorSpaces_files/libs/quarto-html/quarto.js"></script>
+<script src="vectorSpaces_files/libs/quarto-html/popper.min.js"></script>
+<script src="vectorSpaces_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="vectorSpaces_files/libs/quarto-html/anchor.min.js"></script>
+<link href="vectorSpaces_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="vectorSpaces_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="vectorSpaces_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="vectorSpaces_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="vectorSpaces_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="vectorSpaces_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="vectorSpaces_files/libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#real-vectors" id="toc-real-vectors" class="nav-link active" data-scroll-target="#real-vectors"><span class="header-section-number">1</span> Real Vectors</a>
+  <ul class="collapse">
+  <li><a href="#definition" id="toc-definition" class="nav-link" data-scroll-target="#definition"><span class="header-section-number">1.1</span> Definition</a></li>
+  <li><a href="#vector-addition" id="toc-vector-addition" class="nav-link" data-scroll-target="#vector-addition"><span class="header-section-number">1.2</span> Vector Addition</a></li>
+  <li><a href="#scalar-multiplication" id="toc-scalar-multiplication" class="nav-link" data-scroll-target="#scalar-multiplication"><span class="header-section-number">1.3</span> Scalar Multiplication</a></li>
+  </ul></li>
+  <li><a href="#the-coordinate-free-approach" id="toc-the-coordinate-free-approach" class="nav-link" data-scroll-target="#the-coordinate-free-approach"><span class="header-section-number">2</span> The Coordinate-Free Approach</a>
+  <ul class="collapse">
+  <li><a href="#defining-a-vector-space" id="toc-defining-a-vector-space" class="nav-link" data-scroll-target="#defining-a-vector-space"><span class="header-section-number">2.1</span> Defining a Vector Space</a></li>
+  <li><a href="#thinking-intuitively" id="toc-thinking-intuitively" class="nav-link" data-scroll-target="#thinking-intuitively"><span class="header-section-number">2.2</span> Thinking Intuitively</a></li>
+  <li><a href="#other-examples-you-should-verify" id="toc-other-examples-you-should-verify" class="nav-link" data-scroll-target="#other-examples-you-should-verify"><span class="header-section-number">2.3</span> Other Examples (You Should Verify)</a></li>
+  <li><a href="#these-are-not-vector-spaces-you-should-verify" id="toc-these-are-not-vector-spaces-you-should-verify" class="nav-link" data-scroll-target="#these-are-not-vector-spaces-you-should-verify"><span class="header-section-number">2.4</span> These are not vector spaces (you should verify)</a></li>
+  </ul></li>
+  <li><a href="#immediate-results" id="toc-immediate-results" class="nav-link" data-scroll-target="#immediate-results"><span class="header-section-number">3</span> Immediate Results</a>
+  <ul class="collapse">
+  <li><a href="#uniqueness" id="toc-uniqueness" class="nav-link" data-scroll-target="#uniqueness"><span class="header-section-number">3.1</span> Uniqueness</a></li>
+  <li><a href="#defining-subtraction" id="toc-defining-subtraction" class="nav-link" data-scroll-target="#defining-subtraction"><span class="header-section-number">3.2</span> Defining Subtraction</a></li>
+  <li><a href="#properties-of-0" id="toc-properties-of-0" class="nav-link" data-scroll-target="#properties-of-0"><span class="header-section-number">3.3</span> Properties of 0</a></li>
+  <li><a href="#consistency-of-subtraction-notation" id="toc-consistency-of-subtraction-notation" class="nav-link" data-scroll-target="#consistency-of-subtraction-notation"><span class="header-section-number">3.4</span> Consistency of Subtraction Notation</a></li>
+  <li><a href="#other-results" id="toc-other-results" class="nav-link" data-scroll-target="#other-results"><span class="header-section-number">3.5</span> Other Results</a>
+  <ul class="collapse">
+  <li><a href="#sigma-notation-for-vector-addition" id="toc-sigma-notation-for-vector-addition" class="nav-link" data-scroll-target="#sigma-notation-for-vector-addition"><span class="header-section-number">3.5.1</span> Sigma Notation for Vector Addition</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#subspaces" id="toc-subspaces" class="nav-link" data-scroll-target="#subspaces"><span class="header-section-number">4</span> Subspaces</a>
+  <ul class="collapse">
+  <li><a href="#definition-subspace" id="toc-definition-subspace" class="nav-link" data-scroll-target="#definition-subspace"><span class="header-section-number">4.1</span> Definition – Subspace</a></li>
+  <li><a href="#definition-linear-combination" id="toc-definition-linear-combination" class="nav-link" data-scroll-target="#definition-linear-combination"><span class="header-section-number">4.2</span> Definition – Linear Combination</a></li>
+  <li><a href="#definition-span" id="toc-definition-span" class="nav-link" data-scroll-target="#definition-span"><span class="header-section-number">4.3</span> Definition – Span</a></li>
+  <li><a href="#definition-linear-independence" id="toc-definition-linear-independence" class="nav-link" data-scroll-target="#definition-linear-independence"><span class="header-section-number">4.4</span> Definition – Linear Independence</a></li>
+  <li><a href="#definition-basis" id="toc-definition-basis" class="nav-link" data-scroll-target="#definition-basis"><span class="header-section-number">4.5</span> Definition – Basis</a></li>
+  <li><a href="#definition-dimension-of-a-vector-space" id="toc-definition-dimension-of-a-vector-space" class="nav-link" data-scroll-target="#definition-dimension-of-a-vector-space"><span class="header-section-number">4.6</span> Definition – Dimension of a Vector Space</a>
+  <ul class="collapse">
+  <li><a href="#examples-verify" id="toc-examples-verify" class="nav-link" data-scroll-target="#examples-verify"><span class="header-section-number">4.6.1</span> Examples (Verify)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#linear-maps" id="toc-linear-maps" class="nav-link" data-scroll-target="#linear-maps"><span class="header-section-number">5</span> Linear Maps</a>
+  <ul class="collapse">
+  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics"><span class="header-section-number">5.1</span> Basics</a></li>
+  <li><a href="#linear-maps-as-vectors" id="toc-linear-maps-as-vectors" class="nav-link" data-scroll-target="#linear-maps-as-vectors"><span class="header-section-number">5.2</span> Linear Maps as Vectors</a>
+  <ul class="collapse">
+  <li><a href="#addition" id="toc-addition" class="nav-link" data-scroll-target="#addition"><span class="header-section-number">5.2.1</span> Addition</a></li>
+  <li><a href="#multiplication" id="toc-multiplication" class="nav-link" data-scroll-target="#multiplication"><span class="header-section-number">5.2.2</span> Multiplication</a></li>
+  </ul></li>
+  <li><a href="#some-types-of-linear-maps-definitions" id="toc-some-types-of-linear-maps-definitions" class="nav-link" data-scroll-target="#some-types-of-linear-maps-definitions"><span class="header-section-number">5.3</span> Some Types of Linear Maps (Definitions)</a></li>
+  <li><a href="#inverses" id="toc-inverses" class="nav-link" data-scroll-target="#inverses"><span class="header-section-number">5.4</span> Inverses</a></li>
+  <li><a href="#isomorphisms" id="toc-isomorphisms" class="nav-link" data-scroll-target="#isomorphisms"><span class="header-section-number">5.5</span> Isomorphisms</a></li>
+  </ul></li>
+  <li><a href="#sums-and-intersections-of-vector-spaces" id="toc-sums-and-intersections-of-vector-spaces" class="nav-link" data-scroll-target="#sums-and-intersections-of-vector-spaces"><span class="header-section-number">6</span> Sums and Intersections of Vector Spaces</a></li>
+  <li><a href="#projections-and-approximations" id="toc-projections-and-approximations" class="nav-link" data-scroll-target="#projections-and-approximations"><span class="header-section-number">7</span> Projections and Approximations</a>
+  <ul class="collapse">
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">7.1</span> Motivation</a></li>
+  <li><a href="#inner-product-spaces" id="toc-inner-product-spaces" class="nav-link" data-scroll-target="#inner-product-spaces"><span class="header-section-number">7.2</span> Inner Product Spaces</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Abstract Linear Algebra for (Bio) Statisticians</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mark Lamin </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>These notes are based on PubH 8401 – Linear Models from the Fall 2024 semester, taught by <a href="https://steffen-ventz.github.io/">Steffen Ventz</a>. The textbook used is <a href="https://books.google.com/books/about/Matrix_Analysis_for_Statistics.html?id=d-RzQgAACAAJ&amp;source=kp_book_description">Matrix Analysis for Statistics</a> by <a href="https://sciences.ucf.edu/statistics/person/james-r-schott/">James R. Schott</a>. These notes are also heavily influenced by the book <a href="https://linear.axler.net">Linear Algebra Done Right</a> by <a href="https://www.axler.net">Sheldon Axler</a>.</p>
+<section id="real-vectors" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Real Vectors</h1>
+<section id="definition" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="definition"><span class="header-section-number">1.1</span> Definition</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(\mathbb R\)</span> refer to the set of real numbers. Then <span class="math inline">\(\mathbb R^n\)</span> is the set of ordered lists of real numbers of length <span class="math inline">\(n\)</span>. These lists are also called real <em>vectors</em> of length <span class="math inline">\(n\)</span>.</p>
+</blockquote>
+<p>For instance, if <span class="math inline">\(a_1,...,a_n\in\mathbb R\)</span>, then <span class="math display">\[\begin{bmatrix}
+a_1\\  
+a_2\\  
+\vdots\\
+a_n
+\end{bmatrix}\in\mathbb R^n\]</span></p>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning: Order Matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An ordered list means that <span class="math display">\[\begin{bmatrix}
+a_1\\  
+a_2
+\end{bmatrix}\]</span> is not necessarily equal to <span class="math display">\[\begin{bmatrix}
+a_2\\  
+a_1
+\end{bmatrix}\]</span> as an example. Make sure to be consistent if you are specifying the elements in a vector.</p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Elements in <span class="math inline">\(\mathbb R\)</span> are sometimes called <em>scalars</em> in the context of vector spaces.</p>
+</blockquote>
+</section>
+<section id="vector-addition" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="vector-addition"><span class="header-section-number">1.2</span> Vector Addition</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(a_1,...,a_n,b_1,...,b_n\in\mathbb R\)</span>. Then, we can extend the notion of addition to vectors, namely, <em>vector addition</em> as follows: <span class="math display">\[\begin{bmatrix}
+a_1\\  
+a_2\\  
+\vdots\\
+a_n
+\end{bmatrix} + \begin{bmatrix}
+b_1\\  
+b_2\\  
+\vdots\\
+b_n
+\end{bmatrix} = \begin{bmatrix}
+a_1 + b_1\\  
+a_2 + b_2\\  
+\vdots\\
+a_n + b_n
+\end{bmatrix}\]</span></p>
+</blockquote>
+</section>
+<section id="scalar-multiplication" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="scalar-multiplication"><span class="header-section-number">1.3</span> Scalar Multiplication</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(c,a_1,...,a_n\in\mathbb R\)</span>. Then <em>scalar multiplication</em> is notated and defined as follows: <span class="math display">\[c\begin{bmatrix}
+a_1\\  
+a_2\\  
+\vdots\\
+a_n
+\end{bmatrix} = \begin{bmatrix}
+ca_1\\  
+ca_2\\  
+\vdots\\
+ca_n
+\end{bmatrix}\]</span></p>
+</blockquote>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="the-coordinate-free-approach" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The Coordinate-Free Approach</h1>
+<p>While we will typically think of vectors as elements of <span class="math inline">\(\mathbb R^n\)</span>, we don’t need to be that specific when developing our theory. This is the coordinate-free approach. <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="defining-a-vector-space" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="defining-a-vector-space"><span class="header-section-number">2.1</span> Defining a Vector Space</h2>
+<blockquote class="blockquote">
+<p>A <em>vector space</em> is a set, <span class="math inline">\(V\)</span>, that is equipped with two operations: vector addition (+), and scalar multiplication, which is notated as <span class="math inline">\(cv\)</span> where <span class="math inline">\(c\in\mathbb R\)</span> and <span class="math inline">\(v\in V\)</span>. These operations must obey the following properties (where we assume that <span class="math inline">\(v,w,z\in V\)</span> and <span class="math inline">\(a,b\in\mathbb R\)</span>):</p>
+<ol class="example" type="1">
+<li><span class="math inline">\(v+w\in V\)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li><span class="math inline">\(v + (w+z) = (v + w) + z\)</span> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></li>
+<li>There exists an element, <span class="math inline">\(\textbf{0}\in V\)</span> such that, <span class="math inline">\(v+\textbf{0}=v\)</span>. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li>For all <span class="math inline">\(v\)</span>, there exists a vector, <span class="math inline">\(w\)</span>, such that <span class="math inline">\(v+w=\textbf{0}\)</span>. <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></li>
+<li><span class="math inline">\(v+w = w+v\)</span> <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></li>
+<li><span class="math inline">\(av\in V\)</span> <a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a></li>
+<li><span class="math inline">\(a(bv)=(ab)v\)</span></li>
+<li><span class="math inline">\(1v=v\)</span></li>
+<li><span class="math inline">\(a(v+w) = av + aw\)</span></li>
+<li><span class="math inline">\((a+b)v = av+bv\)</span>.</li>
+</ol>
+</blockquote>
+</section>
+<section id="thinking-intuitively" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="thinking-intuitively"><span class="header-section-number">2.2</span> Thinking Intuitively</h2>
+<p>Properties 1-5 enforce the structure of vector addition in <span class="math inline">\(V\)</span>. <a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>Properties 6-10 enforce structure to make scalar multiplication compatible with multiplication in the real numbers, thus allowing scalar multiplication to feel similar to the “usual” multiplication. For instance, property 8 gives consistency to how the number 1 operates in the reals as well as how it operates with respect to scalar multiplication. Properties 9 and 10 demonstrate that the distributive property operates with ease in vector spaces.</p>
+<p>When we prove properties about vector spaces, we can then apply those results to the special case where <span class="math inline">\(V = \mathbb R^n\)</span>, and vector addition and scalar multiplication are as defined above.</p>
+</section>
+<section id="other-examples-you-should-verify" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="other-examples-you-should-verify"><span class="header-section-number">2.3</span> Other Examples (You Should Verify)</h2>
+<ul>
+<li><span class="math inline">\(V\)</span> is the set of continuous functions <span class="math inline">\(f:[0,1]\to\mathbb R\)</span>.
+<ul>
+<li>Vector Addition: For <span class="math inline">\(f,g\in V\)</span>, <span class="math inline">\(f + g\equiv f(x)+g(x)\)</span></li>
+<li>Scalar Multiplication: For <span class="math inline">\(f\in V\)</span> and <span class="math inline">\(c\in\mathbb R\)</span>, scalar multiplication is <span class="math inline">\(cf(x)\)</span>.</li>
+</ul></li>
+<li><span class="math inline">\(V\)</span> is the set of polynomials of degree <span class="math inline">\(\leq m\)</span> for <span class="math inline">\(m\in\mathbb N\)</span>
+<ul>
+<li>Vector addition and scalar multiplication derived from the the first example.</li>
+</ul></li>
+<li><span class="math inline">\(V = \{\textbf{0}\}\)</span>
+<ul>
+<li>The vector sum of any two elements is the zero vector</li>
+<li>Any vector in <span class="math inline">\(V\)</span> scalar multiplied by any real number is the zero vector</li>
+</ul></li>
+<li><span class="math inline">\(V = \left\{a\begin{bmatrix}1\\1\\1\end{bmatrix}:a\in\mathbb R\right\}\)</span>
+<ul>
+<li>VA and SM derived from typical for <span class="math inline">\(\mathbb R^3\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="these-are-not-vector-spaces-you-should-verify" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="these-are-not-vector-spaces-you-should-verify"><span class="header-section-number">2.4</span> These are not vector spaces (you should verify)</h2>
+<ul>
+<li><span class="math inline">\(V = \left\{a\begin{bmatrix}1\\1\\1\end{bmatrix}:a\geq 0\right\}\)</span>
+<ul>
+<li>Operations derived from <span class="math inline">\(\mathbb R^3\)</span></li>
+</ul></li>
+<li><span class="math inline">\(V = \left\{\begin{bmatrix}1\\1\\1\end{bmatrix} +\begin{bmatrix}a\\b\\a+b\end{bmatrix} :a,b\in\mathbb R\right\}\)</span>
+<ul>
+<li>Operations derived from <span class="math inline">\(\mathbb R^3\)</span></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="immediate-results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Immediate Results</h1>
+<section id="uniqueness" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="uniqueness"><span class="header-section-number">3.1</span> Uniqueness</h2>
+<p>The following two theorems take properties that show existence in the Vector Spaces definition and prove subsequent results about their uniqueness.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: The zero vector is unique
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is only one element, <span class="math inline">\(\textbf{0}\)</span>, in <span class="math inline">\(V\)</span> that has the property that for all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(v + \textbf{0} = v\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose there are two elements, <span class="math inline">\(\textbf{0}_1\)</span> and <span class="math inline">\(\textbf{0}_2\)</span> in <span class="math inline">\(V\)</span> that have the identity property. Then, observe that <span class="math display">\[\begin{align}
+\textbf{0}_1 &amp;= \textbf{0}_1 + \textbf{0}_2 \text{ (because $\textbf{0}_2$ is an identity element)}\\
+             &amp;= \textbf{0}_2 + \textbf{0}_1 \text{ (commutative property of vector addition)}\\
+             &amp;= \textbf{0}_2                \text{ (because $\textbf{0}_1$ is an identity element)}
+\end{align} \]</span></p>
+<p>Thus, all identity elements are the same, so the zero element in <span class="math inline">\(V\)</span> is unique, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Uniqueness of the Additive Inverse
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For all <span class="math inline">\(v\in V\)</span>, there exists a <u>unique</u> <span class="math inline">\(w\in V\)</span> such that <span class="math inline">\(v + w =\textbf{0}\)</span>.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(v\in V\)</span> be arbitrary, and let <span class="math inline">\(w,u\in V\)</span> such that <span class="math inline">\(v + w = \textbf{0}\)</span> and that <span class="math inline">\(v + u = \textbf{0}\)</span>.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> Observe that <span class="math display">\[\begin{align}
+v + w = v + u &amp;\implies (v + w) + w = (v + u) + w \text{ (transitive property of equality)}\\
+&amp;\implies w + (v + w) = w + (v + u) \text{ (commutativity of vector addition)}\\
+&amp;\implies (w + v) + w = (w + v) + u \text{ (associativity of vector addition)}\\
+&amp;\implies (v + w) + w = (v + w) + u \text{ (commutativity of vector addition)}\\
+&amp;\implies \textbf{0} + w = \textbf{0} + u\\
+&amp;\implies w + \textbf{0} = u + \textbf{0} \text{ (commutativity of vector addition)}\\
+&amp;\implies w = u \text{ (identity of zero vector under addition)}
+\end{align}\]</span></p>
+<p>Thus, all additive inverses of <span class="math inline">\(v\)</span> are equal, so the additive inverse of <span class="math inline">\(v\)</span> is unique, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="defining-subtraction" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="defining-subtraction"><span class="header-section-number">3.2</span> Defining Subtraction</h2>
+<blockquote class="blockquote">
+<p>For notation purposes, we will now use <span class="math inline">\(-v\)</span> to be defined at the additive inverse of <span class="math inline">\(v\)</span>.</p>
+<p>Then, we define subtraction, that is for <span class="math inline">\(v,w\in V\)</span>, <span class="math inline">\(v-w\)</span> is defined to be <span class="math inline">\(v + (-w)\)</span>.</p>
+</blockquote>
+</section>
+<section id="properties-of-0" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="properties-of-0"><span class="header-section-number">3.3</span> Properties of 0</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Multiplicative (Scalar) Zero
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(0v=\textbf{0}\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Two zeros?!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What’s the difference between 0 and <span class="math inline">\(\textbf{0}\)</span>? Remember, <span class="math inline">\(0\in\mathbb R\)</span> refers to the real number 0, while <span class="math inline">\(\textbf{0}\in V\)</span> refers to the identity vector in <span class="math inline">\(V\)</span>! If you’re ever unsure which is which, look at the context in which the symbol is being used.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that <span class="math display">\[
+\begin{align}
+0v &amp;= (0+0)v\\
+   &amp;= 0v + 0v \text{ (distributive property)}
+\end{align}
+\]</span></p>
+<p>Using this result, we observe that <span class="math display">\[
+\begin{align}
+0v = 0v + 0v &amp;\implies 0v + -(0v) = 0v + 0v + -(0v)\\
+             &amp;\implies \textbf{0} = 0v + \textbf{0}\\
+             &amp;\implies \textbf{0} = 0v \text{ (identity of zero vector)}
+\end{align}
+\]</span></p>
+<p>Therefore, <span class="math inline">\(0v=\textbf{0}\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Multiplicative (Vector) Zero
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For all <span class="math inline">\(c\in \mathbb R\)</span>, <span class="math inline">\(c\textbf{0}=\textbf{0}\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+c\textbf{0} &amp;= c(\textbf{0} + \textbf{0}) \text{ (identity property of $\textbf{0}$)}\\
+            &amp;= c\textbf{0} + c\textbf{0} \text{ (distributive property)}\\
+\end{align}
+\]</span></p>
+<p>Using this result, we observe that <span class="math display">\[
+\begin{align}
+c\textbf{0} = c\textbf{0} + c\textbf{0} &amp;\implies c\textbf{0} - c\textbf{0} = c\textbf{0} + c\textbf{0} - c\textbf{0}\\
+&amp;\implies \textbf{0} = c\textbf{0} + \textbf{0} \text{ (identity property of zero vector)}\\
+&amp;\implies \textbf{0} = c\textbf{0}
+\end{align}
+\]</span> Thus, <span class="math inline">\(c\textbf{0} = \textbf{0}\)</span> which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="consistency-of-subtraction-notation" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="consistency-of-subtraction-notation"><span class="header-section-number">3.4</span> Consistency of Subtraction Notation</h2>
+<p>Now that we’ve defined subtraction, we notice that there are multiple ways to interpret the quantity <span class="math inline">\(-cv\)</span> where <span class="math inline">\(c\in\mathbb R\)</span>, <span class="math inline">\(v\in V\)</span>. These are:</p>
+<ul>
+<li><span class="math inline">\(-(cv)\)</span></li>
+<li><span class="math inline">\((-c)v\)</span></li>
+<li><span class="math inline">\(-1*(cv)\)</span></li>
+<li><span class="math inline">\(c*(-v)\)</span></li>
+</ul>
+<p>It turns out that these are all the same quantity, so we don’t have to worry as much with our notation! Let’s prove it with the following two theorems.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lemma
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(-1v = -v\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What’s the Difference?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Remember, <span class="math inline">\(-v\)</span> refers to the (unique) additive inverse of <span class="math inline">\(v\)</span> while <span class="math inline">\(-1v\)</span> refers to <span class="math inline">\(v\)</span> being scalar multiplied by the real number <span class="math inline">\(-1\)</span>. Our goal is to prove that they are actually the same thing.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that <span class="math display">\[
+\begin{align}
+\textbf{0} &amp;= 0v \text{ (see previous theorem)}\\
+           &amp;= (1+(-1))v\\
+           &amp;= 1v + (-1)v \text{ (distributive property)}\\
+           &amp;= v + (-1)v \text{ (identity property of scalar multiplication)}
+\end{align}
+\]</span></p>
+<p>Then observe that <span class="math display">\[
+\begin{align}
+\textbf{0} = v + (-1)v &amp;\implies \textbf{0} + (-v) = v + (-1)v + (-v)\\
+                       &amp;\implies -v = v-v + (-1)v \text{ (commutative and associative properties of vector addition)}\\
+                       &amp;\implies -v = \textbf{0} + (-1)v\\
+                       &amp;\implies -v=-1v \text{ (identity property of vector addition)}
+\end{align}
+\]</span></p>
+<p>Therefore, <span class="math inline">\(-v=-1v\)</span> which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(c\in\mathbb R\)</span> and <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(-(cv)=(-c)v=-1(cv)=c*(-v)\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that <span class="math display">\[
+\begin{align}
+-(cv) &amp;= -1(cv) \text{ (see previous lemma)}\\
+      &amp;= (-1c)v \text{ (property of scalar multiplication)}\\
+      &amp;= (-c)v\\
+      &amp;= (c*(-1))v\\
+      &amp;= c(-1v)\\
+      &amp;= c*(-v)
+      &amp;\blacksquare
+\end{align}
+\]</span></p>
+</div>
+</div>
+</div>
+<p>Thus, we can use <span class="math inline">\(-cv\)</span> freely without worrying about how it is interpreted.</p>
+</section>
+<section id="other-results" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="other-results"><span class="header-section-number">3.5</span> Other Results</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For <span class="math inline">\(c\in\mathbb R\)</span> and <span class="math inline">\(v\in V\)</span>, if <span class="math inline">\(cv=\textbf{0}\)</span>, then <span class="math inline">\(c=0\)</span> or <span class="math inline">\(v=\textbf{0}\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(cv=\textbf{0}\)</span>. Consider two cases:</p>
+<ul>
+<li><span class="math inline">\(c=0\)</span></li>
+<li><span class="math inline">\(c\neq0\)</span></li>
+</ul>
+<p>In the first case, there is nothing to show as <span class="math inline">\(c=0\)</span>. In the second scenario, <span class="math inline">\(\frac{1}{c}\)</span> is well defined. Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+cv=\textbf{0} &amp;\implies \frac{1}{c}cv = \frac{1}{c}\textbf{0}\\
+              &amp;\implies 1v            = \textbf{0} \text{ (see previous theorem)}\\
+              &amp;\implies v             = \textbf{0} \text{ (identity in scalar multiplication)}
+\end{align}
+\]</span></p>
+<p>Thus, in this case <span class="math inline">\(v=\textbf{0}\)</span>. Therefore, in both cases, either <span class="math inline">\(c=0\)</span> or <span class="math inline">\(v=\textbf{0}\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Counting Vectors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(v\)</span> be an element of some vector space, <span class="math inline">\(V\)</span>. Then, for <span class="math inline">\(n\in\mathbb N\)</span>, <span class="math inline">\(\sum\limits_{i=1}^nv=nv\)</span>.</p>
+</div>
+</div>
+<section id="sigma-notation-for-vector-addition" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="sigma-notation-for-vector-addition"><span class="header-section-number">3.5.1</span> Sigma Notation for Vector Addition</h3>
+<p>You probably have an idea how to define sigma notation for vector addition based on how sigma notation is defined for addition in the real numbers, but for completeness, I will define it here.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<blockquote class="blockquote">
+<p>For n = 1 and <span class="math inline">\(v_1\)</span> in a vector space, V, <span class="math display">\[\sum\limits_{i=1}^nv_i = v_1\]</span> For <span class="math inline">\(n\in\mathbb N\)</span>, and <span class="math inline">\(n&gt;1\)</span>, and <span class="math inline">\(v_1,...,v_n\)</span> in a vector space, <span class="math inline">\(V\)</span>, <span class="math display">\[\sum\limits_{i=1}^nv_i = v_n + \left(\sum\limits_{i=1}^{n-1}v_i\right)\]</span> Where in both cases, the + operation is vector addition.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We will prove by induction.</p>
+<p>(Base Case) When <span class="math inline">\(n=1\)</span>, <span class="math inline">\(\sum\limits_{i=1}^nv_i = v_1\)</span> by definition of sigma notation, and <span class="math inline">\(v_1=1v_1\)</span> by definition of vector spaces.</p>
+<p>(Induction Hypothesis) Assume that the theorem is true for some <span class="math inline">\(n\in\mathbb N\)</span>. Then, <span class="math display">\[
+\begin{align}
+\sum\limits_{i=1}^{n+1}v &amp;= v + \left(\sum\limits_{i=1}^nv\right)\\
+                        &amp;= v + nv\\
+                        &amp;= (1+n)v\\
+                        &amp;= (n+1)v
+\end{align}
+\]</span> Thus, for all <span class="math inline">\(n\in\mathbb N\)</span>, <span class="math inline">\(\sum\limits_{i=1}^nv=nv\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="subspaces" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Subspaces</h1>
+<section id="definition-subspace" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="definition-subspace"><span class="header-section-number">4.1</span> Definition – Subspace</h2>
+<p>Let <span class="math inline">\(V\)</span> be a vector space. Suppose we have a subset, <span class="math inline">\(S\subseteq V\)</span>. In what situations is <span class="math inline">\(S\)</span> a vector space (where <span class="math inline">\(S\)</span> inherits vector addition and scalar multiplication from <span class="math inline">\(V\)</span>)? Conversely, suppose we have a subset of <span class="math inline">\(V\)</span> that we already know is a vector space. Is there anything else we immediately know about it?</p>
+<blockquote class="blockquote">
+<p>A subspace is a subset, <span class="math inline">\(S\)</span> of a vector space, <span class="math inline">\(V\)</span>, such that <span class="math inline">\(S\)</span> is itself a vector space with operations inherited from <span class="math inline">\(V\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Subspaces, Identity, and Closure
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(S\subseteq V\)</span> for a vector space <span class="math inline">\(V\)</span>, then <span class="math inline">\(S\)</span> is a vector space with operations derived from <span class="math inline">\(V\)</span> if and only if all of the following are true.</p>
+<ol type="a">
+<li>It contains <span class="math inline">\(\textbf{0}\)</span>. <a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></li>
+<li>For all <span class="math inline">\(c\in\mathbb R\)</span> and all <span class="math inline">\(s\in S\)</span>, <span class="math inline">\(cs\in S\)</span>. <a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></li>
+<li>For all <span class="math inline">\(s,t\in S\)</span>, <span class="math inline">\(s + t\in S\)</span>. <a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\((\implies):\)</span> Suppose <span class="math inline">\(S\)</span> is a vector space. Then, b) and c) hold from properties 1 and 6 of the Vector Spaces Definition, respectively. To prove a), we recall from previous theorems that <span class="math inline">\(S\)</span> contains a unique additive identity. Suppose <span class="math inline">\(\textbf{0}_S\in S\)</span> is the additive identity of <span class="math inline">\(S\)</span> and <span class="math inline">\(\textbf{0}_V\in V\)</span> is the additive identity of <span class="math inline">\(V\)</span>. Since <span class="math inline">\(S\subseteq V\)</span>, <span class="math inline">\(\textbf{0}_S\in V\)</span>, and similarly, for any <span class="math inline">\(s\in S\)</span>, <span class="math inline">\(s\in V\)</span>. Therefore, the following two equations hold in <span class="math inline">\(V\)</span>: <span class="math display">\[s+\textbf{0}_S=s\]</span> <span class="math display">\[s+\textbf{0}_V=s\]</span> Therefore, <span class="math display">\[
+\begin{align}
+s+\textbf{0}_S = s+\textbf{0}_V &amp;\implies s-s+\textbf{0}_S=s-s+\textbf{0}_V\\
+                                &amp;\implies \textbf{0}_V + \textbf{0}_S = \textbf{0}_V + \textbf{0}_V\\
+                                &amp;\implies \textbf{0}_S + \textbf{0}_V = \textbf{0}_V\\
+                                &amp;\implies \textbf{0}_S = \textbf{0}_V
+\end{align}
+\]</span></p>
+<p>Since <span class="math inline">\(\textbf{0}_S = \textbf{0}_V\)</span>, <span class="math inline">\(\textbf{0}_V\in S\)</span>, thus completing this side of the proof.</p>
+<p><span class="math inline">\((\impliedby)\)</span>: Now, suppose that a), b), and c) apply to <span class="math inline">\(S\)</span>. This immediately shows that properties 1,3, and 6 of the Vector Spaces Definition apply to <span class="math inline">\(S\)</span>. Additionally, properties 2,5,7,8,9, and 10 inherit from <span class="math inline">\(V\)</span>. Thus, we only need to show property 4 holds. Suppose <span class="math inline">\(s\in S\)</span>. We know that since <span class="math inline">\(s\in V\)</span> and <span class="math inline">\(V\)</span> is a vector space, there exists an element, <span class="math inline">\(-s\in V\)</span> such that <span class="math inline">\(s +- s=0\)</span>. Since <span class="math inline">\(-s = -1s\)</span>, <span class="math inline">\(-s\in S\)</span> by b). Thus, <span class="math inline">\(S\)</span> satisfies all 10 properties of a vector space as outlines in the definition, thus finishing this side of the proof. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="definition-linear-combination" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="definition-linear-combination"><span class="header-section-number">4.2</span> Definition – Linear Combination</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(v_1,...,v_n\in V\)</span> for a vector space, <span class="math inline">\(V\)</span>. A <em>Linear Combination</em> of <span class="math inline">\(v_1,...,v_n\)</span> is a vector in the form of <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i\)</span> where <span class="math inline">\(c_1,...,c_n\in \mathbb R\)</span>.</p>
+</blockquote>
+</section>
+<section id="definition-span" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="definition-span"><span class="header-section-number">4.3</span> Definition – Span</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(v_1,...,v_n\in V\)</span> for a vector space, <span class="math inline">\(V\)</span>. The <em>Span</em>, of <span class="math inline">\(v_1,...,v_n\)</span> is the set of all linear combinations of <span class="math inline">\(v_1,...,v_n\)</span>. Equivalently, <span class="math display">\[\text{span}(v_1,...,v_n) = \left\{\sum\limits_{i=1}^nc_iv_i : c_1,...,c_n\in\mathbb R\right\}\]</span> If <span class="math inline">\(A=\{v_1,...,v_n\}\)</span>. Then <span class="math inline">\(\text{span}(A)\)</span> is equivalent notation to <span class="math inline">\(\text{span}(v_1,...,v_n)\)</span>. If <span class="math inline">\(\text{span}(A)=B\)</span> for some set <span class="math inline">\(B\)</span>, then we say <span class="math inline">\(A\)</span> <em>spans</em> <span class="math inline">\(B\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Subsets of Vectors Have Subsets of Spans
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be finite sets of vectors where <span class="math inline">\(A\subseteq B\)</span>. Then, <span class="math inline">\(\text{span}(A)\subseteq\text{span}(B)\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We can write <span class="math inline">\(A\)</span> as <span class="math inline">\(\left{v_1,...,v_n\right}\)</span> and <span class="math inline">\(B\)</span> as <span class="math inline">\(\left{v_1,...,v_n,...,v_{n+k}\right}\)</span>. Suppose <span class="math inline">\(w\in\text{span}(A)\)</span>, then there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math display">\[w=\sum\limits_{i=1}^nc_iv_i = \left(\sum\limits_{i=1}^nc_iv_i\right) + \sum\limits_{i=n+1}^{n+k}0v_i\in\text{span}(B)\]</span> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Spans are Subspaces
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be a vector space and <span class="math inline">\(v_1,...,v_k\in V\)</span>. Then, <span class="math inline">\(\text{span}(v_1,...,v_n)\)</span> is a subspace of <span class="math inline">\(V\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(w\in\text{span}(v_1,...,v_n)\)</span>. Then, there exist <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(w=\sum\limits_{i=1}^nc_iv_i\)</span>. If <span class="math inline">\(c_1=\dots c_n=0\)</span>, then <span class="math inline">\(w=\textbf{0}\)</span> (how can we prove this?). Suppose <span class="math inline">\(a\in\mathbb R\)</span>. Then observe that <span class="math display">\[
+\begin{align}
+aw &amp;= a\sum\limits_{i=1}^nc_iv_i\\
+   &amp;= \sum\limits_{i=1}^na(c_iv_i)\\
+   &amp;= \sum\limits_{i=1}^n(ac_i)v_i
+\end{align}
+\]</span></p>
+<p>Since each <span class="math inline">\(ac_i\in\mathbb R\)</span>, <span class="math inline">\(aw\in\text{span}(v_1,...,v_n)\)</span>.</p>
+<p>Suppose <span class="math inline">\(u\in\text{span}(v_1,...,v_n)\)</span>, then there exist <span class="math inline">\(d_1,\dots,d_n\in\mathbb R\)</span> such that <span class="math inline">\(u=\sum\limits_{i=1}^nd_iv_i\)</span>. Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+w+u &amp;= \sum\limits_{i=1}^nc_iv_i +\sum\limits_{i=1}^nd_iv_i\\
+    &amp;= \sum\limits_{i=1}^n(c_iv_i + d_iv_i) \text{ (associative property)}\\
+    &amp;= \sum\limits_{i=1}^n(c_i + d_i)v_i \text{ (distributive property)}
+\end{align}
+\]</span></p>
+<p>Since each <span class="math inline">\(c_i+d_i\in\mathbb R\)</span>, <span class="math inline">\(w+u\in\text{span}(v_1,...,v_n)\)</span>. Therefore, <span class="math inline">\(\text{span}(v_1,...,v_n)\)</span> is a subspace of <span class="math inline">\(V\)</span> because it satisfies the three properties demonstrated by the previous theorem. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Vectors in Span of Other Vectors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be a vector space and <span class="math inline">\(v_1,...,v_n\in V\)</span>. If there exists <span class="math inline">\(i\)</span> such that <span class="math inline">\(v_i\in\text{span}(\{v_j:j\neq i\})\)</span>, then <span class="math display">\[\text{span}(v_1,...,v_n) = \text{span}(\{v_j:j\neq i\})\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Without loss of generality, suppose <span class="math inline">\(i=n\)</span>. Then, we want to show that <span class="math inline">\(\text{span}(v_1,...,v_n)=\text{span}(v_1,...,v_{n-1})\)</span>. We know that <span class="math inline">\(\text{span}(v_1,...,v_{n-1})\subseteq\text{span}(v_1,...,v_n)\)</span> since <span class="math inline">\(\{v_1,...,v_{n-1}\}\subseteq\{v_1,...,v_n\}\)</span>.</p>
+<p>Suppose <span class="math inline">\(w\in\text{span}(v_1,...,v_n)\)</span>. Then, there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(w=\sum\limits_{i=1}^nc_iv_i\)</span>. Since <span class="math inline">\(v_n\in\text{span}(v_1,...,v_{n-1})\)</span>, there exists <span class="math inline">\(d_1,...,d_{n-1}\in\mathbb R\)</span> such that <span class="math inline">\(v_n=\sum\limits_{i=1}^{n-1}d_iv_i\)</span>. Therefore, <span class="math display">\[
+\begin{align}
+w &amp;= \sum\limits_{i=1}^nc_iv_i\\
+  &amp;= \left(\sum\limits_{i=1}^{n-1}c_iv_i\right) + c_nv_n\\
+  &amp;= \left(\sum\limits_{i=1}^{n-1}c_iv_i\right) + c_n\sum\limits_{i=1}^{n-1}d_iv_i\\
+  &amp;= \sum\limits_{i=1}^{n-1}\left(c_iv_i + c_nd_iv_i\right)\\
+  &amp;= \sum\limits_{i=1}^{n-1}\left(c_i + c_nd_i\right)v_i\\
+  &amp;\in\text{span}(v_1,...,v_{n-1})
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\text{span}(v_1,...,v_{n})\subseteq\text{span}(v_1,...,v_{n-1})\)</span>. Therefore, <span class="math inline">\(\text{span}(v_1,...,v_{n})=\text{span}(v_1,...,v_{n-1})\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Zero Vector Does Not Change Span
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be a vector space and <span class="math inline">\(v_1,...,v_n\in V\)</span>. If there exists <span class="math inline">\(i\)</span> such that <span class="math inline">\(v_i=\textbf{0}\)</span>, then <span class="math display">\[\text{span}(v_1,...,v_n) = \text{span}(\{v_j:j\neq i\})\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\textbf{0}\)</span> is in the span of any set of vectors since that span is a subspace. Thus, this is a corollary of the previous theorem. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<p>Therefore, we have a mechanism of starting with a list of vectors, <span class="math inline">\(v_1,...,v_n\in V\)</span>, and removing “unnecessary” vectors concerning span.</p>
+<ul>
+<li>For <span class="math inline">\(i=1,...,n\)</span>
+<ul>
+<li>If <span class="math inline">\(v_i\)</span> is zero, remove it</li>
+<li>If <span class="math inline">\(v_i\in\text{span}(v_1,...,v_{i-1})\)</span>, remove it</li>
+</ul></li>
+</ul>
+<p>The desire to characterize a vector space with the fewest number of vectors motivates the following definitions.</p>
+</section>
+<section id="definition-linear-independence" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="definition-linear-independence"><span class="header-section-number">4.4</span> Definition – Linear Independence</h2>
+<blockquote class="blockquote">
+<p>A set of vectors <span class="math inline">\(v_1,...,v_n\)</span> in a vector space <span class="math inline">\(V\)</span> is said to be <em>linearly independent</em> if <span class="math display">\[\sum\limits_{i=1}^nc_iv_i = \textbf{0} \implies c_1=...=c_n=0\]</span> A set that is not linearly independent is <em>linearly dependent</em>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Zero vector is not lineraly independent
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a set of vectors, <span class="math inline">\(v_1,...,v_n\)</span> contains <span class="math inline">\(\textbf{0}\)</span>, then it is not a linearly independent set.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Without loss of generality, suppose <span class="math inline">\(v_1=\textbf{0}\)</span>. Then define <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(c_1=1\)</span>, and <span class="math inline">\(c_i=0\)</span> for <span class="math inline">\(i=2,...,n\)</span>. Then,</p>
+<p><span class="math display">\[
+\begin{align}
+\sum\limits_{i=1}^nc_iv_i &amp;= 1v_1 + \sum\limits_{i=2}^n0v_i\\
+                          &amp;= v_1 + \sum\limits_{i=2}^n\textbf{0}\\
+                          &amp;= \textbf{0} + \textbf{0}\\
+                          &amp;= \textbf{0}
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=0\)</span> does not imply that <span class="math inline">\(c_1=...=c_n=0\)</span> since there is an example with <span class="math inline">\(c_1\neq0\)</span> and <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=0\)</span>. Thus, the set is not linearly independent, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Linearly Independent Vectors Do Not Lie in the Span of Each Other
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(S = \{v_1,...,v_n\}\)</span> is a set of vectors in <span class="math inline">\(V\)</span>. Then, <span class="math inline">\(S\)</span> is a linearly independent set if and only if the following two properties are satisfied.</p>
+<ol type="a">
+<li><span class="math inline">\(\textbf{0}\notin S\)</span></li>
+<li><span class="math inline">\(S\)</span> does not contain any vectors that are in the span of the remaining vectors.</li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-33" class="callout-33-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\((\implies)\)</span> Suppose <span class="math inline">\(S\)</span> is a linearly independent set. Then property a) is satisfied from the previous theorem.</p>
+<p>Assume towards contradiction that b) does not hold. Then, without loss of generality, let’s say that vector is <span class="math inline">\(v_n\)</span>. From the previous theorem’s proof, we know we can write <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i\)</span> as <span class="math inline">\(\sum\limits_{i=1}^{n-1}\left(c_i + c_nd_i\right)v_i\)</span> where <span class="math inline">\(c_i, d_i\in\mathbb R\)</span>. If we choose each <span class="math inline">\(c_i=1\)</span> and each <span class="math inline">\(d_i=-1\)</span>, then we have <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}\)</span>, but not all <span class="math inline">\(c_i\)</span>’s are 0. Thus, the set is not linearly independent, showing a contradiction and showing that property b) must, indeed, hold.</p>
+<p><span class="math inline">\((\impliedby)\)</span> Here we will prove the contrapositive. That means that we will assume <span class="math inline">\(S\)</span> is linearly dependent, and show that a) and b) do not both hold. If <span class="math inline">\(\textbf{0}\in S\)</span>, then a) does not hold and there is nothing further to show. If <span class="math inline">\(\textbf{0}\notin S\)</span>, then we need to show that b) is not possible. Since <span class="math inline">\(S\)</span> is linearly dependent, then there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> which are not all 0 such that <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}\)</span>. Let <span class="math inline">\(j\)</span> be the maximum of <span class="math inline">\(\{1,...,n\}\)</span> such that <span class="math inline">\(c_j\neq0\)</span>. Then, <span class="math display">\[
+\begin{align}
+\sum\limits_{i=1}^nc_iv_i=\textbf{0} &amp;\implies\sum\limits_{i=1}^jc_iv_i=\textbf{0}\\
+                                     &amp;\implies\sum\limits_{i=1}^{j-1}c_iv_i = -c_jv_j\\
+                                     &amp;\implies\sum\limits_{i=1}^{j-1}\left(-\frac{c_i}{c_j}\right)v_i = v_j
+\end{align}
+\]</span> Therefore, <span class="math inline">\(v_j\)</span> is in the span of the other vectors, so b) is not possible.</p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A subset of a linearly independent set is linearly independent.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Without loss of generality, let <span class="math inline">\(\{v_1,...,v_n\}\)</span> be a linearly independent set of vectors in a vector space, <span class="math inline">\(V\)</span>, and let <span class="math inline">\(\{v_1,...,v_k\}\)</span> be a subset where <span class="math inline">\(k&lt;n\)</span>. Assume towards contradiction that the subset is a linearly dependent set. Then, there exists a <span class="math inline">\(v_i\)</span> in the span of the other vectors in the subset. However, this implies that the <span class="math inline">\(v_i\)</span> is in the span of the other vectors in the linearly independent subset which is not possible. Hence, a contradiction. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="definition-basis" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="definition-basis"><span class="header-section-number">4.5</span> Definition – Basis</h2>
+<blockquote class="blockquote">
+<p>A basis of a vector space, <span class="math inline">\(V\)</span>, is a linearly independent set of vectors whose span is <span class="math inline">\(V\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A linearly independent set, <span class="math inline">\(\{v_1,...,v_n\}\)</span> is a basis of <span class="math inline">\(\text{span}(v_1,..,v_n)\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a vector space, <span class="math inline">\(V\)</span>, has a basis, then any vector, <span class="math inline">\(v\in V\)</span> can be written as a unique linear combination of the basis vectors.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(B=\{b_1,...,b_n\}\)</span> be a basis of <span class="math inline">\(V\)</span>, let <span class="math inline">\(v\in V\)</span>, and let <span class="math inline">\(c_1,...,c_n,d_1,...,d_n\)</span> be such that <span class="math display">\[v = \sum\limits_{i=1}^nc_ib_i = \sum\limits_{i=1}^nd_ib_i\]</span> Thus, observe that <span class="math display">\[
+\begin{align}
+\sum\limits_{i=1}^nc_ib_i = \sum\limits_{i=1}^nd_ib_i &amp;\implies \sum\limits_{i=1}^nc_ib_i - \left(\sum\limits_{i=1}^nd_ib_i\right)=\textbf{0}\\
+&amp;\implies \sum\limits_{i=1}^n(c_ib_i-d_ib_i)=\textbf{0}\\
+&amp;\implies \sum\limits_{i=1}^n(c_i-d_i)b_i=\textbf{0}\\
+&amp;\implies c_i-d_i=0, \forall i \text{ Since $B$ is a linearly independent set}\\
+&amp;\implies c_i=d_i, \forall i
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(v\)</span> is a unique linear combination of the basis vectors, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<p>This result means we can define a vector space through its basis vectors (assuming a basis exists). For example, if <span class="math inline">\(v\in V\)</span>, then <span class="math inline">\(v\)</span> can be described entirely through its basis vectors.</p>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(\mathcal B=\{b_1,...,b_n\}\)</span> be a basis for a vector space, <span class="math inline">\(V\)</span>. Then, for all <span class="math inline">\(v\in V\)</span>, there exists a unique <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math display">\[v=\sum\limits_{i=1}^nc_ib_i\]</span> <span class="math inline">\(c_1,...,c_n\)</span> are called the <em>coordinates</em> of <span class="math inline">\(v\)</span> with respect to <span class="math inline">\(\mathcal B\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Every Vector Space of the form <span class="math inline">\(\text{span}\{v_1,...,v_n\}\)</span><a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> has a basis.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-40" class="callout-40-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To show that there exists a basis, we will start from the set <span class="math inline">\(\{v_1,...,v_n\}\)</span>, whose span is <span class="math inline">\(V\)</span>, and remove vectors until it is a linearly independent set, but still spans <span class="math inline">\(V\)</span>. We can accomplish this by doing the following:</p>
+<p>Step 1) Remove all <span class="math inline">\(v_i\)</span> in the set where <span class="math inline">\(v_i=\textbf{0}\)</span>. Now the set is <span class="math inline">\(\{v_1,...,v_m\}\)</span> where <span class="math inline">\(m\leq n\)</span>. Step 2) For <span class="math inline">\(i=1,...,m\)</span>: Remove <span class="math inline">\(v_i\)</span> if it is in the span of the other vectors in the set (not including any vectors that have already been removed).</p>
+<p>With these steps, we have a set of vectors that does not contain <span class="math inline">\(\textbf{0}\)</span>, nor has any vectors that lie in the span of the other vectors. From a previous theorem, these two properties imply we are left with a linearly independent set. We also know from previous theorems that this set still spans <span class="math inline">\(V\)</span>. Thus, we have a basis of <span class="math inline">\(V\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be a vector space. A linearly independent set of vectors in <span class="math inline">\(V\)</span> has fewer than or equal to the number of vectors in a set whose span is <span class="math inline">\(V\)</span>.<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-42" class="callout-42-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(U=\{u_1,...,u_n\}\)</span> be a linearly independent set, and let <span class="math inline">\(W=\{w_1,...,w_m\}\)</span> be a set that spans <span class="math inline">\(V\)</span>. We want to show that <span class="math inline">\(n\leq m\)</span>. To do this, we will show that we can replace a vector in <span class="math inline">\(W\)</span> with a vector in <span class="math inline">\(U\)</span> without changing the span of the set. We will show this by doing induction on the number of vectors in <span class="math inline">\(U\)</span>.</p>
+<p>For the base case, consider the set <span class="math inline">\(\{u_1\}\cup W\)</span>. Since <span class="math inline">\(W\)</span> spans <span class="math inline">\(V\)</span>, <span class="math inline">\(\{u_1\}\cup W\)</span> must span <span class="math inline">\(V\)</span> as well. Since the span of a set of vectors is a vector space and <span class="math inline">\(\textbf{0}\)</span> is in all subspaces of <span class="math inline">\(V\)</span>, <span class="math inline">\(\textbf{0}\in\text{span}\{\{u_1\}\cup W\}\)</span>. Thus, there exist <span class="math inline">\(c_0,c_1,...,c_m\)</span> such that <span class="math display">\[c_0u_1+\sum\limits_{i=1}^mc_iw_i=\textbf{0}\]</span> We know that it is possible for <span class="math inline">\(c_0\)</span> to be non-zero since <span class="math inline">\(c_1,...,c_m\)</span> can be chosen such that <span class="math inline">\(\sum\limits_{i=1}^mc_iw_i=-c_0u_1\)</span> (since <span class="math inline">\(W\)</span> spans <span class="math inline">\(V\)</span>). In the case where <span class="math inline">\(c_0\neq0\)</span>, <span class="math inline">\(c_1,...,c_m\)</span> can’t all be zero because that would imply <span class="math inline">\(u_1=\textbf{0}\)</span>, but that contradicts the assumption that <span class="math inline">\(U\)</span> is a linearly independent set. Thus, there exists at least one <span class="math inline">\(w_i\)</span> such that <span class="math inline">\(c_i\neq0\)</span>. Choose <span class="math inline">\(c_j\)</span> such that <span class="math inline">\(j\)</span> is the max of <span class="math inline">\(1,...m\)</span> such that <span class="math inline">\(c_j\neq0\)</span>. Thus, <span class="math display">\[w_j=\left(-\frac{c_0}{c_j}u_1+\sum\limits_{i=1}^{j-1}\left(-\frac{c_i}{c_j}\right)w_i\right)\in\text{span}(\left(W\setminus\{w_j\}\right)\cup\{u_1\})\]</span> Thus, we can remove <span class="math inline">\(w_j\)</span> from the set <span class="math inline">\(\{u_1\}\cup W\)</span> and the span is the same.</p>
+<p>Now, we re label the remaining <span class="math inline">\(w_i\)</span> vectors so our set that spans <span class="math inline">\(V\)</span> is <span class="math inline">\(\{u_1,w_2,...,w_m\}\)</span>.</p>
+<p>For the induction hypothesis, suppose that we were able to successfully replace <span class="math inline">\(k\)</span> (with <span class="math inline">\(k&lt;n\)</span>) vectors in <span class="math inline">\(W\)</span> with vectors. Assume towards contradiction that we’ve replaced all the vectors in <span class="math inline">\(W\)</span> with vectors in <span class="math inline">\(U\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> Then, the set <span class="math inline">\(\{u_1,...,u_k\}\)</span> spans <span class="math inline">\(V\)</span>. However, this means that <span class="math inline">\(u_{k+1}\in\text{span}(\{u_1,...,u_k\})\)</span>, which implies that <span class="math inline">\(\{u_1,...,u_{k+1}\}\)</span> is a linearly dependent set which is a contradiction. Thus, <span class="math inline">\(k&lt;m\implies k+1\leq m\)</span>. As with the base case, we can relabel the remaining vectors in <span class="math inline">\(W\)</span> such that our new spanning set is <span class="math inline">\(\{u_1,...,u_k,w_{k+1},...,w_m\}\)</span>.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> Since <span class="math inline">\(u_{k+1}\in\text{span}(u_1,...,u_k,w_{k+1},...,w_m)\)</span>, there exist scalars <span class="math inline">\(c_1,...,c_n\)</span> such that <span class="math display">\[u_{k+1}=\sum\limits_{i=1}^kc_iu_i +\sum\limits_{i=k+1}^mc_iw_i\]</span> Assume towards contradiction that <span class="math inline">\(c_{k+1}=...=c_m=0\)</span>, then this implies <span class="math inline">\(u_{k+1}\in\text{span}(u_1,...,u_k)\)</span> which implies that <span class="math inline">\(\{u_1,...,u_{k=1}\}\)</span> is not linearly independent, hence a contradiction. Thus, at least one of the scalars for the <span class="math inline">\(w_i's\)</span> is non zero. Choose <span class="math inline">\(g\)</span> to be the max of <span class="math inline">\(k+1,...,m\)</span> such that <span class="math inline">\(c_g\neq0\)</span>. Then <span class="math display">\[
+\begin{align}
+u_{k+1}=\sum\limits_{i=1}^kc_iu_i +\sum\limits_{i=k+1}^gc_iw_i &amp;\implies u_{k+1} -\left(\sum\limits_{i=1}^kc_iu_i\right) - \left(\sum\limits_{i=k+1}^{g-1}c_iw_i\right)=c_gw_g\\
+                                                               &amp;\implies \frac{1}{c_g}u_{k+1} -\left(\sum\limits_{i=1}^k\frac{c_i}{c_g}u_i\right)-\left(\sum\limits_{i=k+1}^{g-1}\frac{c_i}{c_g}w_i\right)=w_g
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(w_g\)</span> is in the span of the other vectors, so we can remove it from the list without changing the span. Without loss of generality, we can re label the remaining <span class="math inline">\(w_i\)</span> vectors such that the new list is <span class="math inline">\(\{u_1,...,u_{k+1},w_{k+2},..,w_m\}\)</span>.</p>
+<p>Thus, by induction, we can replace <span class="math inline">\(n\)</span> <span class="math inline">\(w\)</span> vectors with <span class="math inline">\(u\)</span> vectors and end with either the set <span class="math inline">\(U\)</span> or <span class="math inline">\(U\)</span> as well as some <span class="math inline">\(W\)</span> vectors, that spans <span class="math inline">\(V\)</span>. Thus, the linearly independent set has fewer vectors than the spanning set, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a vector space, <span class="math inline">\(V\)</span>, has a basis, then every basis of <span class="math inline">\(V\)</span>, has the same number of vectors.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-44" class="callout-44-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose we have two bases, <span class="math inline">\(W=\{w_1,...,w_n\}\)</span> and <span class="math inline">\(B=\{b_1,...,b_m\}\)</span>. Since <span class="math inline">\(W\)</span> is a linearly independent set and <span class="math inline">\(B\)</span> spans <span class="math inline">\(V\)</span>, then <span class="math inline">\(n\leq m\)</span>. Since <span class="math inline">\(B\)</span> is a linearly independent set and <span class="math inline">\(W\)</span> spans <span class="math inline">\(V\)</span>, <span class="math inline">\(m\leq n\)</span>. Thus, <span class="math inline">\(m=n\)</span>, so every basis of <span class="math inline">\(V\)</span> has the same number of vectors, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="definition-dimension-of-a-vector-space" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="definition-dimension-of-a-vector-space"><span class="header-section-number">4.6</span> Definition – Dimension of a Vector Space</h2>
+<blockquote class="blockquote">
+<p>The <em>dimension</em> of a vector space, <span class="math inline">\(V\)</span> is the (unique) number of vectors that comprise a basis of <span class="math inline">\(V\)</span>. The dimension of <span class="math inline">\(V\)</span> is sometimes notated as <span class="math inline">\(\text{dim}(V)\)</span>.</p>
+</blockquote>
+<section id="examples-verify" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="examples-verify"><span class="header-section-number">4.6.1</span> Examples (Verify)</h3>
+<ul>
+<li>The vector space <span class="math inline">\(V = \left\{\begin{bmatrix}a\\b\\a+b\end{bmatrix} :a,b\in\mathbb R\right\}\)</span> has dimension 2.</li>
+<li><span class="math inline">\(\text{dim}\left(\mathbb R^n\right)=n\)</span>.</li>
+<li><span class="math inline">\(\text{dim}\left(\mathcal P_n\right)=n+1\)</span></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="linear-maps" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Linear Maps</h1>
+<section id="basics" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">5.1</span> Basics</h2>
+<p>This section will focus on functions that map between vector spaces.</p>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces. A function <span class="math inline">\(T:V\to W\)</span> is called <em>linear</em> if</p>
+<ol type="a">
+<li>For <span class="math inline">\(v_1,v_2\in V\)</span>, <span class="math inline">\(T(v_1+v_2)=T(v_1)+T(v_2)\)</span><a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a></li>
+<li>For <span class="math inline">\(c\in\mathbb R\)</span> and <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(T(cv)=cT(v)\)</span><a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a> Linear functions are also called linear maps.</li>
+</ol>
+</blockquote>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Some Notes on Notation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> need not share vector addition or scalar multiplication, but which operation is being used will be implied from context.</li>
+<li>Sometimes <span class="math inline">\(Tv\)</span> will be used instead of <span class="math inline">\(T(v)\)</span> where <span class="math inline">\(T\)</span> is a linear map and <span class="math inline">\(v\)</span> is a vector in <span class="math inline">\(T\)</span>’s domain.</li>
+<li>Let <span class="math inline">\(V,W\)</span> be vector spaces. Then <span class="math inline">\(\mathcal L(V,W)\)</span> is the set of linear functions with domain <span class="math inline">\(V\)</span> and co-domain <span class="math inline">\(W\)</span>.</li>
+<li><span class="math inline">\(\mathcal L(V)\)</span> is used instead of <span class="math inline">\(\mathcal L(V,V)\)</span> for concision.</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and suppose <span class="math inline">\(T\in\mathcal L(V,W)\)</span>. Then <span class="math inline">\(T(\textbf{0}_V)=\textbf{0}_W\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-47-contents" aria-controls="callout-47" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-47" class="callout-47-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that <span class="math display">\[
+\begin{align}
+T(\textbf{0}_V) &amp;= T(\textbf{0}_V+\textbf{0}_V)\\
+                &amp;= T(\textbf{0}_V) + T(\textbf{0}_V)
+\end{align}
+\]</span></p>
+<p>Thus, observe that <span class="math display">\[
+\begin{align}
+T(\textbf{0}_V) = T(\textbf{0}_V) + T(\textbf{0}_V) &amp;\implies \textbf{0}_W = T(\textbf{0}_V)
+\end{align}
+\]</span></p>
+<p>Thus <span class="math inline">\(T(\textbf{0}_V)=\textbf{0}_W\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="linear-maps-as-vectors" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="linear-maps-as-vectors"><span class="header-section-number">5.2</span> Linear Maps as Vectors</h2>
+<p>We can additionally consider operations on linear maps.</p>
+<section id="addition" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="addition"><span class="header-section-number">5.2.1</span> Addition</h3>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and let <span class="math inline">\(T_1, T_2\in\mathcal L(V,W)\)</span>. The notation of <span class="math inline">\(T_1+T_2\)</span> means that the function <span class="math inline">\(S=T_1+T_2\)</span> is defined to be that for <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(S(v)=T_1(v)+T_2(v)\)</span>. For all <span class="math inline">\(c\in\mathbb R\)</span> and all <span class="math inline">\(T\in\mathcal L(V,W)\)</span>, <span class="math inline">\(S=cT\)</span> is defined such that for all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(S(v)=cT(v)\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Linear Maps are Vectors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces. Then, <span class="math inline">\(\mathcal L(V, W)\)</span> is a vector space with addition and scalar multiplication as defined above.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-49-contents" aria-controls="callout-49" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-49" class="callout-49-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For this proof, let <span class="math inline">\(R, S, T\in\mathcal L(V, W)\)</span>, <span class="math inline">\(u,v\in V\)</span>, and <span class="math inline">\(a,b,c\in\mathbb R\)</span>.</p>
+<p><strong>Closure of Vector Addition</strong></p>
+<p>Then the domain of <span class="math inline">\(S+T\)</span> is <span class="math inline">\(V\)</span> since <span class="math inline">\((S+T)(v)=S(v)+T(v)\)</span> and <span class="math inline">\(V\)</span> is the domain of <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>. <span class="math inline">\(W\)</span> is the co-domain of <span class="math inline">\(S+T\)</span> since <span class="math inline">\(S(v), T(v)\in W\)</span> and <span class="math inline">\(W\)</span> is closed under vector addition.</p>
+<p>To show <span class="math inline">\(S+T\)</span> is a linear map, observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(S+T)(u+v) &amp;= S(u+v) + T(u+v)\\
+            &amp;= Su + Sv + Tu + Tv\\
+            &amp;= (Su + Tu) + (Sv + Tv)\\
+            &amp;= (S+T)u + (S+T)v
+\end{align}
+\]</span></p>
+<p>and also observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(S+T)cv &amp;= Scv + Tcv\\
+         &amp;= cSv + cTv\\
+         &amp;= c(Sv+Tv)\\
+         &amp;= c(S+T)v
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\mathcal L(V,W)\)</span> is closed under vector addition.</p>
+<p><strong>Symmetry of Vector Addition</strong></p>
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(S+T)v &amp;= Sv + Tv\\
+       &amp;= Tv + Sv\\
+       &amp;= (T+S)v
+\end{align}
+\]</span></p>
+<p><strong>Associativity of Vector Addition</strong></p>
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(R + (S+T))v &amp;= Rv + (Sv + Tv)\\
+             &amp;= (Rv + Sv) + Tv\\
+             &amp;= (R+S)v + Tv\\
+             &amp;= ((R+S) + T)v
+\end{align}
+\]</span></p>
+<p><strong>Identity of Vector Addition</strong></p>
+<p>Define the map <span class="math inline">\(Tv=\textbf{0}_W\)</span> for all <span class="math inline">\(v\in V\)</span> where <span class="math inline">\(\textbf{0}_W\)</span> is the zero vector in <span class="math inline">\(W\)</span>. Then, <span class="math inline">\(T\)</span> is the zero vector of <span class="math inline">\(\mathcal L(V,W)\)</span>. To show this, observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(S+T)v &amp;= Sv + Tv\\
+       &amp;= Sv + \textbf{0}_W\\
+       &amp;= Sv
+\end{align}
+\]</span></p>
+<p><strong>Invertibility of Vector Addition</strong></p>
+<p>Let <span class="math inline">\(v\in V\)</span>. Define <span class="math inline">\(w=Tv\)</span>. Then define <span class="math inline">\(S\in\mathcal L(V,W)\)</span>, such that <span class="math inline">\(Sv=-w\)</span>. Then,</p>
+<p><span class="math display">\[
+\begin{align}
+(T+S)v &amp;= Tv + Sv\\
+       &amp;= w - w\\
+       &amp;= \textbf{0}_W
+\end{align}
+\]</span></p>
+<p><strong>Closure of Scalar Mulitplication</strong></p>
+<p>The set of inputs to <span class="math inline">\(cT(v)\)</span> are the same as to <span class="math inline">\(T(v)\)</span> so <span class="math inline">\(cT\)</span> has domain <span class="math inline">\(V\)</span>. <span class="math inline">\(Tv\in W\)</span> through definition of <span class="math inline">\(T\)</span>, and <span class="math inline">\(cTv\in W\)</span> since <span class="math inline">\(W\)</span> is closed under scalar multiplication due to <span class="math inline">\(W\)</span> being a vector space.</p>
+<p>To show that <span class="math inline">\(cT\)</span> is a linear map, observe that</p>
+<p><span class="math display">\[
+\begin{align}
+cT(u+v) &amp;= cTu + cTv
+\end{align}
+\]</span></p>
+<p>and that</p>
+<p><span class="math display">\[
+\begin{align}
+cT(av) &amp;= c(aTv)\\
+       &amp;= (ca)Tv\\
+       &amp;= (ac)Tv\\
+       &amp;= a(cTv)
+\end{align}
+\]</span></p>
+<p>Therefore, <span class="math inline">\(\mathcal L(V,W)\)</span> is closed under scalar multiplication.</p>
+<p><strong>Associativity of Scalar Multiplication</strong></p>
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+a(c(Tv)) &amp;= (ac)(Tv)\\
+         &amp;= (acT)v
+\end{align}
+\]</span></p>
+<p><strong>Identity of Scalar Multiplication</strong></p>
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(1T)v &amp;= 1(Tv)\\
+      &amp;= Tv
+\end{align}
+\]</span></p>
+<p><strong>Distributivity</strong></p>
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+((a+b)T)v &amp;= (a+b)(Tv)\\
+          &amp;= a(Tv) + b(Tv)\\
+          &amp;= (aT)v + (bT)v\\
+          &amp;= (aT + bT)v
+\end{align}
+\]</span></p>
+<p>and that</p>
+<p><span class="math display">\[
+\begin{align}
+(a(S+T))v &amp;= a((S+T)v)\\
+          &amp;= a(Sv + Tv)\\
+          &amp;= a(Sv) + a(Tv)\\
+          &amp;= (aS)v + (aT)v\\
+          &amp;= (aS + aT)v
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(\mathcal L(V,W)\)</span> is a vector space which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Subtraction
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since we’ve shown that <span class="math inline">\(\mathcal L(V,W)\)</span> is a vector space, subtraction of linear maps is well defined. For example, for <span class="math inline">\(S,T\in\mathcal L(V,W)\)</span>, <span class="math inline">\((S-T)v\)</span> is <span class="math inline">\(S(v)-T(v)\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="multiplication" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="multiplication"><span class="header-section-number">5.2.2</span> Multiplication</h3>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W,X\)</span> be vector spaces and let <span class="math inline">\(T_1\in\mathcal L(V, W)\)</span> and <span class="math inline">\(T_2\in\mathcal L(W, X)\)</span>. Then the notation <span class="math inline">\(S = T_2T_1\)</span> is defined such that for all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(Sv=T_2(T_1v)\)</span>.</p>
+</blockquote>
+<section id="properties-of-multiplication" class="level4" data-number="5.2.2.1">
+<h4 data-number="5.2.2.1" class="anchored" data-anchor-id="properties-of-multiplication"><span class="header-section-number">5.2.2.1</span> Properties of Multiplication</h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Associativity of Linear Map Multiplication
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W,X, Y\)</span> be vector spaces and let <span class="math inline">\(T\in\mathcal L(V,W)\)</span>, <span class="math inline">\(S\in\mathcal L(W,X)\)</span>, <span class="math inline">\(R\in\mathcal L(X,Y)\)</span>. Then for all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\((R(ST))v = ((RS)T)v\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-52" class="callout-52-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(R(ST))v &amp;= R(STv)\\
+         &amp;= R(S(Tv))\\
+         &amp;= (RS)(Tv)\\
+         &amp;= (RS(T))v \\
+         \blacksquare
+\end{align}
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>With this theorem, there is no ambiguity in the multiplication of more than two linear maps in the sense that <span class="math inline">\(RST\)</span> is well defined.</p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The <em>identity map</em>, notated as <span class="math inline">\(I_V\in\mathcal L(V)\)</span>, (or just as <span class="math inline">\(I\)</span> when the vector space is obvious) is the function such that for all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(Iv=v\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: The Identity Map is Linear
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be a vector space. Then, <span class="math inline">\(I_V\)</span> is a linear map.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-55-contents" aria-controls="callout-55" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-55" class="callout-55-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(v,w\in V\)</span> and let <span class="math inline">\(c\in\mathbb R\)</span>. Then observe that</p>
+<p><span class="math display">\[
+\begin{align}
+I(v+w) &amp;= v+w\\
+       &amp;= Iv + Iw
+\end{align}
+\]</span></p>
+<p>And that</p>
+<p><span class="math display">\[
+\begin{align}
+I(cv) &amp;= cv\\
+      &amp;= c(Iv)
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Identity map as multiplicative identity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(V,W\)</span> are vector spaces, and let <span class="math inline">\(T\in\mathcal L(V,W)\)</span>. Then for all <span class="math inline">\(v\in V\)</span> <span class="math display">\[I_WTv=TI_Vv=Tv\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-57-contents" aria-controls="callout-57" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-57" class="callout-57-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+I_WTv &amp;= I_W(Tv)\\
+      &amp;= Tv\\
+      &amp;= T(I_Vv)\\
+      &amp;= TI_Vv
+\end{align}
+\]</span> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Distributivity of Linear Map Multiplication
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(T_1,T_2\in\mathcal L(U,V)\)</span> and <span class="math inline">\(S_1, S_2\in\mathcal L(V, W)\)</span>. Then for all <span class="math inline">\(v\in V\)</span>.</p>
+<ol type="i">
+<li><span class="math inline">\((S_1+S_2)T_1v = (S_1T_1 + S_2T_1)v\)</span></li>
+<li><span class="math inline">\(S_1(T_1 + T_2)v = (S_1T_1 + S_1T_2)v\)</span></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-59-contents" aria-controls="callout-59" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-59" class="callout-59-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+(S_1+S_2)T_1v &amp;= (S_1+S_2)(T_1v)\\
+              &amp;= S_1(T_1v) + S_2(T_1v)\\
+              &amp;= S_1T_1v + S_2T_1v\\
+              &amp;= (S_1T_1 + S_2T_1)v
+\end{align}
+\]</span></p>
+<p>and also observe that</p>
+<p><span class="math display">\[
+\begin{align}
+S_1(T_1 + T_2)v &amp;= S_1((T_1 + T_2)v)\\
+                &amp;= S_1(T_1v + T_2v)\\
+                &amp;= S_1((T_1v) + (T_2v))\\
+                &amp;= S_1(T_1v) + S_1(T_2v)\\
+                &amp;= S_1T_1v + S_1T_2v\\
+                &amp;=(S_1T_1 + S_1T_2)v
+\end{align}
+\]</span></p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="some-types-of-linear-maps-definitions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="some-types-of-linear-maps-definitions"><span class="header-section-number">5.3</span> Some Types of Linear Maps (Definitions)</h2>
+<p>For the following definitions, assume that <span class="math inline">\(V,W\)</span> are vector spaces and that <span class="math inline">\(T\in\mathcal L(V,W)\)</span>.</p>
+<blockquote class="blockquote">
+<p><span class="math inline">\(T\)</span> is called <em>injective</em> if for all <span class="math inline">\(u,v\in V\)</span>, <span class="math display">\[T(u)=T(v)\implies u=v\]</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The <em>null space</em>, notated as <span class="math inline">\(\text{null}(T)\)</span> is the set <span class="math inline">\(\{v:T(v)=\textbf{0}_W\}\)</span>.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The <em>range</em> of <span class="math inline">\(T\)</span> is defined as the set of all possible outputs of <span class="math inline">\(T\)</span>. That is, <span class="math display">\[\text{range}(T) = \{Tv: v\in V\}\]</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(T\)</span> is called <em>surjective</em> if <span class="math inline">\(\text{range}(T)=W\)</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(T\)</span> is called <em>bijective</em> if it is both injective and surjective.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Null and Range are subspaces
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(T\in\mathcal L(V,W)\)</span> for vector spaces <span class="math inline">\(V,W\)</span>. Then <span class="math inline">\(\text{null}(T)\)</span> and <span class="math inline">\(\text{range}(T)\)</span> are subspaces of <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> respectively.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-61-contents" aria-controls="callout-61" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-61" class="callout-61-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>See HW 1</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Injectivity and Trivial Null Space
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(T\)</span> be a linear map with domain <span class="math inline">\(V\)</span> and co-domain <span class="math inline">\(W\)</span>, where <span class="math inline">\(V,W\)</span> are vector spaces. Then, <span class="math inline">\(T\)</span> is injective if and only if <span class="math inline">\(\text{null}(T)=\{\textbf{0}_V\}\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-63-contents" aria-controls="callout-63" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-63" class="callout-63-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\((\implies)\)</span> First, suppose that <span class="math inline">\(T\)</span> is injective. Then, since <span class="math inline">\(T(\textbf{0}_V)=\textbf{0}_W\)</span> (as shown in a previous theorem), <span class="math inline">\(\textbf{0}_W\)</span> is in the range of <span class="math inline">\(T\)</span> and thus has a unique input in <span class="math inline">\(V\)</span> since <span class="math inline">\(T\)</span> is injective. Thus, <span class="math inline">\(\textbf{0}_V\)</span> is the only input such that the output is <span class="math inline">\(\textbf{0}_W\)</span>. That is, the null space of <span class="math inline">\(T\)</span> is <span class="math inline">\(\{\textbf{0}_V\}\)</span>.</p>
+<p><span class="math inline">\((\impliedby)\)</span> On the other hand, suppose that <span class="math inline">\(\text{null}(T)=\textbf{0}_V\)</span>. Let <span class="math inline">\(u,v\in V\)</span> and suppose <span class="math inline">\(Tu=Tv\)</span>. Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+\textbf{0}_W &amp;= Tu - Tv\\
+             &amp;= T(u-v)
+\end{align}
+\]</span></p>
+<p>Then, <span class="math inline">\(T(u-v)\in\text{null}(T)\)</span>, so <span class="math inline">\(u-v=\textbf{0}_V\implies u=v\)</span>, so <span class="math inline">\(T\)</span> is injective.</p>
+<p>Thus, <span class="math inline">\(T\)</span> is injective if and only if <span class="math inline">\(\text{null}(T)=\{\textbf{0}_V\}\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="inverses" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="inverses"><span class="header-section-number">5.4</span> Inverses</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and let <span class="math inline">\(T\in\mathcal L(V, W)\)</span>. Then <span class="math inline">\(T\)</span> is called <em>invertible</em> if there exists <span class="math inline">\(S\in\mathcal L(W, V)\)</span> such that <span class="math inline">\(ST=I_V\)</span> and <span class="math inline">\(TS=I_W\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: The inverse is unique
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and let <span class="math inline">\(T\in\mathcal L(V, W)\)</span> such that <span class="math inline">\(T\)</span> is invertible. Then <span class="math inline">\(S\)</span>, as described in the definition of an invertible linear map, is unique.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-65-contents" aria-controls="callout-65" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-65" class="callout-65-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Suppose <span class="math inline">\(S_1,S_2\in\mathcal L(W,V)\)</span> both have the property that <span class="math inline">\(S_jT=I_V\)</span> and <span class="math inline">\(TS_j=I_W\)</span> for <span class="math inline">\(j=1,2\)</span>. Then observe that</p>
+<p><span class="math display">\[
+\begin{align}
+S_1 &amp;= S_1I_W\\
+    &amp;= S_1(TS_2)\\
+    &amp;= (S_1T)S_2\\
+    &amp;= I_VS_2\\
+    &amp;= S_2
+\end{align}
+\]</span></p>
+<p>Thus all inverses of <span class="math inline">\(T\)</span> are equal, so the inverse of <span class="math inline">\(T\)</span> is unique. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and let <span class="math inline">\(T\in\mathcal L(V, W)\)</span>. If <span class="math inline">\(T\)</span> is invertible, then <span class="math inline">\(T^{-1}\)</span> is defined to be the unique element in <span class="math inline">\(\mathcal L(W, V)\)</span> such that <span class="math inline">\(T^{-1}T=I_V\)</span> and <span class="math inline">\(TT^{-1} I_W\)</span>. <span class="math inline">\(T^{-1}\)</span> is called the <em>inverse</em> of <span class="math inline">\(T\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The inverse of <span class="math inline">\(T\)</span> is invertible.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Based on this definition, it should be clear that <span class="math inline">\((T^{-1})^{-1}=T\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Bijectivity and Invertibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and let <span class="math inline">\(T\in\mathcal L(V, W)\)</span>. Then <span class="math inline">\(T\)</span> is invertible if and only if <span class="math inline">\(T\)</span> is bijective.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-68-contents" aria-controls="callout-68" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-68" class="callout-68-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\((\implies)\)</span> First suppose that <span class="math inline">\(T\)</span> is invertible. Then, let <span class="math inline">\(v_1,v_2,\in V\)</span> such that <span class="math inline">\(Tv_1=Tv_2\)</span>. Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+Tv_1=Tv_2 &amp;\implies T^{-1}Tv_1=T^{-1}Tv_2\\
+          &amp;\implies I_Vv_1 = I_vv_2\\
+          &amp;\implies v_1 = v_2
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(T\)</span> is injective. Now, suppose <span class="math inline">\(w\in W\)</span>. Observe that <span class="math inline">\(T^{-1}w\in V\)</span>. Therefore,</p>
+<p><span class="math display">\[
+\begin{align}
+T(T^{-1}w) &amp;= (TT^{-1})w\\
+           &amp;= I_Ww\\
+           &amp;= w
+\end{align}
+\]</span></p>
+<p>Therefore, for all <span class="math inline">\(w\in W\)</span>, there exists an element in <span class="math inline">\(V\)</span>, namely, <span class="math inline">\(T^{-1}(w)\)</span>, such that <span class="math inline">\(T\)</span> maps that element to <span class="math inline">\(w\)</span>. Thus, <span class="math inline">\(T\)</span> is surjective.</p>
+<p>Since <span class="math inline">\(T\)</span> is injective and surjective, <span class="math inline">\(T\)</span> must be bijective, completing this direction of the proof.</p>
+<p><span class="math inline">\((\impliedby)\)</span> Now, suppose <span class="math inline">\(T\)</span> is bijective. Then since <span class="math inline">\(T\)</span> is surjective, for every <span class="math inline">\(w\in W\)</span>, there exists a <span class="math inline">\(v\in V\)</span> such that <span class="math inline">\(Tv=w\)</span>. Since <span class="math inline">\(T\)</span> is injective, this <span class="math inline">\(v\)</span> is unique. We can therefore construct the well-defined function <span class="math inline">\(S:W\to V\)</span> such that <span class="math inline">\(T(S(w))=w\implies T(S(w))=I_Ww\)</span>. Observe that for all <span class="math inline">\(v\in V\)</span>,</p>
+<p><span class="math display">\[
+\begin{align}
+T(S(Tv)) &amp;= T(v)
+\end{align}
+\]</span></p>
+<p>Which implies that <span class="math inline">\(S(T(v)) = v\)</span> since <span class="math inline">\(T\)</span> is injective. Thus, <span class="math inline">\(S(Tv)=I_Vv\)</span>.</p>
+<p>To complete the proof then, it is sufficient to show that <span class="math inline">\(S\)</span> is a linear map. Suppose <span class="math inline">\(w_1,w_2\in W\)</span> and <span class="math inline">\(c\in\mathbb R\)</span>. Then observe that</p>
+<p><span class="math display">\[
+\begin{align}
+T(S(w_1+w_2)) &amp;= w_1 + w_2\\
+              &amp;= T(S(w_1)) + T(S(w_2))\\
+              &amp;= T(S(w_1) + S(w_2)) \text{ (by linearity of } T\text{)}
+\end{align}
+\]</span></p>
+<p>Then <span class="math inline">\(T\)</span>’s injectivity shows that <span class="math inline">\(S(w_1+w_2) = S(w_1) + S(w_2)\)</span>. Similarly, observe that</p>
+<p><span class="math display">\[
+\begin{align}
+T(S(cw_1)) &amp;= cw_1\\
+           &amp;= c T(S(w_1))\\
+           &amp;= T(cS(w_1))\text{ (by linearity of } T\text{)}
+\end{align}
+\]</span></p>
+<p>Again, by injectivity of <span class="math inline">\(T\)</span>, <span class="math inline">\(cS(w_1)=S(cw_1)\)</span>. Thus, <span class="math inline">\(S\)</span> is linear, showing that <span class="math inline">\(S=T^{-1}\)</span>. Therefore, if <span class="math inline">\(T\)</span> is bijective, then <span class="math inline">\(T\)</span> is invertible, finishing this direction of the proof. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="isomorphisms" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="isomorphisms"><span class="header-section-number">5.5</span> Isomorphisms</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces with <span class="math inline">\(T\in\mathcal L(V,W)\)</span>. If <span class="math inline">\(T\)</span> is bijective, then <span class="math inline">\(T\)</span> is an <em>isomorphism</em> from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>. We can use the notation <span class="math inline">\(V\cong W\)</span> to indicate that there exists an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Alternate Definition of Isomorphism
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(T\)</span> is an isomorphism if and only if <span class="math inline">\(T\)</span> is invertible.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Isomorphism is an Equivalence Relation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W,X\)</span> be vector spaces. Then, the following are true:</p>
+<ol type="i">
+<li><span class="math inline">\(V\cong V\)</span> <a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a></li>
+<li><span class="math inline">\(V\cong W\implies W\cong V\)</span> <a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a></li>
+<li><span class="math inline">\(V\cong W\)</span> and <span class="math inline">\(W\cong X\)</span> implies <span class="math inline">\(V\cong X\)</span> <a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-71-contents" aria-controls="callout-71" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-71" class="callout-71-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="i">
+<li><p>Let <span class="math inline">\(T=I_V\)</span>, the identity map in <span class="math inline">\(V\)</span>. Then <span class="math inline">\(T\)</span> is invertible since <span class="math inline">\(I_VI_V=I_V\)</span>. Since <span class="math inline">\(I_V\in\mathcal L(V)\)</span>, <span class="math inline">\(I_V\)</span> is an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(V\)</span>. Thus, <span class="math inline">\(V\cong V\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(T\in\mathcal L(V, W)\)</span> be an isomorphism. Since <span class="math inline">\(T\)</span> is bijective, <span class="math inline">\(T\)</span> is invertible. Since <span class="math inline">\(T^{-1}\)</span> is invertible, <span class="math inline">\(T^{-1}\)</span> is also bijective, so <span class="math inline">\(T^{-1}\in\mathcal L(V, W)\)</span> is an isomorphism. Thus, <span class="math inline">\(V\cong W\implies W\cong V\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(T\in\mathcal L(V,W)\)</span> and <span class="math inline">\(S\in\mathcal L(W, X)\)</span>. Then define <span class="math inline">\(R = ST\in\mathcal L(V, X)\)</span>. Observe that</p></li>
+</ol>
+<p><span class="math display">\[
+\begin{align}
+ST(T^{-1}S^{-1}) &amp;= S(TT^{-1})S^{-1}\\
+                 &amp;= SI_WS^{-1}\\
+                 &amp;= (SI_W)S^{-1}\\
+                 &amp;= SS^{-1}\\
+                 &amp;= I_X
+\end{align}
+\]</span></p>
+<p>and that</p>
+<p><span class="math display">\[
+\begin{align}
+(T^{-1}S^{-1})ST &amp;= T^{-1}(S^{-1}S)T\\
+                 &amp;= T^{-1}I_WT\\
+                 &amp;= T^{-1}T\\
+                 &amp;= I_V
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(R=ST\)</span> is invertible<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a>, so <span class="math inline">\(R\)</span> is a bijection, and thus an isomorpshism from <span class="math inline">\(V\)</span> to <span class="math inline">\(X\)</span>, so <span class="math inline">\(V\cong X\)</span>, which is what we wanted to show.</p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces. If <span class="math inline">\(V\cong W\)</span>, then <span class="math inline">\(V\)</span> and <span class="math inline">\(W\)</span> are called <em>isomorphic</em> vector spaces.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Isormorphism preserves linear independence
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W\)</span> be isomorphic vector spaces and let <span class="math inline">\(T\in\mathcal L(V, W)\)</span> be an isomorphism. Then, if <span class="math inline">\(\{v_1,...,v_n\}\)</span> is a linearly independent set in <span class="math inline">\(V\)</span>, then <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set in <span class="math inline">\(W\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-73-contents" aria-controls="callout-73" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-73" class="callout-73-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(\sum\limits_{i=1}^nc_iT(v_i)=\textbf{0}_W\)</span>. Since <span class="math inline">\(T\)</span> is linear, observe that</p>
+<p><span class="math display">\[
+\begin{align}
+\textbf{0}_W &amp;= \sum\limits_{i=1}^nc_iT(v_i)\\
+             &amp;= T\left(\sum\limits_{i=1}^nc_iv_i\right)
+\end{align}
+\]</span></p>
+<p>Since <span class="math inline">\(T\)</span> is injective, this implies that <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}_W\)</span>. Since <span class="math inline">\(\{v_1,...,v_n\}\)</span> is a linearly independent set, this means that <span class="math inline">\(c_1=...=c_n=0\)</span>. Thus, <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set in <span class="math inline">\(W\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Isomorphism and Dimension
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces where <span class="math inline">\(\text{dim}(V)\)</span> is finite. Then, <span class="math inline">\(V\cong W\)</span> if and only if <span class="math inline">\(\text{dim}(V)=\text{dim}(W)\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-75-contents" aria-controls="callout-75" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-75" class="callout-75-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\((\impliedby)\)</span> Suppose <span class="math inline">\(\text{dim}(V)=\text{dim}(W)\)</span>. Let <span class="math inline">\(\{v_1,...v_n\}\)</span> be a basis of <span class="math inline">\(V\)</span>. This means that <span class="math inline">\(\text{dim}(V)=n=\text{dim}(W)\)</span>. Thus, a basis of <span class="math inline">\(W\)</span> is <span class="math inline">\(\{w_1,...,w_n\}\)</span> for some <span class="math inline">\(w_1,...,w_n\in W\)</span>.</p>
+<p>Let <span class="math inline">\(u\in V\)</span> be arbitrary. Then <span class="math inline">\(u\)</span> is entirely defined as a unique linear combination of basis vectors in <span class="math inline">\(V\)</span>. Thus, any function of <span class="math inline">\(u\)</span> can be defined as a function of <span class="math inline">\(c_1v_1+...+c_nv_n\)</span>. Let <span class="math inline">\(T\in\mathcal L(V, W)\)</span>. Then</p>
+<p><span class="math display">\[
+\begin{align}
+T\left(\sum\limits_{i=1}^nc_iv_i\right) &amp;= \sum\limits_{i=1}^nc_iT(v_i)
+\end{align}
+\]</span></p>
+<p>Thus, <span class="math inline">\(T\)</span> is entirely determined by where it maps the basis vectors of <span class="math inline">\(V\)</span>. Define <span class="math inline">\(T\)</span> such that <span class="math inline">\(T(v_i)=w_i\)</span> for <span class="math inline">\(i=1,...,n\)</span>. Thus, <span class="math display">\[\sum\limits_{i=1}^nc_iw_i\]</span> We can conclude that <span class="math inline">\(\text{Range}(T)\)</span> are all vectors of the form <span class="math inline">\(\sum\limits_{i=1}^nc_iw_i\)</span> for <span class="math inline">\(c_i\in\mathbb R\)</span>. Thus, <span class="math inline">\(\text{Range}(T)=\text{span}(w_1,...,w_n)=W\)</span>. Thus, <span class="math inline">\(T\)</span> is surjective. Now, suppose <span class="math inline">\(u_1,u_2\in V\)</span> where <span class="math inline">\(T(u_1)=T(u_2)\)</span>. Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+T(u_1)=T(u_2) &amp;\implies T\left(\sum\limits_{i=1}^nc_iv_i\right) = T\left(\sum\limits_{i=1}^nd_iv_i\right)\\
+              &amp;\implies \sum\limits_{i=1}^nc_iT(v_i) = \sum\limits_{i=1}^nd_iT(v_i)\\
+              &amp;\implies \sum\limits_{i=1}^nc_iw_i = \sum\limits_{i=1}^nd_iw_i\\
+              &amp;\implies \sum\limits_{i=1}^n(c_iw_i-d_iw_i) = \textbf{0}_W\\
+              &amp;\implies \sum\limits_{i=1}^n(c_i-d_i)w_i=\textbf{0}_W
+\end{align}
+\]</span></p>
+<p>Since the <span class="math inline">\(w_i\)</span>’s are independent since the vectors are part of a basis, then <span class="math inline">\(c_i=d_i\)</span> for all <span class="math inline">\(i=1,...,n\)</span>. Thus <span class="math inline">\(u_1=u_2\)</span>, so <span class="math inline">\(T\)</span> is injective. Thus, <span class="math inline">\(T\)</span> is bijective and is therefore an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>. Thus, <span class="math inline">\(V\cong W\)</span>.</p>
+<p><span class="math inline">\((\implies)\)</span> Now suppose <span class="math inline">\(V\cong W\)</span>. Since <span class="math inline">\(V\)</span> has finite dimension, let <span class="math inline">\(n=\text{dim}(V)\)</span>. Then there exists a basis of length <span class="math inline">\(n\)</span> in <span class="math inline">\(V\)</span>, say <span class="math inline">\(\{v_1,...,v_2\}\)</span>. As shown in the previous theorem, if <span class="math inline">\(T\)</span> is an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>, then <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set in <span class="math inline">\(W\)</span>. Observe that</p>
+<p><span class="math display">\[
+\begin{align}
+W &amp;= \text{Range}(T)\\
+  &amp;= \{Tv: v\in V\}\\
+  &amp;= \left\{T\left(\sum\limits_{i=1}^n c_iv_i\right): c_i\in\mathbb R\right\}\\
+  &amp;= \left\{\sum\limits_{i=1}^ncT(v_i): c_i\in\mathbb R\right\}\\
+  &amp;=\text{span}(Tv_1,...,Tv_n)
+\end{align}
+\]</span></p>
+<p>Since <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set and spans <span class="math inline">\(W\)</span>, it is a basis of <span class="math inline">\(W\)</span>. Thus, <span class="math inline">\(W\)</span> has dimension <span class="math inline">\(n\)</span> since its basis is of length <span class="math inline">\(n\)</span>. Therefore, <span class="math inline">\(\text{dim}(W)=n=\text{dim}(V)\)</span>.</p>
+<p>Therefore, <span class="math inline">\(V\cong W\)</span> if and only if <span class="math inline">\(\text{dim}(W)=\text{dim}(V)\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sums-and-intersections-of-vector-spaces" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Sums and Intersections of Vector Spaces</h1>
+<p>The following definitions and theorems will be helpful as we explore projections and approximations.</p>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(H, S\)</span> be vector subspaces of a vector space, <span class="math inline">\(V\)</span>. Then, the <em>sum</em> of the vector spaces is defined to be <span class="math inline">\(H+S = \{h+s: h\in H, s\in S\}\)</span>.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>The <em>intersection</em> of of two vector spaces is notated <span class="math inline">\(H\cap S = \{v: v\in H, v\in S\}\)</span>.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(H\)</span> and <span class="math inline">\(S\)</span> are called <em>disjoint</em> if <span class="math inline">\(H\cap S=\{\textbf{0}\}\)</span>.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><span class="math inline">\(H\)</span> and <span class="math inline">\(S\)</span> are called <em>complements</em> of <span class="math inline">\(V\)</span> if they are disjoint and <span class="math inline">\(H+S=V\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Sum of Subspaces is a Subspace
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(H,S\)</span> are subspaces of a vector space, <span class="math inline">\(V\)</span>, then <span class="math inline">\(H+S\)</span> is also a vector space.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-77-contents" aria-controls="callout-77" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-77" class="callout-77-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(H+S\)</span> is a subset of <span class="math inline">\(V\)</span> since for all <span class="math inline">\(h\in H\)</span> and <span class="math inline">\(s\in S\)</span>, <span class="math inline">\(h,s\in V\)</span> so <span class="math inline">\(h+s\in V\)</span>. Therefore, we only need to show that <span class="math inline">\(H+S\)</span> is a subspace of <span class="math inline">\(V\)</span>.</p>
+<p>Since <span class="math inline">\(\textbf{0}\in H\)</span> and <span class="math inline">\(\textbf{0}\in S\)</span>, then <span class="math inline">\(\textbf{0}=\textbf{0}+\textbf{0}\in H+S\)</span>. Similarly observe that for <span class="math inline">\(a,b\in S+H\)</span>, that there exists <span class="math inline">\(h_a,h_b\in H\)</span> and <span class="math inline">\(s_a, s_b\in S\)</span> such that <span class="math display">\[a+b=(h_a+s_a) + (h_b + s_b) = (h_a + h_b) + (s_a + s_b)\]</span> Since <span class="math inline">\((h_a + h_b)\in H\)</span> and <span class="math inline">\((s_a + s_b)\in S\)</span>, then <span class="math inline">\(a+b\in H+S\)</span>. Additionally, consider <span class="math inline">\(c\in\mathbb R\)</span>. Then observe that <span class="math display">\[ca = c(h_a + s_a) = ch_a + cs_a\]</span> Since <span class="math inline">\(ch_a\in H\)</span> and <span class="math inline">\(cs_a\in S\)</span>, then <span class="math inline">\(ca\in H+S\)</span>. Thus, <span class="math inline">\(H+S\)</span> contains the zero vector, is closed under vector addition, and is closed under scalar multiplication, so <span class="math inline">\(H+S\)</span> is a subspace of <span class="math inline">\(V\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Intersections are Subspaces
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(H,S\)</span> are subspaces of a vector space, <span class="math inline">\(V\)</span>, then <span class="math inline">\(H\cap S\)</span> is a subspace.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-79-contents" aria-controls="callout-79" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-79" class="callout-79-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(H\cap S\)</span> is a subset of <span class="math inline">\(V\)</span>, it is sufficient to show that <span class="math inline">\(H\cap S\)</span> is a subspace of <span class="math inline">\(V\)</span>. Since both <span class="math inline">\(H\)</span> and <span class="math inline">\(S\)</span> contain the zero vector (as with all subspaces of <span class="math inline">\(V\)</span>), <span class="math inline">\(H\cap S\)</span> contains the zero vector as well. Suppose <span class="math inline">\(a,b\in H\cap S\)</span>. Then since <span class="math inline">\(a,b\in H\)</span>, <span class="math inline">\(a+b\in H\)</span> since <span class="math inline">\(H\)</span> is closed under vector addition. A similar argument shows that <span class="math inline">\(a+b\in S\)</span> as well. Thus, <span class="math inline">\(a+b\in H\cap S\)</span>, making the set closed under vector addition. Consider <span class="math inline">\(c\in\mathbb R\)</span>. Then, <span class="math inline">\(ca\in H\)</span> since <span class="math inline">\(a\in H\)</span> and <span class="math inline">\(H\)</span> is closed under scalar multiplication. A similar argument shows that <span class="math inline">\(ca\in S\)</span>. Thus, <span class="math inline">\(ca\in H\cap S\)</span> and therefore the set is closed under scalar multiplication. Thus, <span class="math inline">\(H\cap S\)</span> is a subspace of <span class="math inline">\(V\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Complements and Uniqueness
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Suppose the subspaces, <span class="math inline">\(H\)</span> and <span class="math inline">\(S\)</span>, are complements in a vector space <span class="math inline">\(V\)</span>. Then for all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(v\)</span> has a unique decomposition as <span class="math inline">\(h+s\)</span> where <span class="math inline">\(h\in H\)</span> and <span class="math inline">\(s\in S\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-81-contents" aria-controls="callout-81" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-81" class="callout-81-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We know of existence since <span class="math inline">\(H+S=V\)</span>. Let <span class="math inline">\(h_1, s_1\)</span> and <span class="math inline">\(h_2, s_2\)</span> be vectors in <span class="math inline">\(H\)</span> and <span class="math inline">\(S\)</span> such that <span class="math display">\[v=h_1 + s_1 = h_2 + s_2\]</span> This means that <span class="math inline">\(h_1-h_2 = s_2-s_1\)</span>. <span class="math inline">\(h_1-h_2\in H\)</span> since <span class="math inline">\(H\)</span> is closed under addition (and therefore subtraction). A similar argument shows that <span class="math inline">\(s_1-s_2\in S\)</span>. Thus, <span class="math inline">\(h_1-h_2\in S\)</span> and therefore <span class="math inline">\(h_1-h_2\in H\cap S=\{\textbf{0}\}\)</span>. This means that <span class="math inline">\(h_1-h_2=\textbf{0}\implies h_1=h_2\)</span>. Similarly, <span class="math inline">\(s_2-s_1=\textbf{0}\)</span>, so <span class="math inline">\(s_1=s_2\)</span>. Therefore, the decomposition is unique.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="projections-and-approximations" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Projections and Approximations</h1>
+<section id="motivation" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="motivation"><span class="header-section-number">7.1</span> Motivation</h2>
+<p>Let <span class="math inline">\(V,W\)</span> be vector spaces and <span class="math inline">\(T\in\mathcal L(V, W)\)</span>. We sometimes are interested in solving the equation <span class="math inline">\(Tv=w\)</span> when <span class="math inline">\(w\)</span> is known. However, when <span class="math inline">\(T\)</span> isn’t surjective, there isn’t always a solution to this equation.</p>
+<p>But we don’t have to give up. We might not have a <span class="math inline">\(v\)</span> that perfectly solves the equation, but is there a <span class="math inline">\(v\)</span> that approximates the solution. Is there a <span class="math inline">\(v\)</span> such that <span class="math inline">\(Tv\)</span> is very close to <span class="math inline">\(w\)</span>? What does “very close” mean in the context of an abstract vector space?</p>
+<p>These questions are answered with the following structures and definitions in this section.</p>
+</section>
+<section id="inner-product-spaces" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="inner-product-spaces"><span class="header-section-number">7.2</span> Inner Product Spaces</h2>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The notion of scalars can also be abstracted in the sense that a scalar is an element of a field, <span class="math inline">\(F\)</span>, rather than specifically being an element in <span class="math inline">\(\mathbb R\)</span>. However, keeping in mind that this is a statistics course, such abstraction will not be used. When the scalar field is not clear, one might use the term <em>real vector space</em> to indicate that the scalars are real. In these notes, “Vector Space” will be understood to mean “Real Vector Space”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>aka <span class="math inline">\(V\)</span> is closed under vector addition<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>aka vector addition is associative in <span class="math inline">\(V\)</span><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>aka <span class="math inline">\(V\)</span> has an identity with respect to vector addition<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>aka every element in <span class="math inline">\(V\)</span> has an inverse with respect to vector addition<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>aka vector addition is commutative in <span class="math inline">\(V\)</span><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>aka <span class="math inline">\(V\)</span> is closed under scalar multiplication for all scalars in <span class="math inline">\(\mathbb R\)</span><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>For those with a background in abstract algebra, properties 1-5 are equivalent to saying <span class="math inline">\(V\)</span> is an abelian group under vector addition. See previous footnotes for the specific connections.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>This is true since <span class="math inline">\(V\)</span> is a group, but a proof is still provided below.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>We know this is possible as Property 4 demonstrates existence of an inverse.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>There are certain properties that I will use without proof in these notes that could be proved using inductive properties on theorems already proved in the immediate results.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>That is, <span class="math inline">\(V\)</span> and <span class="math inline">\(S\)</span> have the same (unique) additive identity.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>That is, <span class="math inline">\(S\)</span> is closed under scalar multiplication.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>That is, <span class="math inline">\(S\)</span> is closed under vector addition.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>A vector space that can be describe as the span of a finite number of vectors is called <em>finite dimensional</em>. A vector space that is not finite dimensional is called <em>infinite dimensional</em>. We will mostly be working with finite-dimensional vector spaces in these notes.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>I used <a href="https://en.wikipedia.org/wiki/Steinitz_exchange_lemma">this Proof on Wikipedia</a> as inspiration.<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>This either means that <span class="math inline">\(k=m\)</span> or that <span class="math inline">\(k&gt;m\)</span> and that we eventually would just add vectors from <span class="math inline">\(U\)</span> and not removing any vectors.<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>where, of course, in the case that <span class="math inline">\(k+1=m\)</span>, <span class="math inline">\(w_{k+1}\)</span> is the last vector in the set.<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>The addition in <span class="math inline">\(T(v_1+v_2)\)</span> refers to vector addition in <span class="math inline">\(V\)</span> while the addition in <span class="math inline">\(T(v_1)+T(v_2)\)</span> refers to vector addition in <span class="math inline">\(W\)</span>.<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>The multiplication in <span class="math inline">\(T(cv)\)</span> refers to scalar multiplication in <span class="math inline">\(V\)</span> while the multiplication in <span class="math inline">\(cT(v)\)</span> refers to scalar multiplication in <span class="math inline">\(W\)</span>.<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>identity of an equivalence relation<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>symmetry of an equivalence relation<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p>transitivity of an equivalence relation<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn24"><p>In fact, this proves that if a linear map, <span class="math inline">\(ST\)</span>, is invertible, that <span class="math inline">\((ST)^{-1}=T^{-1}S^{-1}\)</span><a href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
