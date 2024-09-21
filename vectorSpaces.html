@@ -132,7 +132,14 @@ window.Quarto = {
   <li><a href="#projections-and-approximations" id="toc-projections-and-approximations" class="nav-link" data-scroll-target="#projections-and-approximations"><span class="header-section-number">7</span> Projections and Approximations</a>
   <ul class="collapse">
   <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><span class="header-section-number">7.1</span> Motivation</a></li>
-  <li><a href="#inner-product-spaces" id="toc-inner-product-spaces" class="nav-link" data-scroll-target="#inner-product-spaces"><span class="header-section-number">7.2</span> Inner Product Spaces</a></li>
+  <li><a href="#inner-products" id="toc-inner-products" class="nav-link" data-scroll-target="#inner-products"><span class="header-section-number">7.2</span> Inner Products</a></li>
+  <li><a href="#norms" id="toc-norms" class="nav-link" data-scroll-target="#norms"><span class="header-section-number">7.3</span> Norms</a></li>
+  <li><a href="#orthogonality" id="toc-orthogonality" class="nav-link" data-scroll-target="#orthogonality"><span class="header-section-number">7.4</span> Orthogonality</a></li>
+  <li><a href="#orthogonal-sets" id="toc-orthogonal-sets" class="nav-link" data-scroll-target="#orthogonal-sets"><span class="header-section-number">7.5</span> Orthogonal Sets</a>
+  <ul class="collapse">
+  <li><a href="#orthonormal-sets" id="toc-orthonormal-sets" class="nav-link" data-scroll-target="#orthonormal-sets"><span class="header-section-number">7.5.1</span> Orthonormal Sets</a></li>
+  </ul></li>
+  <li><a href="#the-orthonormal-basis" id="toc-the-orthonormal-basis" class="nav-link" data-scroll-target="#the-orthonormal-basis"><span class="header-section-number">7.6</span> The Orthonormal Basis</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -338,7 +345,7 @@ Proof
 \textbf{0}_1 &amp;= \textbf{0}_1 + \textbf{0}_2 \text{ (because $\textbf{0}_2$ is an identity element)}\\
              &amp;= \textbf{0}_2 + \textbf{0}_1 \text{ (commutative property of vector addition)}\\
              &amp;= \textbf{0}_2                \text{ (because $\textbf{0}_1$ is an identity element)}
-\end{align} \]</span></p>
+\end{align}\]</span></p>
 <p>Thus, all identity elements are the same, so the zero element in <span class="math inline">\(V\)</span> is unique, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -429,19 +436,17 @@ Proof
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Observe that <span class="math display">\[
-\begin{align}
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align}
 0v &amp;= (0+0)v\\
    &amp;= 0v + 0v \text{ (distributive property)}
-\end{align}
-\]</span></p>
-<p>Using this result, we observe that <span class="math display">\[
-\begin{align}
+\end{align}\]</span></p>
+<p>Using this result, we observe that</p>
+<p><span class="math display">\[\begin{align}
 0v = 0v + 0v &amp;\implies 0v + -(0v) = 0v + 0v + -(0v)\\
              &amp;\implies \textbf{0} = 0v + \textbf{0}\\
              &amp;\implies \textbf{0} = 0v \text{ (identity of zero vector)}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Therefore, <span class="math inline">\(0v=\textbf{0}\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -472,19 +477,17 @@ Proof
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 c\textbf{0} &amp;= c(\textbf{0} + \textbf{0}) \text{ (identity property of $\textbf{0}$)}\\
             &amp;= c\textbf{0} + c\textbf{0} \text{ (distributive property)}\\
-\end{align}
-\]</span></p>
-<p>Using this result, we observe that <span class="math display">\[
-\begin{align}
+\end{align}\]</span></p>
+<p>Using this result, we observe that</p>
+<p><span class="math display">\[\begin{align}
 c\textbf{0} = c\textbf{0} + c\textbf{0} &amp;\implies c\textbf{0} - c\textbf{0} = c\textbf{0} + c\textbf{0} - c\textbf{0}\\
 &amp;\implies \textbf{0} = c\textbf{0} + \textbf{0} \text{ (identity property of zero vector)}\\
 &amp;\implies \textbf{0} = c\textbf{0}
-\end{align}
-\]</span> Thus, <span class="math inline">\(c\textbf{0} = \textbf{0}\)</span> which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+\end{align}\]</span></p>
+<p>Thus, <span class="math inline">\(c\textbf{0} = \textbf{0}\)</span> which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
 </div>
@@ -537,22 +540,20 @@ Proof
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Observe that <span class="math display">\[
-\begin{align}
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align}
 \textbf{0} &amp;= 0v \text{ (see previous theorem)}\\
            &amp;= (1+(-1))v\\
            &amp;= 1v + (-1)v \text{ (distributive property)}\\
            &amp;= v + (-1)v \text{ (identity property of scalar multiplication)}
-\end{align}
-\]</span></p>
-<p>Then observe that <span class="math display">\[
-\begin{align}
+\end{align}\]</span></p>
+<p>Then observe that</p>
+<p><span class="math display">\[\begin{align}
 \textbf{0} = v + (-1)v &amp;\implies \textbf{0} + (-v) = v + (-1)v + (-v)\\
                        &amp;\implies -v = v-v + (-1)v \text{ (commutative and associative properties of vector addition)}\\
                        &amp;\implies -v = \textbf{0} + (-1)v\\
                        &amp;\implies -v=-1v \text{ (identity property of vector addition)}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Therefore, <span class="math inline">\(-v=-1v\)</span> which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -582,8 +583,8 @@ Proof
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Observe that <span class="math display">\[
-\begin{align}
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align}
 -(cv) &amp;= -1(cv) \text{ (see previous lemma)}\\
       &amp;= (-1c)v \text{ (property of scalar multiplication)}\\
       &amp;= (-c)v\\
@@ -591,8 +592,7 @@ Proof
       &amp;= c(-1v)\\
       &amp;= c*(-v)
       &amp;\blacksquare
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 </div>
 </div>
 </div>
@@ -631,13 +631,11 @@ Proof
 <li><span class="math inline">\(c\neq0\)</span></li>
 </ul>
 <p>In the first case, there is nothing to show as <span class="math inline">\(c=0\)</span>. In the second scenario, <span class="math inline">\(\frac{1}{c}\)</span> is well defined. Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 cv=\textbf{0} &amp;\implies \frac{1}{c}cv = \frac{1}{c}\textbf{0}\\
               &amp;\implies 1v            = \textbf{0} \text{ (see previous theorem)}\\
               &amp;\implies v             = \textbf{0} \text{ (identity in scalar multiplication)}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, in this case <span class="math inline">\(v=\textbf{0}\)</span>. Therefore, in both cases, either <span class="math inline">\(c=0\)</span> or <span class="math inline">\(v=\textbf{0}\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -675,14 +673,14 @@ Proof
 <div class="callout-body-container callout-body">
 <p>We will prove by induction.</p>
 <p>(Base Case) When <span class="math inline">\(n=1\)</span>, <span class="math inline">\(\sum\limits_{i=1}^nv_i = v_1\)</span> by definition of sigma notation, and <span class="math inline">\(v_1=1v_1\)</span> by definition of vector spaces.</p>
-<p>(Induction Hypothesis) Assume that the theorem is true for some <span class="math inline">\(n\in\mathbb N\)</span>. Then, <span class="math display">\[
-\begin{align}
+<p>(Induction Hypothesis) Assume that the theorem is true for some <span class="math inline">\(n\in\mathbb N\)</span>. Then,</p>
+<p><span class="math display">\[\begin{align}
 \sum\limits_{i=1}^{n+1}v &amp;= v + \left(\sum\limits_{i=1}^nv\right)\\
                         &amp;= v + nv\\
                         &amp;= (1+n)v\\
                         &amp;= (n+1)v
-\end{align}
-\]</span> Thus, for all <span class="math inline">\(n\in\mathbb N\)</span>, <span class="math inline">\(\sum\limits_{i=1}^nv=nv\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+\end{align}\]</span></p>
+<p>Thus, for all <span class="math inline">\(n\in\mathbb N\)</span>, <span class="math inline">\(\sum\limits_{i=1}^nv=nv\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
 </div>
@@ -727,14 +725,13 @@ Proof
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span class="math inline">\((\implies):\)</span> Suppose <span class="math inline">\(S\)</span> is a vector space. Then, b) and c) hold from properties 1 and 6 of the Vector Spaces Definition, respectively. To prove a), we recall from previous theorems that <span class="math inline">\(S\)</span> contains a unique additive identity. Suppose <span class="math inline">\(\textbf{0}_S\in S\)</span> is the additive identity of <span class="math inline">\(S\)</span> and <span class="math inline">\(\textbf{0}_V\in V\)</span> is the additive identity of <span class="math inline">\(V\)</span>. Since <span class="math inline">\(S\subseteq V\)</span>, <span class="math inline">\(\textbf{0}_S\in V\)</span>, and similarly, for any <span class="math inline">\(s\in S\)</span>, <span class="math inline">\(s\in V\)</span>. Therefore, the following two equations hold in <span class="math inline">\(V\)</span>: <span class="math display">\[s+\textbf{0}_S=s\]</span> <span class="math display">\[s+\textbf{0}_V=s\]</span> Therefore, <span class="math display">\[
-\begin{align}
+<p><span class="math inline">\((\implies):\)</span> Suppose <span class="math inline">\(S\)</span> is a vector space. Then, b) and c) hold from properties 1 and 6 of the Vector Spaces Definition, respectively. To prove a), we recall from previous theorems that <span class="math inline">\(S\)</span> contains a unique additive identity. Suppose <span class="math inline">\(\textbf{0}_S\in S\)</span> is the additive identity of <span class="math inline">\(S\)</span> and <span class="math inline">\(\textbf{0}_V\in V\)</span> is the additive identity of <span class="math inline">\(V\)</span>. Since <span class="math inline">\(S\subseteq V\)</span>, <span class="math inline">\(\textbf{0}_S\in V\)</span>, and similarly, for any <span class="math inline">\(s\in S\)</span>, <span class="math inline">\(s\in V\)</span>. Therefore, the following two equations hold in <span class="math inline">\(V\)</span>: <span class="math display">\[s+\textbf{0}_S=s\]</span> <span class="math display">\[s+\textbf{0}_V=s\]</span> Therefore,</p>
+<p><span class="math display">\[\begin{align}
 s+\textbf{0}_S = s+\textbf{0}_V &amp;\implies s-s+\textbf{0}_S=s-s+\textbf{0}_V\\
                                 &amp;\implies \textbf{0}_V + \textbf{0}_S = \textbf{0}_V + \textbf{0}_V\\
                                 &amp;\implies \textbf{0}_S + \textbf{0}_V = \textbf{0}_V\\
                                 &amp;\implies \textbf{0}_S = \textbf{0}_V
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Since <span class="math inline">\(\textbf{0}_S = \textbf{0}_V\)</span>, <span class="math inline">\(\textbf{0}_V\in S\)</span>, thus completing this side of the proof.</p>
 <p><span class="math inline">\((\impliedby)\)</span>: Now, suppose that a), b), and c) apply to <span class="math inline">\(S\)</span>. This immediately shows that properties 1,3, and 6 of the Vector Spaces Definition apply to <span class="math inline">\(S\)</span>. Additionally, properties 2,5,7,8,9, and 10 inherit from <span class="math inline">\(V\)</span>. Thus, we only need to show property 4 holds. Suppose <span class="math inline">\(s\in S\)</span>. We know that since <span class="math inline">\(s\in V\)</span> and <span class="math inline">\(V\)</span> is a vector space, there exists an element, <span class="math inline">\(-s\in V\)</span> such that <span class="math inline">\(s +- s=0\)</span>. Since <span class="math inline">\(-s = -1s\)</span>, <span class="math inline">\(-s\in S\)</span> by b). Thus, <span class="math inline">\(S\)</span> satisfies all 10 properties of a vector space as outlines in the definition, thus finishing this side of the proof. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
@@ -806,22 +803,19 @@ Proof
 </div>
 <div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Suppose <span class="math inline">\(w\in\text{span}(v_1,...,v_n)\)</span>. Then, there exist <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(w=\sum\limits_{i=1}^nc_iv_i\)</span>. If <span class="math inline">\(c_1=\dots c_n=0\)</span>, then <span class="math inline">\(w=\textbf{0}\)</span> (how can we prove this?). Suppose <span class="math inline">\(a\in\mathbb R\)</span>. Then observe that <span class="math display">\[
-\begin{align}
+<p>Suppose <span class="math inline">\(w\in\text{span}(v_1,...,v_n)\)</span>. Then, there exist <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(w=\sum\limits_{i=1}^nc_iv_i\)</span>. If <span class="math inline">\(c_1=\dots c_n=0\)</span>, then <span class="math inline">\(w=\textbf{0}\)</span> (how can we prove this?). Suppose <span class="math inline">\(a\in\mathbb R\)</span>. Then observe that</p>
+<p><span class="math display">\[\begin{align}
 aw &amp;= a\sum\limits_{i=1}^nc_iv_i\\
    &amp;= \sum\limits_{i=1}^na(c_iv_i)\\
    &amp;= \sum\limits_{i=1}^n(ac_i)v_i
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Since each <span class="math inline">\(ac_i\in\mathbb R\)</span>, <span class="math inline">\(aw\in\text{span}(v_1,...,v_n)\)</span>.</p>
 <p>Suppose <span class="math inline">\(u\in\text{span}(v_1,...,v_n)\)</span>, then there exist <span class="math inline">\(d_1,\dots,d_n\in\mathbb R\)</span> such that <span class="math inline">\(u=\sum\limits_{i=1}^nd_iv_i\)</span>. Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 w+u &amp;= \sum\limits_{i=1}^nc_iv_i +\sum\limits_{i=1}^nd_iv_i\\
     &amp;= \sum\limits_{i=1}^n(c_iv_i + d_iv_i) \text{ (associative property)}\\
     &amp;= \sum\limits_{i=1}^n(c_i + d_i)v_i \text{ (distributive property)}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Since each <span class="math inline">\(c_i+d_i\in\mathbb R\)</span>, <span class="math inline">\(w+u\in\text{span}(v_1,...,v_n)\)</span>. Therefore, <span class="math inline">\(\text{span}(v_1,...,v_n)\)</span> is a subspace of <span class="math inline">\(V\)</span> because it satisfies the three properties demonstrated by the previous theorem. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -852,16 +846,15 @@ Proof
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Without loss of generality, suppose <span class="math inline">\(i=n\)</span>. Then, we want to show that <span class="math inline">\(\text{span}(v_1,...,v_n)=\text{span}(v_1,...,v_{n-1})\)</span>. We know that <span class="math inline">\(\text{span}(v_1,...,v_{n-1})\subseteq\text{span}(v_1,...,v_n)\)</span> since <span class="math inline">\(\{v_1,...,v_{n-1}\}\subseteq\{v_1,...,v_n\}\)</span>.</p>
-<p>Suppose <span class="math inline">\(w\in\text{span}(v_1,...,v_n)\)</span>. Then, there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(w=\sum\limits_{i=1}^nc_iv_i\)</span>. Since <span class="math inline">\(v_n\in\text{span}(v_1,...,v_{n-1})\)</span>, there exists <span class="math inline">\(d_1,...,d_{n-1}\in\mathbb R\)</span> such that <span class="math inline">\(v_n=\sum\limits_{i=1}^{n-1}d_iv_i\)</span>. Therefore, <span class="math display">\[
-\begin{align}
+<p>Suppose <span class="math inline">\(w\in\text{span}(v_1,...,v_n)\)</span>. Then, there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(w=\sum\limits_{i=1}^nc_iv_i\)</span>. Since <span class="math inline">\(v_n\in\text{span}(v_1,...,v_{n-1})\)</span>, there exists <span class="math inline">\(d_1,...,d_{n-1}\in\mathbb R\)</span> such that <span class="math inline">\(v_n=\sum\limits_{i=1}^{n-1}d_iv_i\)</span>. Therefore,</p>
+<p><span class="math display">\[\begin{align}
 w &amp;= \sum\limits_{i=1}^nc_iv_i\\
   &amp;= \left(\sum\limits_{i=1}^{n-1}c_iv_i\right) + c_nv_n\\
   &amp;= \left(\sum\limits_{i=1}^{n-1}c_iv_i\right) + c_n\sum\limits_{i=1}^{n-1}d_iv_i\\
   &amp;= \sum\limits_{i=1}^{n-1}\left(c_iv_i + c_nd_iv_i\right)\\
   &amp;= \sum\limits_{i=1}^{n-1}\left(c_i + c_nd_i\right)v_i\\
   &amp;\in\text{span}(v_1,...,v_{n-1})
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(\text{span}(v_1,...,v_{n})\subseteq\text{span}(v_1,...,v_{n-1})\)</span>. Therefore, <span class="math inline">\(\text{span}(v_1,...,v_{n})=\text{span}(v_1,...,v_{n-1})\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -936,14 +929,12 @@ Proof
 <div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Without loss of generality, suppose <span class="math inline">\(v_1=\textbf{0}\)</span>. Then define <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(c_1=1\)</span>, and <span class="math inline">\(c_i=0\)</span> for <span class="math inline">\(i=2,...,n\)</span>. Then,</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 \sum\limits_{i=1}^nc_iv_i &amp;= 1v_1 + \sum\limits_{i=2}^n0v_i\\
                           &amp;= v_1 + \sum\limits_{i=2}^n\textbf{0}\\
                           &amp;= \textbf{0} + \textbf{0}\\
                           &amp;= \textbf{0}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=0\)</span> does not imply that <span class="math inline">\(c_1=...=c_n=0\)</span> since there is an example with <span class="math inline">\(c_1\neq0\)</span> and <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=0\)</span>. Thus, the set is not linearly independent, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -979,13 +970,13 @@ Proof:
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\((\implies)\)</span> Suppose <span class="math inline">\(S\)</span> is a linearly independent set. Then property a) is satisfied from the previous theorem.</p>
 <p>Assume towards contradiction that b) does not hold. Then, without loss of generality, let’s say that vector is <span class="math inline">\(v_n\)</span>. From the previous theorem’s proof, we know we can write <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i\)</span> as <span class="math inline">\(\sum\limits_{i=1}^{n-1}\left(c_i + c_nd_i\right)v_i\)</span> where <span class="math inline">\(c_i, d_i\in\mathbb R\)</span>. If we choose each <span class="math inline">\(c_i=1\)</span> and each <span class="math inline">\(d_i=-1\)</span>, then we have <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}\)</span>, but not all <span class="math inline">\(c_i\)</span>’s are 0. Thus, the set is not linearly independent, showing a contradiction and showing that property b) must, indeed, hold.</p>
-<p><span class="math inline">\((\impliedby)\)</span> Here we will prove the contrapositive. That means that we will assume <span class="math inline">\(S\)</span> is linearly dependent, and show that a) and b) do not both hold. If <span class="math inline">\(\textbf{0}\in S\)</span>, then a) does not hold and there is nothing further to show. If <span class="math inline">\(\textbf{0}\notin S\)</span>, then we need to show that b) is not possible. Since <span class="math inline">\(S\)</span> is linearly dependent, then there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> which are not all 0 such that <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}\)</span>. Let <span class="math inline">\(j\)</span> be the maximum of <span class="math inline">\(\{1,...,n\}\)</span> such that <span class="math inline">\(c_j\neq0\)</span>. Then, <span class="math display">\[
-\begin{align}
+<p><span class="math inline">\((\impliedby)\)</span> Here we will prove the contrapositive. That means that we will assume <span class="math inline">\(S\)</span> is linearly dependent, and show that a) and b) do not both hold. If <span class="math inline">\(\textbf{0}\in S\)</span>, then a) does not hold and there is nothing further to show. If <span class="math inline">\(\textbf{0}\notin S\)</span>, then we need to show that b) is not possible. Since <span class="math inline">\(S\)</span> is linearly dependent, then there exists <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> which are not all 0 such that <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}\)</span>. Let <span class="math inline">\(j\)</span> be the maximum of <span class="math inline">\(\{1,...,n\}\)</span> such that <span class="math inline">\(c_j\neq0\)</span>. Then,</p>
+<p><span class="math display">\[\begin{align}
 \sum\limits_{i=1}^nc_iv_i=\textbf{0} &amp;\implies\sum\limits_{i=1}^jc_iv_i=\textbf{0}\\
                                      &amp;\implies\sum\limits_{i=1}^{j-1}c_iv_i = -c_jv_j\\
                                      &amp;\implies\sum\limits_{i=1}^{j-1}\left(-\frac{c_i}{c_j}\right)v_i = v_j
-\end{align}
-\]</span> Therefore, <span class="math inline">\(v_j\)</span> is in the span of the other vectors, so b) is not possible.</p>
+\end{align}\]</span></p>
+<p>Therefore, <span class="math inline">\(v_j\)</span> is in the span of the other vectors, so b) is not possible.</p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1063,15 +1054,14 @@ Proof:
 </div>
 <div id="callout-38" class="callout-38-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Let <span class="math inline">\(B=\{b_1,...,b_n\}\)</span> be a basis of <span class="math inline">\(V\)</span>, let <span class="math inline">\(v\in V\)</span>, and let <span class="math inline">\(c_1,...,c_n,d_1,...,d_n\)</span> be such that <span class="math display">\[v = \sum\limits_{i=1}^nc_ib_i = \sum\limits_{i=1}^nd_ib_i\]</span> Thus, observe that <span class="math display">\[
-\begin{align}
+<p>Let <span class="math inline">\(B=\{b_1,...,b_n\}\)</span> be a basis of <span class="math inline">\(V\)</span>, let <span class="math inline">\(v\in V\)</span>, and let <span class="math inline">\(c_1,...,c_n,d_1,...,d_n\)</span> be such that <span class="math display">\[v = \sum\limits_{i=1}^nc_ib_i = \sum\limits_{i=1}^nd_ib_i\]</span> Thus, observe that</p>
+<p><span class="math display">\[\begin{align}
 \sum\limits_{i=1}^nc_ib_i = \sum\limits_{i=1}^nd_ib_i &amp;\implies \sum\limits_{i=1}^nc_ib_i - \left(\sum\limits_{i=1}^nd_ib_i\right)=\textbf{0}\\
 &amp;\implies \sum\limits_{i=1}^n(c_ib_i-d_ib_i)=\textbf{0}\\
 &amp;\implies \sum\limits_{i=1}^n(c_i-d_i)b_i=\textbf{0}\\
 &amp;\implies c_i-d_i=0, \forall i \text{ Since $B$ is a linearly independent set}\\
 &amp;\implies c_i=d_i, \forall i
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(v\)</span> is a unique linear combination of the basis vectors, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1139,12 +1129,11 @@ Proof
 <p>Let <span class="math inline">\(U=\{u_1,...,u_n\}\)</span> be a linearly independent set, and let <span class="math inline">\(W=\{w_1,...,w_m\}\)</span> be a set that spans <span class="math inline">\(V\)</span>. We want to show that <span class="math inline">\(n\leq m\)</span>. To do this, we will show that we can replace a vector in <span class="math inline">\(W\)</span> with a vector in <span class="math inline">\(U\)</span> without changing the span of the set. We will show this by doing induction on the number of vectors in <span class="math inline">\(U\)</span>.</p>
 <p>For the base case, consider the set <span class="math inline">\(\{u_1\}\cup W\)</span>. Since <span class="math inline">\(W\)</span> spans <span class="math inline">\(V\)</span>, <span class="math inline">\(\{u_1\}\cup W\)</span> must span <span class="math inline">\(V\)</span> as well. Since the span of a set of vectors is a vector space and <span class="math inline">\(\textbf{0}\)</span> is in all subspaces of <span class="math inline">\(V\)</span>, <span class="math inline">\(\textbf{0}\in\text{span}\{\{u_1\}\cup W\}\)</span>. Thus, there exist <span class="math inline">\(c_0,c_1,...,c_m\)</span> such that <span class="math display">\[c_0u_1+\sum\limits_{i=1}^mc_iw_i=\textbf{0}\]</span> We know that it is possible for <span class="math inline">\(c_0\)</span> to be non-zero since <span class="math inline">\(c_1,...,c_m\)</span> can be chosen such that <span class="math inline">\(\sum\limits_{i=1}^mc_iw_i=-c_0u_1\)</span> (since <span class="math inline">\(W\)</span> spans <span class="math inline">\(V\)</span>). In the case where <span class="math inline">\(c_0\neq0\)</span>, <span class="math inline">\(c_1,...,c_m\)</span> can’t all be zero because that would imply <span class="math inline">\(u_1=\textbf{0}\)</span>, but that contradicts the assumption that <span class="math inline">\(U\)</span> is a linearly independent set. Thus, there exists at least one <span class="math inline">\(w_i\)</span> such that <span class="math inline">\(c_i\neq0\)</span>. Choose <span class="math inline">\(c_j\)</span> such that <span class="math inline">\(j\)</span> is the max of <span class="math inline">\(1,...m\)</span> such that <span class="math inline">\(c_j\neq0\)</span>. Thus, <span class="math display">\[w_j=\left(-\frac{c_0}{c_j}u_1+\sum\limits_{i=1}^{j-1}\left(-\frac{c_i}{c_j}\right)w_i\right)\in\text{span}(\left(W\setminus\{w_j\}\right)\cup\{u_1\})\]</span> Thus, we can remove <span class="math inline">\(w_j\)</span> from the set <span class="math inline">\(\{u_1\}\cup W\)</span> and the span is the same.</p>
 <p>Now, we re label the remaining <span class="math inline">\(w_i\)</span> vectors so our set that spans <span class="math inline">\(V\)</span> is <span class="math inline">\(\{u_1,w_2,...,w_m\}\)</span>.</p>
-<p>For the induction hypothesis, suppose that we were able to successfully replace <span class="math inline">\(k\)</span> (with <span class="math inline">\(k&lt;n\)</span>) vectors in <span class="math inline">\(W\)</span> with vectors. Assume towards contradiction that we’ve replaced all the vectors in <span class="math inline">\(W\)</span> with vectors in <span class="math inline">\(U\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> Then, the set <span class="math inline">\(\{u_1,...,u_k\}\)</span> spans <span class="math inline">\(V\)</span>. However, this means that <span class="math inline">\(u_{k+1}\in\text{span}(\{u_1,...,u_k\})\)</span>, which implies that <span class="math inline">\(\{u_1,...,u_{k+1}\}\)</span> is a linearly dependent set which is a contradiction. Thus, <span class="math inline">\(k&lt;m\implies k+1\leq m\)</span>. As with the base case, we can relabel the remaining vectors in <span class="math inline">\(W\)</span> such that our new spanning set is <span class="math inline">\(\{u_1,...,u_k,w_{k+1},...,w_m\}\)</span>.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> Since <span class="math inline">\(u_{k+1}\in\text{span}(u_1,...,u_k,w_{k+1},...,w_m)\)</span>, there exist scalars <span class="math inline">\(c_1,...,c_n\)</span> such that <span class="math display">\[u_{k+1}=\sum\limits_{i=1}^kc_iu_i +\sum\limits_{i=k+1}^mc_iw_i\]</span> Assume towards contradiction that <span class="math inline">\(c_{k+1}=...=c_m=0\)</span>, then this implies <span class="math inline">\(u_{k+1}\in\text{span}(u_1,...,u_k)\)</span> which implies that <span class="math inline">\(\{u_1,...,u_{k=1}\}\)</span> is not linearly independent, hence a contradiction. Thus, at least one of the scalars for the <span class="math inline">\(w_i's\)</span> is non zero. Choose <span class="math inline">\(g\)</span> to be the max of <span class="math inline">\(k+1,...,m\)</span> such that <span class="math inline">\(c_g\neq0\)</span>. Then <span class="math display">\[
-\begin{align}
+<p>For the induction hypothesis, suppose that we were able to successfully replace <span class="math inline">\(k\)</span> (with <span class="math inline">\(k&lt;n\)</span>) vectors in <span class="math inline">\(W\)</span> with vectors. Assume towards contradiction that we’ve replaced all the vectors in <span class="math inline">\(W\)</span> with vectors in <span class="math inline">\(U\)</span>.<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a> Then, the set <span class="math inline">\(\{u_1,...,u_k\}\)</span> spans <span class="math inline">\(V\)</span>. However, this means that <span class="math inline">\(u_{k+1}\in\text{span}(\{u_1,...,u_k\})\)</span>, which implies that <span class="math inline">\(\{u_1,...,u_{k+1}\}\)</span> is a linearly dependent set which is a contradiction. Thus, <span class="math inline">\(k&lt;m\implies k+1\leq m\)</span>. As with the base case, we can relabel the remaining vectors in <span class="math inline">\(W\)</span> such that our new spanning set is <span class="math inline">\(\{u_1,...,u_k,w_{k+1},...,w_m\}\)</span>.<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a> Since <span class="math inline">\(u_{k+1}\in\text{span}(u_1,...,u_k,w_{k+1},...,w_m)\)</span>, there exist scalars <span class="math inline">\(c_1,...,c_n\)</span> such that <span class="math display">\[u_{k+1}=\sum\limits_{i=1}^kc_iu_i +\sum\limits_{i=k+1}^mc_iw_i\]</span> Assume towards contradiction that <span class="math inline">\(c_{k+1}=...=c_m=0\)</span>, then this implies <span class="math inline">\(u_{k+1}\in\text{span}(u_1,...,u_k)\)</span> which implies that <span class="math inline">\(\{u_1,...,u_{k=1}\}\)</span> is not linearly independent, hence a contradiction. Thus, at least one of the scalars for the <span class="math inline">\(w_i's\)</span> is non zero. Choose <span class="math inline">\(g\)</span> to be the max of <span class="math inline">\(k+1,...,m\)</span> such that <span class="math inline">\(c_g\neq0\)</span>. Then</p>
+<p><span class="math display">\[\begin{align}
 u_{k+1}=\sum\limits_{i=1}^kc_iu_i +\sum\limits_{i=k+1}^gc_iw_i &amp;\implies u_{k+1} -\left(\sum\limits_{i=1}^kc_iu_i\right) - \left(\sum\limits_{i=k+1}^{g-1}c_iw_i\right)=c_gw_g\\
                                                                &amp;\implies \frac{1}{c_g}u_{k+1} -\left(\sum\limits_{i=1}^k\frac{c_i}{c_g}u_i\right)-\left(\sum\limits_{i=k+1}^{g-1}\frac{c_i}{c_g}w_i\right)=w_g
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(w_g\)</span> is in the span of the other vectors, so we can remove it from the list without changing the span. Without loss of generality, we can re label the remaining <span class="math inline">\(w_i\)</span> vectors such that the new list is <span class="math inline">\(\{u_1,...,u_{k+1},w_{k+2},..,w_m\}\)</span>.</p>
 <p>Thus, by induction, we can replace <span class="math inline">\(n\)</span> <span class="math inline">\(w\)</span> vectors with <span class="math inline">\(u\)</span> vectors and end with either the set <span class="math inline">\(U\)</span> or <span class="math inline">\(U\)</span> as well as some <span class="math inline">\(W\)</span> vectors, that spans <span class="math inline">\(V\)</span>. Thus, the linearly independent set has fewer vectors than the spanning set, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
@@ -1250,17 +1239,15 @@ Proof
 </div>
 <div id="callout-47" class="callout-47-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Observe that <span class="math display">\[
-\begin{align}
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align}
 T(\textbf{0}_V) &amp;= T(\textbf{0}_V+\textbf{0}_V)\\
                 &amp;= T(\textbf{0}_V) + T(\textbf{0}_V)
-\end{align}
-\]</span></p>
-<p>Thus, observe that <span class="math display">\[
-\begin{align}
+\end{align}\]</span></p>
+<p>Thus, observe that</p>
+<p><span class="math display">\[\begin{align}
 T(\textbf{0}_V) = T(\textbf{0}_V) + T(\textbf{0}_V) &amp;\implies \textbf{0}_W = T(\textbf{0}_V)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus <span class="math inline">\(T(\textbf{0}_V)=\textbf{0}_W\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1303,69 +1290,55 @@ Proof
 <p><strong>Closure of Vector Addition</strong></p>
 <p>Then the domain of <span class="math inline">\(S+T\)</span> is <span class="math inline">\(V\)</span> since <span class="math inline">\((S+T)(v)=S(v)+T(v)\)</span> and <span class="math inline">\(V\)</span> is the domain of <span class="math inline">\(S\)</span> and <span class="math inline">\(T\)</span>. <span class="math inline">\(W\)</span> is the co-domain of <span class="math inline">\(S+T\)</span> since <span class="math inline">\(S(v), T(v)\in W\)</span> and <span class="math inline">\(W\)</span> is closed under vector addition.</p>
 <p>To show <span class="math inline">\(S+T\)</span> is a linear map, observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (S+T)(u+v) &amp;= S(u+v) + T(u+v)\\
             &amp;= Su + Sv + Tu + Tv\\
             &amp;= (Su + Tu) + (Sv + Tv)\\
             &amp;= (S+T)u + (S+T)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>and also observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (S+T)cv &amp;= Scv + Tcv\\
          &amp;= cSv + cTv\\
          &amp;= c(Sv+Tv)\\
          &amp;= c(S+T)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(\mathcal L(V,W)\)</span> is closed under vector addition.</p>
 <p><strong>Symmetry of Vector Addition</strong></p>
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (S+T)v &amp;= Sv + Tv\\
        &amp;= Tv + Sv\\
        &amp;= (T+S)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><strong>Associativity of Vector Addition</strong></p>
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (R + (S+T))v &amp;= Rv + (Sv + Tv)\\
              &amp;= (Rv + Sv) + Tv\\
              &amp;= (R+S)v + Tv\\
              &amp;= ((R+S) + T)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><strong>Identity of Vector Addition</strong></p>
 <p>Define the map <span class="math inline">\(Tv=\textbf{0}_W\)</span> for all <span class="math inline">\(v\in V\)</span> where <span class="math inline">\(\textbf{0}_W\)</span> is the zero vector in <span class="math inline">\(W\)</span>. Then, <span class="math inline">\(T\)</span> is the zero vector of <span class="math inline">\(\mathcal L(V,W)\)</span>. To show this, observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (S+T)v &amp;= Sv + Tv\\
        &amp;= Sv + \textbf{0}_W\\
        &amp;= Sv
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><strong>Invertibility of Vector Addition</strong></p>
 <p>Let <span class="math inline">\(v\in V\)</span>. Define <span class="math inline">\(w=Tv\)</span>. Then define <span class="math inline">\(S\in\mathcal L(V,W)\)</span>, such that <span class="math inline">\(Sv=-w\)</span>. Then,</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (T+S)v &amp;= Tv + Sv\\
        &amp;= w - w\\
        &amp;= \textbf{0}_W
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><strong>Closure of Scalar Mulitplication</strong></p>
 <p>The set of inputs to <span class="math inline">\(cT(v)\)</span> are the same as to <span class="math inline">\(T(v)\)</span> so <span class="math inline">\(cT\)</span> has domain <span class="math inline">\(V\)</span>. <span class="math inline">\(Tv\in W\)</span> through definition of <span class="math inline">\(T\)</span>, and <span class="math inline">\(cTv\in W\)</span> since <span class="math inline">\(W\)</span> is closed under scalar multiplication due to <span class="math inline">\(W\)</span> being a vector space.</p>
 <p>To show that <span class="math inline">\(cT\)</span> is a linear map, observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 cT(u+v) &amp;= cTu + cTv
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>and that</p>
 <p><span class="math display">\[
 \begin{align}
@@ -1378,40 +1351,32 @@ cT(av) &amp;= c(aTv)\\
 <p>Therefore, <span class="math inline">\(\mathcal L(V,W)\)</span> is closed under scalar multiplication.</p>
 <p><strong>Associativity of Scalar Multiplication</strong></p>
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 a(c(Tv)) &amp;= (ac)(Tv)\\
          &amp;= (acT)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><strong>Identity of Scalar Multiplication</strong></p>
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (1T)v &amp;= 1(Tv)\\
       &amp;= Tv
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><strong>Distributivity</strong></p>
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 ((a+b)T)v &amp;= (a+b)(Tv)\\
           &amp;= a(Tv) + b(Tv)\\
           &amp;= (aT)v + (bT)v\\
           &amp;= (aT + bT)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>and that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (a(S+T))v &amp;= a((S+T)v)\\
           &amp;= a(Sv + Tv)\\
           &amp;= a(Sv) + a(Tv)\\
           &amp;= (aS)v + (aT)v\\
           &amp;= (aS + aT)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(\mathcal L(V,W)\)</span> is a vector space which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1463,15 +1428,13 @@ Proof
 <div id="callout-52" class="callout-52-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (R(ST))v &amp;= R(STv)\\
          &amp;= R(S(Tv))\\
          &amp;= (RS)(Tv)\\
          &amp;= (RS(T))v \\
          \blacksquare
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 </div>
 </div>
 </div>
@@ -1517,19 +1480,15 @@ Proof
 <div id="callout-55" class="callout-55-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(v,w\in V\)</span> and let <span class="math inline">\(c\in\mathbb R\)</span>. Then observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 I(v+w) &amp;= v+w\\
        &amp;= Iv + Iw
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>And that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 I(cv) &amp;= cv\\
       &amp;= c(Iv)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1560,14 +1519,13 @@ Proof:
 <div id="callout-57" class="callout-57-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 I_WTv &amp;= I_W(Tv)\\
       &amp;= Tv\\
       &amp;= T(I_Vv)\\
       &amp;= TI_Vv
-\end{align}
-\]</span> <span class="math inline">\(\blacksquare\)</span></p>
+\end{align}\]</span></p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
 </div>
@@ -1601,25 +1559,21 @@ Proof:
 <div id="callout-59" class="callout-59-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (S_1+S_2)T_1v &amp;= (S_1+S_2)(T_1v)\\
               &amp;= S_1(T_1v) + S_2(T_1v)\\
               &amp;= S_1T_1v + S_2T_1v\\
               &amp;= (S_1T_1 + S_2T_1)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>and also observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 S_1(T_1 + T_2)v &amp;= S_1((T_1 + T_2)v)\\
                 &amp;= S_1(T_1v + T_2v)\\
                 &amp;= S_1((T_1v) + (T_2v))\\
                 &amp;= S_1(T_1v) + S_1(T_2v)\\
                 &amp;= S_1T_1v + S_1T_2v\\
                 &amp;=(S_1T_1 + S_1T_2)v
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1701,12 +1655,10 @@ Proof
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\((\implies)\)</span> First, suppose that <span class="math inline">\(T\)</span> is injective. Then, since <span class="math inline">\(T(\textbf{0}_V)=\textbf{0}_W\)</span> (as shown in a previous theorem), <span class="math inline">\(\textbf{0}_W\)</span> is in the range of <span class="math inline">\(T\)</span> and thus has a unique input in <span class="math inline">\(V\)</span> since <span class="math inline">\(T\)</span> is injective. Thus, <span class="math inline">\(\textbf{0}_V\)</span> is the only input such that the output is <span class="math inline">\(\textbf{0}_W\)</span>. That is, the null space of <span class="math inline">\(T\)</span> is <span class="math inline">\(\{\textbf{0}_V\}\)</span>.</p>
 <p><span class="math inline">\((\impliedby)\)</span> On the other hand, suppose that <span class="math inline">\(\text{null}(T)=\textbf{0}_V\)</span>. Let <span class="math inline">\(u,v\in V\)</span> and suppose <span class="math inline">\(Tu=Tv\)</span>. Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 \textbf{0}_W &amp;= Tu - Tv\\
              &amp;= T(u-v)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Then, <span class="math inline">\(T(u-v)\in\text{null}(T)\)</span>, so <span class="math inline">\(u-v=\textbf{0}_V\implies u=v\)</span>, so <span class="math inline">\(T\)</span> is injective.</p>
 <p>Thus, <span class="math inline">\(T\)</span> is injective if and only if <span class="math inline">\(\text{null}(T)=\{\textbf{0}_V\}\)</span>.</p>
 </div>
@@ -1744,15 +1696,13 @@ Proof
 <div id="callout-65" class="callout-65-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Suppose <span class="math inline">\(S_1,S_2\in\mathcal L(W,V)\)</span> both have the property that <span class="math inline">\(S_jT=I_V\)</span> and <span class="math inline">\(TS_j=I_W\)</span> for <span class="math inline">\(j=1,2\)</span>. Then observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 S_1 &amp;= S_1I_W\\
     &amp;= S_1(TS_2)\\
     &amp;= (S_1T)S_2\\
     &amp;= I_VS_2\\
     &amp;= S_2
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus all inverses of <span class="math inline">\(T\)</span> are equal, so the inverse of <span class="math inline">\(T\)</span> is unique. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1799,46 +1749,36 @@ Proof
 <div id="callout-68" class="callout-68-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\((\implies)\)</span> First suppose that <span class="math inline">\(T\)</span> is invertible. Then, let <span class="math inline">\(v_1,v_2,\in V\)</span> such that <span class="math inline">\(Tv_1=Tv_2\)</span>. Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 Tv_1=Tv_2 &amp;\implies T^{-1}Tv_1=T^{-1}Tv_2\\
           &amp;\implies I_Vv_1 = I_vv_2\\
           &amp;\implies v_1 = v_2
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(T\)</span> is injective. Now, suppose <span class="math inline">\(w\in W\)</span>. Observe that <span class="math inline">\(T^{-1}w\in V\)</span>. Therefore,</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 T(T^{-1}w) &amp;= (TT^{-1})w\\
            &amp;= I_Ww\\
            &amp;= w
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Therefore, for all <span class="math inline">\(w\in W\)</span>, there exists an element in <span class="math inline">\(V\)</span>, namely, <span class="math inline">\(T^{-1}(w)\)</span>, such that <span class="math inline">\(T\)</span> maps that element to <span class="math inline">\(w\)</span>. Thus, <span class="math inline">\(T\)</span> is surjective.</p>
 <p>Since <span class="math inline">\(T\)</span> is injective and surjective, <span class="math inline">\(T\)</span> must be bijective, completing this direction of the proof.</p>
 <p><span class="math inline">\((\impliedby)\)</span> Now, suppose <span class="math inline">\(T\)</span> is bijective. Then since <span class="math inline">\(T\)</span> is surjective, for every <span class="math inline">\(w\in W\)</span>, there exists a <span class="math inline">\(v\in V\)</span> such that <span class="math inline">\(Tv=w\)</span>. Since <span class="math inline">\(T\)</span> is injective, this <span class="math inline">\(v\)</span> is unique. We can therefore construct the well-defined function <span class="math inline">\(S:W\to V\)</span> such that <span class="math inline">\(T(S(w))=w\implies T(S(w))=I_Ww\)</span>. Observe that for all <span class="math inline">\(v\in V\)</span>,</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 T(S(Tv)) &amp;= T(v)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Which implies that <span class="math inline">\(S(T(v)) = v\)</span> since <span class="math inline">\(T\)</span> is injective. Thus, <span class="math inline">\(S(Tv)=I_Vv\)</span>.</p>
 <p>To complete the proof then, it is sufficient to show that <span class="math inline">\(S\)</span> is a linear map. Suppose <span class="math inline">\(w_1,w_2\in W\)</span> and <span class="math inline">\(c\in\mathbb R\)</span>. Then observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 T(S(w_1+w_2)) &amp;= w_1 + w_2\\
               &amp;= T(S(w_1)) + T(S(w_2))\\
               &amp;= T(S(w_1) + S(w_2)) \text{ (by linearity of } T\text{)}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Then <span class="math inline">\(T\)</span>’s injectivity shows that <span class="math inline">\(S(w_1+w_2) = S(w_1) + S(w_2)\)</span>. Similarly, observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 T(S(cw_1)) &amp;= cw_1\\
            &amp;= c T(S(w_1))\\
            &amp;= T(cS(w_1))\text{ (by linearity of } T\text{)}
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Again, by injectivity of <span class="math inline">\(T\)</span>, <span class="math inline">\(cS(w_1)=S(cw_1)\)</span>. Thus, <span class="math inline">\(S\)</span> is linear, showing that <span class="math inline">\(S=T^{-1}\)</span>. Therefore, if <span class="math inline">\(T\)</span> is bijective, then <span class="math inline">\(T\)</span> is invertible, finishing this direction of the proof. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1897,24 +1837,20 @@ Proof:
 <li><p>Let <span class="math inline">\(T\in\mathcal L(V, W)\)</span> be an isomorphism. Since <span class="math inline">\(T\)</span> is bijective, <span class="math inline">\(T\)</span> is invertible. Since <span class="math inline">\(T^{-1}\)</span> is invertible, <span class="math inline">\(T^{-1}\)</span> is also bijective, so <span class="math inline">\(T^{-1}\in\mathcal L(V, W)\)</span> is an isomorphism. Thus, <span class="math inline">\(V\cong W\implies W\cong V\)</span>.</p></li>
 <li><p>Let <span class="math inline">\(T\in\mathcal L(V,W)\)</span> and <span class="math inline">\(S\in\mathcal L(W, X)\)</span>. Then define <span class="math inline">\(R = ST\in\mathcal L(V, X)\)</span>. Observe that</p></li>
 </ol>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 ST(T^{-1}S^{-1}) &amp;= S(TT^{-1})S^{-1}\\
                  &amp;= SI_WS^{-1}\\
                  &amp;= (SI_W)S^{-1}\\
                  &amp;= SS^{-1}\\
                  &amp;= I_X
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>and that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 (T^{-1}S^{-1})ST &amp;= T^{-1}(S^{-1}S)T\\
                  &amp;= T^{-1}I_WT\\
                  &amp;= T^{-1}T\\
                  &amp;= I_V
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(R=ST\)</span> is invertible<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a>, so <span class="math inline">\(R\)</span> is a bijection, and thus an isomorpshism from <span class="math inline">\(V\)</span> to <span class="math inline">\(X\)</span>, so <span class="math inline">\(V\cong X\)</span>, which is what we wanted to show.</p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
 </div>
@@ -1949,12 +1885,10 @@ Proof
 <div id="callout-73" class="callout-73-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Let <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math inline">\(\sum\limits_{i=1}^nc_iT(v_i)=\textbf{0}_W\)</span>. Since <span class="math inline">\(T\)</span> is linear, observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 \textbf{0}_W &amp;= \sum\limits_{i=1}^nc_iT(v_i)\\
              &amp;= T\left(\sum\limits_{i=1}^nc_iv_i\right)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Since <span class="math inline">\(T\)</span> is injective, this implies that <span class="math inline">\(\sum\limits_{i=1}^nc_iv_i=\textbf{0}_W\)</span>. Since <span class="math inline">\(\{v_1,...,v_n\}\)</span> is a linearly independent set, this means that <span class="math inline">\(c_1=...=c_n=0\)</span>. Thus, <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set in <span class="math inline">\(W\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -1986,32 +1920,26 @@ Proof
 <div class="callout-body-container callout-body">
 <p><span class="math inline">\((\impliedby)\)</span> Suppose <span class="math inline">\(\text{dim}(V)=\text{dim}(W)\)</span>. Let <span class="math inline">\(\{v_1,...v_n\}\)</span> be a basis of <span class="math inline">\(V\)</span>. This means that <span class="math inline">\(\text{dim}(V)=n=\text{dim}(W)\)</span>. Thus, a basis of <span class="math inline">\(W\)</span> is <span class="math inline">\(\{w_1,...,w_n\}\)</span> for some <span class="math inline">\(w_1,...,w_n\in W\)</span>.</p>
 <p>Let <span class="math inline">\(u\in V\)</span> be arbitrary. Then <span class="math inline">\(u\)</span> is entirely defined as a unique linear combination of basis vectors in <span class="math inline">\(V\)</span>. Thus, any function of <span class="math inline">\(u\)</span> can be defined as a function of <span class="math inline">\(c_1v_1+...+c_nv_n\)</span>. Let <span class="math inline">\(T\in\mathcal L(V, W)\)</span>. Then</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 T\left(\sum\limits_{i=1}^nc_iv_i\right) &amp;= \sum\limits_{i=1}^nc_iT(v_i)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(T\)</span> is entirely determined by where it maps the basis vectors of <span class="math inline">\(V\)</span>. Define <span class="math inline">\(T\)</span> such that <span class="math inline">\(T(v_i)=w_i\)</span> for <span class="math inline">\(i=1,...,n\)</span>. Thus, <span class="math display">\[\sum\limits_{i=1}^nc_iw_i\]</span> We can conclude that <span class="math inline">\(\text{Range}(T)\)</span> are all vectors of the form <span class="math inline">\(\sum\limits_{i=1}^nc_iw_i\)</span> for <span class="math inline">\(c_i\in\mathbb R\)</span>. Thus, <span class="math inline">\(\text{Range}(T)=\text{span}(w_1,...,w_n)=W\)</span>. Thus, <span class="math inline">\(T\)</span> is surjective. Now, suppose <span class="math inline">\(u_1,u_2\in V\)</span> where <span class="math inline">\(T(u_1)=T(u_2)\)</span>. Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 T(u_1)=T(u_2) &amp;\implies T\left(\sum\limits_{i=1}^nc_iv_i\right) = T\left(\sum\limits_{i=1}^nd_iv_i\right)\\
               &amp;\implies \sum\limits_{i=1}^nc_iT(v_i) = \sum\limits_{i=1}^nd_iT(v_i)\\
               &amp;\implies \sum\limits_{i=1}^nc_iw_i = \sum\limits_{i=1}^nd_iw_i\\
               &amp;\implies \sum\limits_{i=1}^n(c_iw_i-d_iw_i) = \textbf{0}_W\\
               &amp;\implies \sum\limits_{i=1}^n(c_i-d_i)w_i=\textbf{0}_W
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Since the <span class="math inline">\(w_i\)</span>’s are independent since the vectors are part of a basis, then <span class="math inline">\(c_i=d_i\)</span> for all <span class="math inline">\(i=1,...,n\)</span>. Thus <span class="math inline">\(u_1=u_2\)</span>, so <span class="math inline">\(T\)</span> is injective. Thus, <span class="math inline">\(T\)</span> is bijective and is therefore an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>. Thus, <span class="math inline">\(V\cong W\)</span>.</p>
 <p><span class="math inline">\((\implies)\)</span> Now suppose <span class="math inline">\(V\cong W\)</span>. Since <span class="math inline">\(V\)</span> has finite dimension, let <span class="math inline">\(n=\text{dim}(V)\)</span>. Then there exists a basis of length <span class="math inline">\(n\)</span> in <span class="math inline">\(V\)</span>, say <span class="math inline">\(\{v_1,...,v_2\}\)</span>. As shown in the previous theorem, if <span class="math inline">\(T\)</span> is an isomorphism from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>, then <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set in <span class="math inline">\(W\)</span>. Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 W &amp;= \text{Range}(T)\\
   &amp;= \{Tv: v\in V\}\\
   &amp;= \left\{T\left(\sum\limits_{i=1}^n c_iv_i\right): c_i\in\mathbb R\right\}\\
   &amp;= \left\{\sum\limits_{i=1}^ncT(v_i): c_i\in\mathbb R\right\}\\
   &amp;=\text{span}(Tv_1,...,Tv_n)
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Since <span class="math inline">\(\{T(v_1),...,T(v_n)\}\)</span> is a linearly independent set and spans <span class="math inline">\(W\)</span>, it is a basis of <span class="math inline">\(W\)</span>. Thus, <span class="math inline">\(W\)</span> has dimension <span class="math inline">\(n\)</span> since its basis is of length <span class="math inline">\(n\)</span>. Therefore, <span class="math inline">\(\text{dim}(W)=n=\text{dim}(V)\)</span>.</p>
 <p>Therefore, <span class="math inline">\(V\cong W\)</span> if and only if <span class="math inline">\(\text{dim}(W)=\text{dim}(V)\)</span>, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
 </div>
@@ -2140,8 +2068,8 @@ Proof
 <p>But we don’t have to give up. We might not have a <span class="math inline">\(v\)</span> that perfectly solves the equation, but is there a <span class="math inline">\(v\)</span> that approximates the solution. Is there a <span class="math inline">\(v\)</span> such that <span class="math inline">\(Tv\)</span> is very close to <span class="math inline">\(w\)</span>? What does “very close” mean in the context of an abstract vector space?</p>
 <p>These questions are answered with the following structures and definitions in this section.</p>
 </section>
-<section id="inner-product-spaces" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="inner-product-spaces"><span class="header-section-number">7.2</span> Inner Product Spaces</h2>
+<section id="inner-products" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="inner-products"><span class="header-section-number">7.2</span> Inner Products</h2>
 <blockquote class="blockquote">
 <p>For a vector space, <span class="math inline">\(V\)</span>, an <em>inner product</em> is a function from <span class="math inline">\(V\times V\to\mathbb R\)</span>, notated as <span class="math inline">\(\langle,\rangle\)</span> that meets the following criteria</p>
 <ol type="a">
@@ -2149,7 +2077,7 @@ Proof
 <li>For all <span class="math inline">\(v\in V\)</span>, <span class="math inline">\(\langle v,v\rangle=0 \iff v=\textbf{0}\)</span></li>
 <li>For all <span class="math inline">\(u,v\in V\)</span>, <span class="math inline">\(\langle u,v\rangle=\langle v,u\rangle\)</span><a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a></li>
 <li>For all <span class="math inline">\(u,v\in V\)</span> and <span class="math inline">\(c\in\mathbb R\)</span>, <span class="math inline">\(\langle cu,v\rangle=c\langle u,v\rangle\)</span></li>
-<li>For all <span class="math inline">\(u,v,w\in V \langle u+v, w\rangle = \langle u,w\rangle + \langle v,w\rangle\)</span></li>
+<li>For all <span class="math inline">\(u,v,w\in V \langle u+v, w\rangle = \langle u,w\rangle + \langle v,w\rangle\)</span><a href="#fn27" class="footnote-ref" id="fnref27" role="doc-noteref"><sup>27</sup></a></li>
 </ol>
 <p>A vector space equipped with an inner product is called and <em>Inner Product Space</em>.</p>
 </blockquote>
@@ -2186,31 +2114,25 @@ Proof
 <div class="callout-body-container callout-body">
 <p>Proof of 1)</p>
 <p>Observe that for all <span class="math inline">\(v\in V\)</span>,</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 \langle v,\textbf{0}\rangle &amp;= \langle v,\textbf{0} + \textbf{0}\rangle\\
                             &amp;= \langle\textbf{0} + \textbf{0}, v\rangle\\
                             &amp;= \langle\textbf{0}, v\rangle + \langle\textbf{0},v\rangle\\
                             &amp;= \langle v,\textbf{0}\rangle + \langle v,\textbf{0}\rangle
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Thus, <span class="math inline">\(\langle v,\textbf{0}\rangle = \langle v,\textbf{0}\rangle + \langle v,\textbf{0}\rangle\)</span> which means that <span class="math inline">\(0=\langle v,\textbf{0}\rangle=\langle\textbf{0}, v\rangle\)</span> which is what we wanted to show.</p>
 <p>Proof of 2) Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 \langle u, v+w\rangle &amp;= \langle v+w, u\rangle\\
                       &amp;= \langle v, u\rangle + \langle w,u\rangle\\
                       &amp;= \langle u,v\rangle + \langle u,w\rangle
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p>Proof of 3) Observe that</p>
-<p><span class="math display">\[
-\begin{align}
+<p><span class="math display">\[\begin{align}
 \langle u, cv\rangle &amp;= \langle cv, u\rangle\\
                      &amp;= c\langle v,u\rangle\\
                      &amp;= c\langle u,v\rangle
-\end{align}
-\]</span></p>
+\end{align}\]</span></p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
 </div>
 </div>
@@ -2221,13 +2143,402 @@ Proof
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Inner Products of Sums
+Inner Products of Large Sums
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Induction can be used to prove similar properties with sums of more than two vectors. For example, if <span class="math inline">\(u,v_1,...,v_n\in V\)</span> for some inner product space <span class="math inline">\(V\)</span>, then <span class="math display">\[\left\langle u,\sum\limits_{i=1}^nv_i\right\rangle = \sum\limits_{i=1}^n\langle u,v_i\rangle\]</span></p>
 </div>
 </div>
+</section>
+<section id="norms" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="norms"><span class="header-section-number">7.3</span> Norms</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space. Then, for <span class="math inline">\(v\in V\)</span>, the <em>norm</em> of <span class="math inline">\(V\)</span>, notated as <span class="math inline">\(\|v\|\)</span> is defined<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a> to be <span class="math inline">\(\|v\|=\sqrt{\langle v,v\rangle}\)</span></p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is a norm?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Norms generalize the idea of a vector’s length. In <span class="math inline">\(\mathbb R^n\)</span> for <span class="math inline">\(n=1,2,3\)</span>, the norm of a vector actually is its length! However, in other spaces, the norm of a vector is more emblematic of the vector’s length rather than a geometrical measurement.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Norm Properties
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space with <span class="math inline">\(u,v\in V\)</span>. <span class="math inline">\(c\in\mathbb R\)</span>. Then</p>
+<ol type="a">
+<li><span class="math inline">\(\|cv\|=|c|\|v\|\)</span></li>
+<li><span class="math inline">\(\|v\|=0\iff v=\textbf{0}\)</span></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-87-contents" aria-controls="callout-87" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-87" class="callout-87-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Proof of a) Observe that</p>
+<p><span class="math display">\[\begin{align}
+\|cv\| &amp;= \sqrt{\langle cv,cv\rangle}\\
+       &amp;= \sqrt{c^2\langle v,v\rangle}\\
+       &amp;= \sqrt{c^2}\sqrt{\langle v,v\rangle}\\
+       &amp;= |c|\|v\|
+\end{align}\]</span></p>
+<p>Proof of b) If <span class="math inline">\(\|v\|=0\)</span>, Then</p>
+<p><span class="math display">\[\begin{align}
+0 &amp;= \|v\|\\
+  &amp;= \sqrt{\langle v,v\rangle}
+\end{align}\]</span></p>
+<p>So <span class="math inline">\(0=\sqrt{\langle v,v\rangle}\)</span>, squaring both sides gives us <span class="math inline">\(0=\langle v,v\rangle\)</span> which means that <span class="math inline">\(v=\textbf{0}\)</span> by definition of an inner product.</p>
+<p>If <span class="math inline">\(v=\textbf{0}\)</span>, then</p>
+<p><span class="math display">\[\begin{align}
+\|v\| &amp;= \sqrt{\langle v,v\rangle}\\
+      &amp;= \sqrt{\langle\textbf{0},\textbf{0}\rangle}\\
+      &amp;=\sqrt{0}\\
+      &amp;=0
+\end{align}\]</span> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="orthogonality" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="orthogonality"><span class="header-section-number">7.4</span> Orthogonality</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space. Then two vectors, <span class="math inline">\(u,v\in V\)</span> are called <em>orthogonal</em> if <span class="math inline">\(\langle u,v\rangle=0\)</span>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What is orthogonality?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Orthogonality generalizes the idea of vectors being perpendicular in a similar way that norms generalize length.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Zero Vector and Orthogonality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The zero vector is orthogonal to every vector and is the only vector to be orthogonal to itself. These follow from the properties and definitions of an inner product, respectively.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pythagorean Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space where <span class="math inline">\(u,v\in V\)</span> are orthogonal. Then <span class="math display">\[\|u+v\|^2 = \|u\|^2 \|v\|^2\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-91-contents" aria-controls="callout-91" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-91" class="callout-91-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align}
+\|u+v\|^2 &amp;= \langle u+v, u+v\rangle\\
+          &amp;= \langle u,u\rangle + \langle u,v\rangle + \langle v,u\rangle + \langle v,v\rangle\\
+          &amp;= \|u\|^2 + 0 + 0 + \|v\|^2\\
+          &amp;= \|u\|^2 + \|v\|^2
+\end{align}\]</span></p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Cauchy Schwartz Inequality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space with <span class="math inline">\(u,v\in V\)</span>. Then <span class="math inline">\(|\langle u,v\rangle|\leq\|u\|\|v\|\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-93-contents" aria-controls="callout-93" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-93" class="callout-93-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If <span class="math inline">\(v=\textbf{0}\)</span>, then <span class="math display">\[|\langle u,v\rangle| = |\langle u,\textbf{0}\rangle|=|0|=0\]</span> Similarly, <span class="math display">\[\|u\|\|v\|=\|u\|\|\textbf{0}\|=\|u\|*0=0\]</span> So the inequality is an equality in the case where <span class="math inline">\(v=\textbf{0}\)</span>.</p>
+<p>If <span class="math inline">\(v\neq\textbf{0}\)</span>, then <span class="math inline">\(\|v\|\neq0\)</span>. Define <span class="math inline">\(w=u-\frac{\langle u,v\rangle}{\|v\|^2}v\)</span>. Observe that</p>
+<p><span class="math display">\[\begin{align}
+\langle v,w\rangle &amp;= \left\langle v, u-\frac{\langle u,v\rangle}{\|v\|^2}v\right\rangle\\
+                   &amp;= \langle v,u\rangle - \left\langle v, \frac{\langle u,v\rangle}{\|v\|^2}v\right\rangle\\
+                   &amp;= \langle u,v\rangle - \frac{\langle u,v\rangle}{\|v\|^2}\langle v,v\rangle\\
+                   &amp;= \langle u,v\rangle - \frac{\langle u,v\rangle}{\|v\|^2}\|v\|^2\\
+                   &amp;= \langle u,v\rangle - \langle u,v\rangle\\
+                   &amp;= 0
+\end{align}\]</span></p>
+<p>So <span class="math inline">\(v,w\)</span> are orthogonal and so are <span class="math inline">\(cv, w\)</span> for any <span class="math inline">\(c\in\mathbb R\)</span> since <span class="math display">\[\langle cv,w\rangle=c\langle v,w\rangle = c*0=0\]</span> In this case we choose <span class="math inline">\(c=\frac{\langle u,v\rangle}{\|v\|^2}\)</span> and observe that <span class="math inline">\(w=u-cv\)</span>. Using the pythagorean theorem, observe that</p>
+<p><span class="math display">\[\begin{align}
+\|u\|^2 &amp;= \|cv + (u-cv)\|^2\\
+        &amp;= \|cv + w\|^2\\
+        &amp;= \|cv\|^2 + \|w\|^2\\
+        &amp;= \left(|c|\|v\|\right)^2 + \|w\|^2\\
+        &amp;= |c|^2\|v\|^2 + \|w\|^2\\
+        &amp;= c^2\|v\|^2 + \|w\|^2\\
+        &amp;\geq c^2\|v\|^2
+\end{align}\]</span></p>
+<p>Using this result, observe that</p>
+<p><span class="math display">\[\begin{align}
+\|u\|^2\geq c^2\|v\|^2 &amp;\implies \|u\|^2\geq \left(\frac{\langle u,v\rangle}{\|v\|^2}\right)^2\|v\|^2\\
+                       &amp;\implies \|u\|^2\geq\frac{\langle u,v\rangle^2\|v\|^2}{\|v\|^4}\\
+                       &amp;\implies \|u\|^2\geq\frac{\langle u,v\rangle^2}{\|v\|^2}\\
+                       &amp;\implies \|u\|^2\|v\|^2\geq\langle u,v\rangle^2\\
+                       &amp;\implies \left(\|u\|\|v\|\right)^2\geq\langle u,v\rangle^2\\
+                       &amp;\implies \|u\|\|v\|\geq|\langle u,v\rangle|
+\end{align}\]</span></p>
+<p>Which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Triangle Inequality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space with <span class="math inline">\(u,v\in V\)</span>. Then <span class="math inline">\(\|u+v\|\leq\|u\|+\|v\|\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-95-contents" aria-controls="callout-95" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-95" class="callout-95-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We start from the Cauchy-Schwartz Inequality and continue from there, noting that <span class="math inline">\(\langle u,v\rangle\leq|\langle u,v\rangle|\)</span></p>
+<p><span class="math display">\[\begin{align}
+|\langle u,v\rangle|\leq\|u\|\|v\| &amp;\implies \langle u,v\rangle\leq\|u\|\|v\|\\
+                                   &amp;\implies 2\langle u,v\rangle\leq2\|u\|\|v\|\\
+                                   &amp;\implies \langle u,u\rangle + 2\langle u,v\rangle + \langle v,v\rangle \leq \|u\|^2 + 2\|u\|\|v\| + \|v\|^2\\
+                                   &amp;\implies \langle u,u\rangle + \langle u,v\rangle + \langle v,u\rangle + \langle v,v\rangle\leq\left(\|u\|+\|v\|\right)^2\\
+                                   &amp;\implies \langle u, u+v\rangle + \langle v,u+v\rangle \leq\left(\|u\|+\|v\|\right)^2\\
+                                   &amp;\implies \langle u+v, u+v\rangle +\leq\left(\|u\|+\|v\|\right)^2\\
+                                   &amp;\implies \|u+v\|^2\leq\left(\|u\|+\|v\|\right)^2\\
+                                   &amp;\implies \|u+v\|\leq\|u\|+\|v\|
+                                   &amp;&amp;\blacksquare
+\end{align}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="orthogonal-sets" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="orthogonal-sets"><span class="header-section-number">7.5</span> Orthogonal Sets</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space. Then a set, <span class="math inline">\(\{v_1,...,v_n\}\subseteq V\)</span> is called an <em>orthogonal set</em> if each vector is pairwise orthogonal. That is, <span class="math inline">\(\langle v_i,v_j\rangle=0\)</span> when <span class="math inline">\(i\neq j\)</span></p>
+</blockquote>
+<section id="orthonormal-sets" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="orthonormal-sets"><span class="header-section-number">7.5.1</span> Orthonormal Sets</h3>
+<blockquote class="blockquote">
+<p>A set is called an <em>orthonormal set</em> if it is an orthogonal set and the norm of each vector in the set is 1.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The zero vector cannot be contained in an orthonormal set since the norm of the zero vector is 0.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Orthogonality and Span
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space and let <span class="math inline">\(\{b_1,...,b_n\}\subseteq V\)</span> be an orthonormal set. Then any vector is orthogonal to anything in the span of the remaining vectors. That is <span class="math display">\[\langle b_i, v\rangle=0\]</span> when <span class="math display">\[v\in\text{span}(\{b_j: j\neq i\})\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-98-contents" aria-controls="callout-98" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-98" class="callout-98-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Without loss of generality let <span class="math inline">\(i=n\)</span>. Let <span class="math inline">\(c_1,...,c_{n-1}\in\mathbb R\)</span>. Then observe that</p>
+<p><span class="math display">\[\begin{align}
+\left\langle\sum\limits_{i=1}^{n-1}c_ib_i, b_n\right\rangle &amp;=\sum\limits_{i=1}^{n-1}\left\langle c_ib_i, b_n\right\rangle\\
+&amp;= \sum\limits_{i=1}^{n-1}c_i\left\langle b_i,b_n\right\rangle\\
+&amp;= \sum\limits_{i=1}^{n-1}(c_i*0)\\
+&amp;= \sum\limits_{i=1}^{n-1}0\\
+&amp;= 0
+\end{align}\]</span></p>
+<p>Thus, <span class="math inline">\(b_n\)</span> is orthogonal to anything in the span of the remaining vectors. Since the choice of <span class="math inline">\(i=n\)</span> was arbitrary, this proves the theorem.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Expanded Pythagorean Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(V\)</span> be an inner product space and let <span class="math inline">\(\{b_1,...,b_n\}\subseteq V\)</span> be an orthonormal set and let <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span>. Then <span class="math display">\[\left\|\sum\limits_{i=1}^nc_ib_i\right\|^2 = \sum\limits_{i=1}^nc_i^2\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-100-contents" aria-controls="callout-100" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-100" class="callout-100-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>We will prove this by induction on <span class="math inline">\(n\)</span>, the number of vectors in the orthonormal set.</p>
+<p>In the base case with <span class="math inline">\(n=1\)</span>, observe that</p>
+<p><span class="math display">\[\begin{align}
+\left\|\sum\limits_{i=1}^1c_ib_i\right\|^2 &amp;= \|c_1b_1\|^2\\
+                                         &amp;= |c_1|^2\|b\|^2\\
+                                         &amp;= |c_1|^2*1^2\\
+                                         &amp;= c_1^2\\
+                                         &amp;= \sum\limits_{i=1}^1c_i^2
+\end{align}\]</span></p>
+<p>For the induction hypothesis, suppose the theorem is true for some <span class="math inline">\(k\in\mathbb N\)</span>. Then observe</p>
+<p><span class="math display">\[\begin{align}
+\left\|\sum\limits_{i=1}^{k+1}c_ib_i\right\|^2 &amp;= \left\|c_{k+1}b_{k+1}+\sum\limits_{i=1}^{k}c_ib_i\right\|^2\\
+&amp;= \|c_{k+1}b_{k+1}\|^2 + \left\|\sum\limits_{i=1}^{k}c_ib_i\right\|^2\\
+&amp;= |c_{k+1}|^2\|b_{k+1}\|^2 + \sum\limits_{i=1}^k|c_i|^2\\
+&amp;= |c_{k+1}|^2*1^2 + \sum\limits_{i=1}^k|c_i|^2\\
+&amp;= |c_{k+1}|^2+ \sum\limits_{i=1}^k|c_i|^2\\
+&amp;= \sum\limits_{i=1}^{k+1}|c_i|^2\\
+&amp;= \sum\limits_{i=1}^{k+1}c_i^2
+&amp;&amp;\blacksquare
+\end{align}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Linear Independence and Orthonormality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An orthonormal set is a linearly independent set.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-102-contents" aria-controls="callout-102" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-102" class="callout-102-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\{b_1,...,b_n\}\)</span> be an orthonormal set, and let <span class="math inline">\(c_1,...,c_n\in\mathbb R\)</span> such that <span class="math display">\[\sum\limits_{i=1}^{n}c_ib_i=\textbf{0}\]</span> Observe that</p>
+<p><span class="math display">\[\begin{align}
+\sum\limits_{i=1}^{n}c_ib_i=\textbf{0} &amp;\implies \left\|\sum\limits_{i=1}^{n}c_ib_i\right\|^2 = \|\textbf{0}\|^2\\
+&amp;\implies\sum\limits_{i=1}^nc_i^2=0\\
+\end{align}\]</span></p>
+<p>We take care to note that <span class="math inline">\(\sum\limits_{i=1}^nc_i^2\)</span> is the sum of non-negative terms. Since this sum equals 0, that means that every term in the sum is zero. Observe that</p>
+<p><span class="math display">\[\begin{align}
+|c_i|^2 = 0 &amp;\implies c_i^2=0\\
+&amp;\implies c_i=0
+\end{align}\]</span></p>
+<p>Thus, the orthonormal set is linearly independent, which is what we wanted to show. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-orthonormal-basis" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="the-orthonormal-basis"><span class="header-section-number">7.6</span> The Orthonormal Basis</h2>
 </section>
 </section>
 
@@ -2261,6 +2572,8 @@ Inner Products of Sums
 <li id="fn24"><p>In fact, this proves that if a linear map, <span class="math inline">\(ST\)</span>, is invertible, that <span class="math inline">\((ST)^{-1}=T^{-1}S^{-1}\)</span><a href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn25"><p>positivity of inner products<a href="#fnref25" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn26"><p>symmetry of inner products<a href="#fnref26" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn27"><p>d and e represent the linearity of inner products<a href="#fnref27" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn28"><p>In some texts, the term here is the <em>induced norm</em> by the inner product, and the notion of a norm is generalized to be a function that has a particular set of properties, including those proved in the following theorem.<a href="#fnref28" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
