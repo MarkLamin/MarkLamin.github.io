@@ -1,0 +1,369 @@
+---
+title: "Linear Models for (Bio) Statisticians"
+author: "Mark Lamin"
+format: html
+editor: visual
+theme:
+  dark: darkly
+  light: flatly
+toc: true
+toc-title: Contents
+number-sections: true
+---
+
+# Random Vectors and Matrices
+
+> A *random vector* is a vector whose entries are random variables. That is, if $Y_1,...,Y_n$ are random variables, then $$\mathbf{Y} = \begin{bmatrix}Y_1\\
+\vdots\\
+Y_n\end{bmatrix}$$ is a random vector. A *random matrix* is a matrix whose entries are random variables.
+
+## Expected Value
+
+> The *expected value* of a vector is defined as follows: $$\mathbb{E}[\mathbf{Y}] = \begin{bmatrix}\mathbb{E}[Y_1]\\ \vdots \\ \mathbb{E}[Y_n]\end{bmatrix}$$
+
+> The *expected value* of a matrix is defined similarly. Let $\mathbf{X}$ be an $n\times p$ random matrix. Then $$\mathbb{E}[\mathbf X] = \mathbb{E}\left[
+\begin{bmatrix}
+X_{1,1} & X_{1,2} & \cdots & X_{1,p}\\
+X_{2,1} & X_{2,2} & \cdots & X_{2,p}\\
+\vdots & \vdots & \ddots & \vdots\\
+X_{n,1} & X_{n, 2} & \cdots & X_{n,p}
+\end{bmatrix}
+\right] = \begin{bmatrix}
+\mathbb E[X_{1,1}] & \mathbb E[X_{1,2}] & \cdots & \mathbb E[X_{1,p}]\\
+\mathbb E[X_{2,1}] & \mathbb E[X_{2,2}] & \cdots & \mathbb E[X_{2,p}]\\
+\vdots & \vdots & \ddots & \vdots\\
+\mathbb E[X_{n,1}] & \mathbb E[X_{n, 2}] & \cdots & \mathbb E[X_{n,p}]
+\end{bmatrix}$$
+
+:::{.callout-note}
+## Theorem: Linearity of Expectation
+Let $X$ be a $n\times p$ random matrix, let $A\in\mathbb R^{m\times n}$, and let $b\in\mathbb R^{m\times p}$. Then, $$\mathbb E[AX + b] = A\mathbb E[X] + b$$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+:::{.callout-note}
+## Theorem: Expectation and Transpose
+Let $X$ be a random matrix, then $\mathbb E\left[X^T\right]=\left(\mathbb E[X]\right)^T$.
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+## Variance
+
+> The *variance* of a random vector, $Y$ with $\mathbb E[Y]=\mu$ is the matrix defined as $$Var[Y]=\mathbb E\left[(\mathbf Y - \mu)(\mathbf Y - \mu)^{T}\right]$$
+
+:::{.callout-note}
+## Theorem: Variance
+Let $\mathbf{Y}=\begin{bmatrix}Y_1\\ \vdots \\ Y_n\end{bmatrix}$ be an n-dimensional random vector with $\mathbb E[\mathbf Y]=\mu\in\mathbb R^{n}$. Let $\sigma_i^2=Var[Y_i]$ and $\sigma_{i,j}=Cov(Y_i, Y_j)$. Then, $$\mathbb E\left[(\mathbf Y - \mu)(\mathbf Y - \mu)^{T}\right] = \mathbb E\left[YY^{T}\right] - \mu\mu^{T} = \begin{bmatrix}
+\sigma_{1}^2 & \sigma_{1,2} & \cdots & \sigma_{1,n}\\
+\sigma_{2,1} & \sigma_{2}^2 & \cdots & \sigma_{2,n}\\
+\vdots & \vdots & \ddots & \vdots\\
+\sigma_{n,1} & \sigma_{n, 2} & \cdots & \sigma_{n}^2
+\end{bmatrix}$$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+:::{.callout-note}
+## Theorem: 
+Let $X$ be a $n\times p$ random matrix, let $A\in\mathbb R^{m\times n}$, and let $b\in\mathbb R^{m\times p}$. Then, $$Var[AX+b] = AVar[X]A^{T}$$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+:::{.callout-warning}
+## A note on notation
+
+If $Y$ is a random vector with expected value $\mu\in\mathbb R^n$ and variance matrix $\Sigma\in\mathbb R^{n\times n}$, we say that $Y\sim(\mu, \Sigma)$
+:::
+
+## Estimating Parameters
+
+:::{.callout-tip}
+## Identity Matrix
+Recall that $I$ is the identity matrix, that is, $$I=\begin{bmatrix}
+1 & 0 & \cdots & 0\\
+0 & 1 & \cdots & 0\\
+\vdots & \vdots & \ddots & \vdots\\
+0 & 0 & \cdots & 1
+\end{bmatrix}$$
+
+Where $I$ is a square matrix whose dimension is understood from context.
+:::
+
+
+Let $\varepsilon$ be a subspace of $\mathbb R^{n}$. Then, let $Y\sim(\mu,\sigma^2I)$ be a $n$-dimensional random vector with $\mu\in\varepsilon$ and $\sigma\in\mathbb R$. Then, (like the good little statisticians we are), we are interested in estimating $\mu$ and $\sigma^2$.
+
+:::{.callout-tip}
+Since $Var[Y]=\sigma^2I$, that means that $Var[Y_1]=...=Var[Y_n]$ and that $Cov(Y_i,Y_j)=0$ for all $i\neq j$, where $Y_i$ is the $i$th entry of the random vector $Y$.
+:::
+
+### A digression on inner products and norms
+
+> The *dot product* is an operation whose input is two vectors (of same dimension) and whose output is a real number. If $a=\begin{bmatrix}a_1\\ \vdots \\ a_n\end{bmatrix}$, and $b = \begin{bmatrix}b_1\\ \vdots \\ b_n\end{bmatrix}$, then the dot product of $a$ and $b$, notated as $a\cdot b$, is defined as $$a\cdot b = a^{T}b = \sum\limits_{i=1}^n a_ib_i$$
+
+:::{.callout-note}
+## Theorem: Dot Products and Inner Products
+The dot product is an inner product, as defined on a real vector space.
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+Thus, for each vector in $\mathbb R^n$, we can define the norm as $\|a\|=\sqrt{a\cdot a}=\sqrt{a_1^2+...+a_n^2}$.
+
+### Ordinary Least Squares Estimators
+
+One way to estimate $mu$ is to choose $\hat{\mu}\in\varepsilon$ such that $\|y-\hat{\mu}\|$. This estimator is notated as $\hat{\mu}_{OLS}$. We know from the theory of inner product spaces that $$\hat{\mu}_{OLS} = \text{Proj}_{\varepsilon}(Y)$$
+
+:::{.callout-caution}
+## A Note on Notation
+For the rest of these notes, $P_\varepsilon y=\text{Proj}_\varepsilon(y)$
+:::
+
+:::{.callout-note}
+## Theorem: Projection as Linear Map
+Let $y\in\mathbb R^n$ and let $\varepsilon$ be a subspace of $\mathbb R^n$, then $P_\varepsilon$ is a linear map and can therefore be represented as a matrix.
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+ To see how $P_\varepsilon$ can be written as a matrix, let $\{b_1,...,b_p\}$ be an orthonormal basis for $\varepsilon$^[We know such a basis exists since $\varepsilon$ is finite dimensional.]. Define $B$ to be the $n\times p$ matrix whose columns are the $b_i$'s. Then, for all $y=\begin{bmatrix}y_1\\\vdots\\y_n\end{bmatrix}\in\mathbb R^n$, 
+ 
+ \begin{align*}
+ P_\varepsilon y &= \sum\limits_{j=1}^p(y\cdot b_j)b_j\\
+ &= B\begin{bmatrix}y\cdot b_1\\y\cdot b_2\\\vdots\\y\cdot b_p\end{bmatrix}\\
+ &= BB^{T}y
+ \end{align*}
+ 
+Thus, $P_\varepsilon=BB^{T}$. Of course, this is not the only way to characterize $P_\varepsilon$, as we will see later in these notes.
+ 
+:::{.callout-note}
+## Theorem: Orthogonal Basis Matrix
+Let $B$ be defined as above. Then, $B^TB=I\in\mathbb R^{p\times p}$.
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+:::{.callout-note}
+## Theorem
+$P_\varepsilon P_\varepsilon^T =P_\varepsilon$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+
+Observe that
+
+\begin{align*}
+P_\varepsilon P_\varepsilon^T &= BB^T(BB^T)^T\\
+&= BB^TBB^T\\
+&= B(B^TB)B^T\\
+&=BB^T\\
+&=P_\varepsilon\\
+&&\blacksquare
+\end{align*}
+:::
+
+:::{.callout-note}
+## Theorem: 
+$P_\varepsilon^{T}P_\varepsilon = P_\varepsilon$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+Observe that
+
+$$
+\begin{align*}
+P_\varepsilon^{T}P_\varepsilon &= (BB^T)^TBB^T\\
+&= BB^TBB^T\\
+&= B(B^TB)B^T\\
+&= BIB^T\\
+&= BB^T\\
+&= P_\varepsilon
+\end{align*}
+$$
+:::
+
+:::{.callout-note}
+## Theorem: 
+$P_\varepsilon=P_\varepsilon^T$, thus $P_\varepsilon^2=P_\varepsilon$.
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+TBD
+:::
+
+### Orthogonal Complements
+
+Recall that for a subspace, $\varepsilon$, that $\varepsilon^{\perp}$^[Sometimes this is pronounced as epsilon *perp*.] is the orthogonal complement to $\varepsilon$, that is, the set of vectors that are orthogonal to every vector in $\varepsilon$. $\varepsilon^{\perp}$ is a subspace of $\mathbb R^n$, and every vector, $y\in\mathbb R^n$ has a unique decomposition as the sum of an element in $\varepsilon$ and an element in $\varepsilon^{\perp}$. 
+
+> $Q_{\varepsilon}$ is defined to be $P_{\varepsilon^\perp}$.
+
+Then, for all $y\in\mathbb R^n$, $$y=P_\varepsilon y + Q_\varepsilon y \implies P_\varepsilon + Q_\varepsilon = I$$
+
+### Properties of the OLS Estimator
+
+:::{.callout-note}
+## Theorem: 
+$$E\left[\hat{\mu}_{OLS}\right]=\mu$$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+
+Observe that
+
+\begin{align*}
+\mathbb E\left[\hat{\mu}_{OLS}\right] &= \mathbb E\left[P_\varepsilon Y\right]\\
+&= P_\varepsilon\mathbb E\left[Y\right]\\
+&= P_\varepsilon\mu\\
+&= \mu\text{ (since }\mu\in\varepsilon\text{)}\\
+&&\blacksquare
+\end{align*}
+:::
+
+
+Thus, $\hat{\mu}_{OLS}$ is unbiased.
+
+:::{.callout-note}
+## Theorem: 
+$$Var\left[\hat{\mu}_{OLS}\right] = \sigma^2P_\varepsilon$$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+Observe that
+
+\begin{align*}
+Var\left[\hat{\mu}_{OLS}\right] &= Var[P_\varepsilon Y]\\
+&= P_\varepsilon Var[Y]P_\varepsilon^T\\
+&= P_\varepsilon (\sigma^2I)P_\varepsilon^T\\
+&= \sigma^2P_\varepsilon IP_\varepsilon^T\\
+&= \sigma^2P_\varepsilon P_\varepsilon^T\\
+&= \sigma^2P_\varepsilon\\
+&&\blacksquare
+\end{align*}
+:::
+
+### Estimating Distances
+
+:::{.callout-note}
+## Theorem
+$$\mathbb E\left[\|Y-\mu\|^2\right] = n\sigma^2$$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+Observe that
+
+\begin{align*}
+\mathbb E\left[\|Y-\mu\|^2\right] &= \mathbb E\left[(Y-\mu)^T(Y-\mu)\right]\\
+&= \mathbb E\left[(Y^T-\mu^T)(Y-\mu)\right]\\
+&= \mathbb E\left[Y^TY-Y^T\mu - \mu^T Y + \mu^T\mu\right]\\
+&= \mathbb E\left[Y^TY\right] - \mathbb E\left[Y^T\mu\right] - \mathbb E\left[\mu^TY\right] + \mathbb E\left[\mu^T\mu\right]\\
+&= \mathbb E\left[\|Y\|^2\right] - \mathbb E\left[Y\cdot\mu\right]-\mathbb E\left[\mu\cdot Y\right] + \mathbb E\left[\|\mu\|^2\right]\\
+&= \mathbb E\left[\sum\limits_{i=1}^nY_i^2\right] - \mathbb E\left[\mu\cdot Y\right]-\mathbb E\left[\mu\cdot Y\right] +\|\mu\|^2\\
+&= \sum\limits_{i=1}^n\mathbb E\left[Y_i^2\right] -2\mathbb E\left[\mu\cdot Y\right] + \|\mu\|^2\\
+&= \sum\limits_{i=1}^n(\sigma^2 + \left(\mathbb E[Y_i]\right)^2) -2\mathbb E\left[\mu^T Y\right] + \|\mu\|^2\\
+&= n\sigma^2 + \sum\limits_{i=1}^n(\mathbb E[Y_i])^2 -2\mu^T\mathbb E\left[ Y\right] + \|\mu\|^2\\
+&= n\sigma^2 + \left\|\begin{bmatrix}\mathbb E[Y_1]\\\vdots\\\mathbb E[Y_n]\end{bmatrix}\right\|^2 -2\mu^T\mu + \|\mu\|^2\\
+&= n\sigma^2 + \|\mu\|^2 - 2\|\mu\|^2 + \|\mu\|^2\\
+&= n\sigma^2\\
+&&\blacksquare
+\end{align*}
+:::
+
+:::{.callout-note}
+## Theorem
+$\mathbb E[Y^TP_{\varepsilon}Y]=\sigma^2*dim(\varepsilon)$
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+This is a HW Exercise
+:::
+
+:::{.callout-note}
+## Theorem: 
+
+$\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right]=(n-p)\sigma^2$ where $p=dim(\epsilon)$.
+:::
+
+:::{.callout-note collapse=true}
+## Proof
+\begin{align*}
+\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right] &= \mathbb E\left[\|IY-P_{\varepsilon}Y\|^2\right]\\
+&=\mathbb E\left[\|(I-P_{\varepsilon})Y\|^2\right]\\
+&=\mathbb E\left[\|Q_{\varepsilon}Y\|^2\right]\\
+&=\mathbb E\left[(Q_{\varepsilon}Y)^TQ_{\varepsilon}Y\right]\\
+&=\mathbb E\left[Y^TQ_{\varepsilon}^TQ_{\varepsilon}Y\right]\\
+&=\mathbb E\left[Y^TQ_{\varepsilon}Y\right]\\
+&=(n-p)\sigma^2 &\text{ (because }dim(\varepsilon^\perp)=dim(\mathbb R^n)-\dim(\varepsilon)\text{)}\\
+&&\blacksquare
+\end{align*}
+:::
+
+This result shows that $$\frac{\|Y-\hat{\mu}_{OLS}\|^2}{n-p}$$ is an unbiased estimator for $\sigma^2$.
+
+Additionally in consideration is $\|\hat{\mu}_{OLS}-\mu\|^2$, observe that
+
+$$
+\begin{align*}
+\mathbb E\left[\|\hat{\mu}_{OLS}-\mu\|^2\right] &= \mathbb E\left[\|P_\varepsilon Y-P_\varepsilon\mu\|^2\right]\\
+&=\mathbb E\left[\|P_\varepsilon (Y-\mu)\|^2\right]\\
+&=\mathbb E\left[(P_\varepsilon (Y-\mu))^TP_\varepsilon (Y-\mu)\right]\\
+&=\mathbb E\left[ (Y-\mu)^TP_\varepsilon^T P_\varepsilon (Y-\mu)\right]\\
+&=\mathbb E\left[ (Y-\mu)^T P_\varepsilon (Y-\mu)\right]\\
+&=p\sigma^2 
+\end{align*}
+$$
+
+### Example: Equal Means
+
+Suppose $\varepsilon=\text{span}\left(\begin{bmatrix} 1 \\ \vdots \\ 1\end{bmatrix}\right)\subset\mathbb R^n$. Note that this is equivalent to saying $\mathbb E[Y_1]=\cdots=\mathbb E[Y_n]$. Observe that
+
+\begin{align*}
+\left\|\begin{bmatrix}\left(\frac{1}{\sqrt{n}}\right)\\ \vdots \\ \left(\frac{1}{\sqrt{n}}\right)\end{bmatrix}\right\|^2 &= \sum\limits_{i=1}^n\left(\frac{1}{\sqrt{n}}\right)^2\\
+&= n*\left(\frac{1}{\sqrt{n}}\right)^2\\
+&= n*\frac{1}{n}\\
+&= 1
+\end{align*}
+
+Thus, $\left\{\begin{bmatrix}\left(\frac{1}{\sqrt{n}}\right)\\ \vdots \\ \left(\frac{1}{\sqrt{n}}\right)\end{bmatrix}\right\}$ is an orthonormal basis of $\varepsilon$. Let $b=\begin{bmatrix}\left(\frac{1}{\sqrt{n}}\right)\\ \vdots \\ \left(\frac{1}{\sqrt{n}}\right)\end{bmatrix}$. Then, for all $Y\in\mathbb R^n$,
+
+\begin{align*}
+P_{\varepsilon}Y &= (b\cdot Y)b\\
+&= \left(\sum\limits_{i=1}^n\frac{Y_i}{\sqrt{n}}\right)b\\
+&= \sqrt{n}\overline{Y}\begin{bmatrix}\left(\frac{1}{\sqrt{n}}\right)\\ \vdots \\ \left(\frac{1}{\sqrt{n}}\right)\end{bmatrix}\\
+&=\begin{bmatrix}\overline{Y}\\ \vdots \\ \overline{Y}\end{bmatrix}
+\end{align*}
+
+Where we note that $\overline{Y}=\frac{1}{n}\sum\limits_{i=1}^nY_i$.
+
+Then in this case $$\hat{\mu}_{OLS}=\begin{bmatrix}\overline{Y}\\ \vdots \\ \overline{Y}\end{bmatrix}$$ So $$\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right]=(n-1)\sigma^2$$
+
+The estimator for $\sigma^2$ is $\frac{\sum\limits_{i=1}^n\left(Y_i-\overline{Y}\right)^2}{n-1}$ which is also known as $S^2$ to many statisticians.
