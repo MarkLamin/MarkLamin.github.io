@@ -81,16 +81,24 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#expected-value" id="toc-expected-value" class="nav-link" data-scroll-target="#expected-value"><span class="header-section-number">1.1</span> Expected Value</a></li>
   <li><a href="#variance" id="toc-variance" class="nav-link" data-scroll-target="#variance"><span class="header-section-number">1.2</span> Variance</a></li>
-  <li><a href="#estimating-parameters" id="toc-estimating-parameters" class="nav-link" data-scroll-target="#estimating-parameters"><span class="header-section-number">1.3</span> Estimating Parameters</a>
+  <li><a href="#other-expectation-theorems" id="toc-other-expectation-theorems" class="nav-link" data-scroll-target="#other-expectation-theorems"><span class="header-section-number">1.3</span> Other Expectation Theorems</a></li>
+  <li><a href="#estimating-parameters" id="toc-estimating-parameters" class="nav-link" data-scroll-target="#estimating-parameters"><span class="header-section-number">1.4</span> Estimating Parameters</a>
   <ul class="collapse">
-  <li><a href="#a-digression-on-inner-products-and-norms" id="toc-a-digression-on-inner-products-and-norms" class="nav-link" data-scroll-target="#a-digression-on-inner-products-and-norms"><span class="header-section-number">1.3.1</span> A digression on inner products and norms</a></li>
-  <li><a href="#ordinary-least-squares-estimators" id="toc-ordinary-least-squares-estimators" class="nav-link" data-scroll-target="#ordinary-least-squares-estimators"><span class="header-section-number">1.3.2</span> Ordinary Least Squares Estimators</a></li>
-  <li><a href="#orthogonal-complements" id="toc-orthogonal-complements" class="nav-link" data-scroll-target="#orthogonal-complements"><span class="header-section-number">1.3.3</span> Orthogonal Complements</a></li>
-  <li><a href="#properties-of-the-ols-estimator" id="toc-properties-of-the-ols-estimator" class="nav-link" data-scroll-target="#properties-of-the-ols-estimator"><span class="header-section-number">1.3.4</span> Properties of the OLS Estimator</a></li>
-  <li><a href="#estimating-distances" id="toc-estimating-distances" class="nav-link" data-scroll-target="#estimating-distances"><span class="header-section-number">1.3.5</span> Estimating Distances</a></li>
-  <li><a href="#example-equal-means" id="toc-example-equal-means" class="nav-link" data-scroll-target="#example-equal-means"><span class="header-section-number">1.3.6</span> Example: Equal Means</a></li>
+  <li><a href="#a-digression-on-inner-products-and-norms" id="toc-a-digression-on-inner-products-and-norms" class="nav-link" data-scroll-target="#a-digression-on-inner-products-and-norms"><span class="header-section-number">1.4.1</span> A digression on inner products and norms</a></li>
+  <li><a href="#ordinary-least-squares-estimators" id="toc-ordinary-least-squares-estimators" class="nav-link" data-scroll-target="#ordinary-least-squares-estimators"><span class="header-section-number">1.4.2</span> Ordinary Least Squares Estimators</a></li>
+  <li><a href="#orthogonal-complements" id="toc-orthogonal-complements" class="nav-link" data-scroll-target="#orthogonal-complements"><span class="header-section-number">1.4.3</span> Orthogonal Complements</a></li>
+  <li><a href="#properties-of-the-ols-estimator" id="toc-properties-of-the-ols-estimator" class="nav-link" data-scroll-target="#properties-of-the-ols-estimator"><span class="header-section-number">1.4.4</span> Properties of the OLS Estimator</a></li>
+  <li><a href="#estimating-distances" id="toc-estimating-distances" class="nav-link" data-scroll-target="#estimating-distances"><span class="header-section-number">1.4.5</span> Estimating Distances</a></li>
+  <li><a href="#example-equal-means" id="toc-example-equal-means" class="nav-link" data-scroll-target="#example-equal-means"><span class="header-section-number">1.4.6</span> Example: Equal Means</a></li>
   </ul></li>
+  <li><a href="#another-way-to-find-the-projection-matrix" id="toc-another-way-to-find-the-projection-matrix" class="nav-link" data-scroll-target="#another-way-to-find-the-projection-matrix"><span class="header-section-number">1.5</span> Another Way to Find the Projection Matrix</a></li>
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance"><span class="header-section-number">1.6</span> Covariance</a>
+  <ul class="collapse">
+  <li><a href="#back-to-estimators" id="toc-back-to-estimators" class="nav-link" data-scroll-target="#back-to-estimators"><span class="header-section-number">1.6.1</span> Back to estimators</a></li>
   </ul></li>
+  <li><a href="#in-summary" id="toc-in-summary" class="nav-link" data-scroll-target="#in-summary"><span class="header-section-number">1.7</span> In Summary</a></li>
+  </ul></li>
+  <li><a href="#evaluating-estimators" id="toc-evaluating-estimators" class="nav-link" data-scroll-target="#evaluating-estimators"><span class="header-section-number">2</span> Evaluating Estimators</a></li>
   </ul>
 </nav>
 </div>
@@ -289,8 +297,48 @@ A note on notation
 </div>
 </div>
 </section>
-<section id="estimating-parameters" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="estimating-parameters"><span class="header-section-number">1.3</span> Estimating Parameters</h2>
+<section id="other-expectation-theorems" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="other-expectation-theorems"><span class="header-section-number">1.3</span> Other Expectation Theorems</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(Y\sim(\mu, \Sigma)\)</span> be an n-dimensional random vector. Then <span class="math display">\[\mathbb E\left[Y^TY\right]=\text{trace}(\Sigma)+\mu^T\mu\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(Y=\begin{bmatrix}Y_1\\ \vdots \\Y_n\end{bmatrix}\)</span> where the <span class="math inline">\(Y_i\)</span>’s are random variables. Then observe that</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb E\left[Y^TY\right] &amp;= \mathbb E\left[Y\cdot Y\right]\\
+&amp;= \mathbb E\left[\sum\limits_{i=1}^nY_i^2\right]\\
+&amp;= \sum\limits_{i=1}^n\mathbb E[Y_i^2]\\
+&amp;= \sum\limits_{i=1}^n\left(Var[Y_i] + \left(\mathbb E[Y_i]\right)^2\right)\\
+&amp;= \sum\limits_{i=1}^nVar[Y_i] + \sum\limits_{i=1}^n\left(\mathbb E[Y_i]\right)^2\\
+&amp;= \text{trace}(\Sigma) + \mu^T\mu
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="estimating-parameters" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="estimating-parameters"><span class="header-section-number">1.4</span> Estimating Parameters</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -310,7 +358,7 @@ Identity Matrix
 <p>Where <span class="math inline">\(I\)</span> is a square matrix whose dimension is understood from context.</p>
 </div>
 </div>
-<p>Let <span class="math inline">\(\varepsilon\)</span> be a subspace of <span class="math inline">\(\mathbb R^{n}\)</span>. Then, let <span class="math inline">\(Y\sim(\mu,\sigma^2I)\)</span> be a <span class="math inline">\(n\)</span>-dimensional random vector with <span class="math inline">\(\mu\in\varepsilon\)</span> and <span class="math inline">\(\sigma\in\mathbb R\)</span>. Then, (like the good little statisticians we are), we are interested in estimating <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Let <span class="math inline">\(\varepsilon\)</span> be a subspace of <span class="math inline">\(\mathbb R^{n}\)</span> such that <span class="math inline">\(dim(\varepsilon)=p&lt;n\)</span>. Then, let <span class="math inline">\(Y\sim(\mu,\sigma^2I)\)</span> be a <span class="math inline">\(n\)</span>-dimensional random vector with <span class="math inline">\(\mu\in\varepsilon\)</span> and <span class="math inline">\(\sigma\in\mathbb R\)</span>. Then, (like the good little statisticians we are), we are interested in estimating <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -324,8 +372,8 @@ Tip
 <p>Since <span class="math inline">\(Var[Y]=\sigma^2I\)</span>, that means that <span class="math inline">\(Var[Y_1]=...=Var[Y_n]\)</span> and that <span class="math inline">\(Cov(Y_i,Y_j)=0\)</span> for all <span class="math inline">\(i\neq j\)</span>, where <span class="math inline">\(Y_i\)</span> is the <span class="math inline">\(i\)</span>th entry of the random vector <span class="math inline">\(Y\)</span>.</p>
 </div>
 </div>
-<section id="a-digression-on-inner-products-and-norms" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="a-digression-on-inner-products-and-norms"><span class="header-section-number">1.3.1</span> A digression on inner products and norms</h3>
+<section id="a-digression-on-inner-products-and-norms" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="a-digression-on-inner-products-and-norms"><span class="header-section-number">1.4.1</span> A digression on inner products and norms</h3>
 <blockquote class="blockquote">
 <p>The <em>dot product</em> is an operation whose input is two vectors (of same dimension) and whose output is a real number. If <span class="math inline">\(a=\begin{bmatrix}a_1\\ \vdots \\ a_n\end{bmatrix}\)</span>, and <span class="math inline">\(b = \begin{bmatrix}b_1\\ \vdots \\ b_n\end{bmatrix}\)</span>, then the dot product of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, notated as <span class="math inline">\(a\cdot b\)</span>, is defined as <span class="math display">\[a\cdot b = a^{T}b = \sum\limits_{i=1}^n a_ib_i\]</span></p>
 </blockquote>
@@ -343,7 +391,7 @@ Theorem: Dot Products and Inner Products
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -352,7 +400,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>TBD</p>
 </div>
@@ -360,9 +408,9 @@ Proof
 </div>
 <p>Thus, for each vector in <span class="math inline">\(\mathbb R^n\)</span>, we can define the norm as <span class="math inline">\(\|a\|=\sqrt{a\cdot a}=\sqrt{a_1^2+...+a_n^2}\)</span>.</p>
 </section>
-<section id="ordinary-least-squares-estimators" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="ordinary-least-squares-estimators"><span class="header-section-number">1.3.2</span> Ordinary Least Squares Estimators</h3>
-<p>One way to estimate <span class="math inline">\(mu\)</span> is to choose <span class="math inline">\(\hat{\mu}\in\varepsilon\)</span> such that <span class="math inline">\(\|y-\hat{\mu}\|\)</span>. This estimator is notated as <span class="math inline">\(\hat{\mu}_{OLS}\)</span>. We know from the theory of inner product spaces that <span class="math display">\[\hat{\mu}_{OLS} = \text{Proj}_{\varepsilon}(Y)\]</span></p>
+<section id="ordinary-least-squares-estimators" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="ordinary-least-squares-estimators"><span class="header-section-number">1.4.2</span> Ordinary Least Squares Estimators</h3>
+<p>One way to estimate <span class="math inline">\(mu\)</span> is to choose <span class="math inline">\(\hat{\mu}\in\varepsilon\)</span> such that <span class="math inline">\(\|y-\hat{\mu}\|\)</span> is minimized. This estimator is notated as <span class="math inline">\(\hat{\mu}_{OLS}\)</span>. We know from the theory of inner product spaces that <span class="math display">\[\hat{\mu}_{OLS} = \text{Proj}_{\varepsilon}(Y)\]</span></p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -390,7 +438,7 @@ Theorem: Projection as Linear Map
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -399,7 +447,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>TBD</p>
 </div>
@@ -426,7 +474,7 @@ Theorem: Orthogonal Basis Matrix
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -435,7 +483,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>TBD</p>
 </div>
@@ -455,7 +503,7 @@ Theorem
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -464,7 +512,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
 <p><span class="math display">\[\begin{align*}
@@ -492,7 +540,7 @@ Theorem:
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -501,19 +549,17 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
-<p><span class="math display">\[
-\begin{align*}
+<p><span class="math display">\[\begin{align*}
 P_\varepsilon^{T}P_\varepsilon &amp;= (BB^T)^TBB^T\\
 &amp;= BB^TBB^T\\
 &amp;= B(B^TB)B^T\\
 &amp;= BIB^T\\
 &amp;= BB^T\\
 &amp;= P_\varepsilon
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
 </div>
 </div>
 </div>
@@ -531,7 +577,7 @@ Theorem:
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -540,23 +586,104 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>TBD</p>
 </div>
 </div>
 </div>
 </section>
-<section id="orthogonal-complements" class="level3" data-number="1.3.3">
-<h3 data-number="1.3.3" class="anchored" data-anchor-id="orthogonal-complements"><span class="header-section-number">1.3.3</span> Orthogonal Complements</h3>
+<section id="orthogonal-complements" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="orthogonal-complements"><span class="header-section-number">1.4.3</span> Orthogonal Complements</h3>
 <p>Recall that for a subspace, <span class="math inline">\(\varepsilon\)</span>, that <span class="math inline">\(\varepsilon^{\perp}\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is the orthogonal complement to <span class="math inline">\(\varepsilon\)</span>, that is, the set of vectors that are orthogonal to every vector in <span class="math inline">\(\varepsilon\)</span>. <span class="math inline">\(\varepsilon^{\perp}\)</span> is a subspace of <span class="math inline">\(\mathbb R^n\)</span>, and every vector, <span class="math inline">\(y\in\mathbb R^n\)</span> has a unique decomposition as the sum of an element in <span class="math inline">\(\varepsilon\)</span> and an element in <span class="math inline">\(\varepsilon^{\perp}\)</span>.</p>
 <blockquote class="blockquote">
 <p><span class="math inline">\(Q_{\varepsilon}\)</span> is defined to be <span class="math inline">\(P_{\varepsilon^\perp}\)</span>.</p>
 </blockquote>
 <p>Then, for all <span class="math inline">\(y\in\mathbb R^n\)</span>, <span class="math display">\[y=P_\varepsilon y + Q_\varepsilon y \implies P_\varepsilon + Q_\varepsilon = I\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(Y\sim(\mu, \sigma^2I)\)</span> be an n-dimensional random vector. Then, <span class="math display">\[\mathbb E\left[Y^TP_\varepsilon Y\right] = p\sigma^2 + \mu^T\mu\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb E\left[Y^TP_\varepsilon Y\right] &amp;= \mathbb E\left[Y^TBB^TY\right]\\
+&amp;=\mathbb E\left[(B^TY)^TB^TY\right]
+\end{align*}\]</span></p>
+<p>Let <span class="math inline">\(A=B^TY\)</span>, then <span class="math inline">\(A\)</span> is a random vector such that <span class="math display">\[\mathbb E[A]=\mathbb E[B^TY]=B^T\mathbb E[Y]=B^T\mu\]</span> and that <span class="math display">\[Var[A] = Var[B^TY] = B^TVar[Y]B = B^T\sigma^2IB=\sigma^2B^TIB=\sigma^2B^TB=\sigma^2I\]</span></p>
+<p>Thus, <span class="math display">\[\begin{align*}
+\mathbb E\left[(B^TY)^TB^TY\right] &amp;= \mathbb E[A^TA]\\
+&amp;=\text{trace}(\sigma^2I) + (B^T\mu)^TB^T\mu\\
+&amp;= \sigma^2\text{trace}(I) + \mu^TBB^T\mu\\
+&amp;= p\sigma^2 + \mu^TP_\varepsilon\mu\\
+&amp;=p\sigma^2 + \mu^T\mu\\
+&amp;&amp;\blacksquare
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(Y\sim(\mu, \sigma^2I)\)</span> be an n-dimensional random vector. Then, <span class="math display">\[\mathbb E\left[Y^TQ_\varepsilon Y\right] = (n-p)\sigma^2\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that <span class="math display">\[\begin{align*}
+\mathbb E\left[Y^TQ_\varepsilon Y\right] &amp;= \mathbb E\left[Y^T(I-P_\varepsilon)Y\right]\\
+&amp;= \mathbb E\left[Y^T(IY-P_\varepsilon Y)\right]\\
+&amp;=\mathbb E\left[Y^T(Y-P_\varepsilon Y)\right]\\
+&amp;=\mathbb E\left[Y^TY-Y^TP_\varepsilon Y\right]\\
+&amp;=\mathbb E\left[Y^TY\right]-\mathbb E\left[Y^TP_\varepsilon Y\right]\\
+&amp;= \text{trace}(\sigma^2I) + \mu^T\mu - (p\sigma^2 + \mu^T\mu)\\
+&amp;= \sigma^2\text{trace}(I) + \mu^T\mu - p\sigma^2 - \mu^T\mu\\
+&amp;= \sigma^2n-p\sigma^2\\
+&amp;= (n-p)\sigma^2
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
 </section>
-<section id="properties-of-the-ols-estimator" class="level3" data-number="1.3.4">
-<h3 data-number="1.3.4" class="anchored" data-anchor-id="properties-of-the-ols-estimator"><span class="header-section-number">1.3.4</span> Properties of the OLS Estimator</h3>
+<section id="properties-of-the-ols-estimator" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="properties-of-the-ols-estimator"><span class="header-section-number">1.4.4</span> Properties of the OLS Estimator</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -571,7 +698,7 @@ Theorem:
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -580,7 +707,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
 <p><span class="math display">\[\begin{align*}
@@ -608,7 +735,7 @@ Theorem:
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -617,7 +744,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
 <p><span class="math display">\[\begin{align*}
@@ -633,8 +760,8 @@ Var\left[\hat{\mu}_{OLS}\right] &amp;= Var[P_\varepsilon Y]\\
 </div>
 </div>
 </section>
-<section id="estimating-distances" class="level3" data-number="1.3.5">
-<h3 data-number="1.3.5" class="anchored" data-anchor-id="estimating-distances"><span class="header-section-number">1.3.5</span> Estimating Distances</h3>
+<section id="estimating-distances" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="estimating-distances"><span class="header-section-number">1.4.5</span> Estimating Distances</h3>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -649,7 +776,7 @@ Theorem
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-36-contents" aria-controls="callout-36" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -658,7 +785,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div id="callout-36" class="callout-36-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Observe that</p>
 <p><span class="math display">\[\begin{align*}
@@ -685,15 +812,15 @@ Proof
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Theorem
+Theorem:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="math inline">\(\mathbb E[Y^TP_{\varepsilon}Y]=\sigma^2*dim(\varepsilon)\)</span></p>
+<p><span class="math inline">\(\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right]=(n-p)\sigma^2\)</span> where <span class="math inline">\(p=dim(\epsilon)\)</span>.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-38-contents" aria-controls="callout-38" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -702,12 +829,22 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div id="callout-38" class="callout-38-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>This is a HW Exercise</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right] &amp;= \mathbb E\left[\|IY-P_{\varepsilon}Y\|^2\right]\\
+&amp;=\mathbb E\left[\|(I-P_{\varepsilon})Y\|^2\right]\\
+&amp;=\mathbb E\left[\|Q_{\varepsilon}Y\|^2\right]\\
+&amp;=\mathbb E\left[(Q_{\varepsilon}Y)^TQ_{\varepsilon}Y\right]\\
+&amp;=\mathbb E\left[Y^TQ_{\varepsilon}^TQ_{\varepsilon}Y\right]\\
+&amp;=\mathbb E\left[Y^TQ_{\varepsilon}Y\right]\\
+&amp;=(n-p)\sigma^2\\
+&amp;&amp;\blacksquare
+\end{align*}\]</span></p>
 </div>
 </div>
 </div>
+<p>This result shows that <span class="math display">\[\frac{\|Y-\hat{\mu}_{OLS}\|^2}{n-p}\]</span> is an unbiased estimator for <span class="math inline">\(\sigma^2\)</span>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -718,11 +855,11 @@ Theorem:
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="math inline">\(\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right]=(n-p)\sigma^2\)</span> where <span class="math inline">\(p=dim(\epsilon)\)</span>.</p>
+<p><span class="math display">\[\mathbb E\left[\|\hat{\mu}_{OLS}-\mu\|^2\right] = p\sigma^2\]</span></p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-40-contents" aria-controls="callout-40" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -731,36 +868,31 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-34" class="callout-34-contents callout-collapse collapse">
+<div id="callout-40" class="callout-40-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><span class="math display">\[\begin{align*}
-\mathbb E\left[\|Y-\hat{\mu}_{OLS}\|^2\right] &amp;= \mathbb E\left[\|IY-P_{\varepsilon}Y\|^2\right]\\
-&amp;=\mathbb E\left[\|(I-P_{\varepsilon})Y\|^2\right]\\
-&amp;=\mathbb E\left[\|Q_{\varepsilon}Y\|^2\right]\\
-&amp;=\mathbb E\left[(Q_{\varepsilon}Y)^TQ_{\varepsilon}Y\right]\\
-&amp;=\mathbb E\left[Y^TQ_{\varepsilon}^TQ_{\varepsilon}Y\right]\\
-&amp;=\mathbb E\left[Y^TQ_{\varepsilon}Y\right]\\
-&amp;=(n-p)\sigma^2 &amp;\text{ (because }dim(\varepsilon^\perp)=dim(\mathbb R^n)-\dim(\varepsilon)\text{)}\\
-&amp;&amp;\blacksquare
-\end{align*}\]</span></p>
-</div>
-</div>
-</div>
-<p>This result shows that <span class="math display">\[\frac{\|Y-\hat{\mu}_{OLS}\|^2}{n-p}\]</span> is an unbiased estimator for <span class="math inline">\(\sigma^2\)</span>.</p>
-<p>Additionally in consideration is <span class="math inline">\(\|\hat{\mu}_{OLS}-\mu\|^2\)</span>, observe that</p>
-<p><span class="math display">\[
-\begin{align*}
 \mathbb E\left[\|\hat{\mu}_{OLS}-\mu\|^2\right] &amp;= \mathbb E\left[\|P_\varepsilon Y-P_\varepsilon\mu\|^2\right]\\
 &amp;=\mathbb E\left[\|P_\varepsilon (Y-\mu)\|^2\right]\\
 &amp;=\mathbb E\left[(P_\varepsilon (Y-\mu))^TP_\varepsilon (Y-\mu)\right]\\
 &amp;=\mathbb E\left[ (Y-\mu)^TP_\varepsilon^T P_\varepsilon (Y-\mu)\right]\\
 &amp;=\mathbb E\left[ (Y-\mu)^T P_\varepsilon (Y-\mu)\right]\\
+&amp;=\mathbb E\left[ (Y-\mu)^T (P_\varepsilon Y-P_\varepsilon\mu)\right]\\
+&amp;=\mathbb E\left[ (Y^T-\mu^T) (P_\varepsilon Y-\mu)\right]\\
+&amp;=\mathbb E\left[Y^TP_\varepsilon Y - Y^T\mu - \mu^TP_\varepsilon Y + \mu^T\mu\right]\\
+&amp;=\mathbb E\left[Y^TP_\varepsilon Y\right] - \mathbb E\left[Y^T\mu\right]- \mu^TP_\varepsilon\mathbb E\left[Y\right] + \mu^T\mu\\
+&amp;=p\sigma^2 + \mu^T\mu - \mathbb E\left[(\mu^TY)^T\right] - (P_\varepsilon^T\mu)^T\mu + \mu^T\mu\\
+&amp;=p\sigma^2 + 2\mu^T\mu - \left(\mathbb E\left[\mu^TY\right]\right)^T - \mu^TP_\varepsilon\mu \\
+&amp;=p\sigma^2 + 2\mu^T\mu-\left(\mu^T\mathbb E[Y]\right)^T-\mu^T\mu\\
+&amp;=p\sigma^2 +\mu^T\mu - (\mu^T\mu)^T\\
+&amp;=p\sigma^2 +\mu^T\mu -\mu^T\mu\\
 &amp;=p\sigma^2
-\end{align*}
-\]</span></p>
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
 </section>
-<section id="example-equal-means" class="level3" data-number="1.3.6">
-<h3 data-number="1.3.6" class="anchored" data-anchor-id="example-equal-means"><span class="header-section-number">1.3.6</span> Example: Equal Means</h3>
+<section id="example-equal-means" class="level3" data-number="1.4.6">
+<h3 data-number="1.4.6" class="anchored" data-anchor-id="example-equal-means"><span class="header-section-number">1.4.6</span> Example: Equal Means</h3>
 <p>Suppose <span class="math inline">\(\varepsilon=\text{span}\left(\begin{bmatrix} 1 \\ \vdots \\ 1\end{bmatrix}\right)\subset\mathbb R^n\)</span>. Note that this is equivalent to saying <span class="math inline">\(\mathbb E[Y_1]=\cdots=\mathbb E[Y_n]\)</span>. Observe that</p>
 <p><span class="math display">\[\begin{align*}
 \left\|\begin{bmatrix}\left(\frac{1}{\sqrt{n}}\right)\\ \vdots \\ \left(\frac{1}{\sqrt{n}}\right)\end{bmatrix}\right\|^2 &amp;= \sum\limits_{i=1}^n\left(\frac{1}{\sqrt{n}}\right)^2\\
@@ -780,6 +912,369 @@ P_{\varepsilon}Y &amp;= (b\cdot Y)b\\
 <p>The estimator for <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(\frac{\sum\limits_{i=1}^n\left(Y_i-\overline{Y}\right)^2}{n-1}\)</span> which is also known as <span class="math inline">\(S^2\)</span> to many statisticians.</p>
 </section>
 </section>
+<section id="another-way-to-find-the-projection-matrix" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="another-way-to-find-the-projection-matrix"><span class="header-section-number">1.5</span> Another Way to Find the Projection Matrix</h2>
+<p>Our goal is to find <span class="math inline">\(\hat\mu\in\varepsilon\)</span> that minimizes <span class="math inline">\(\|Y-\hat\mu\|\)</span>. We know that the optimal choice of <span class="math inline">\(\hat\mu\)</span> will be such that <span class="math inline">\(\hat\mu\in\varepsilon\)</span> and <span class="math inline">\(y-\hat\mu\in\varepsilon^\perp\)</span> by unique decomposition.</p>
+<p>Let <span class="math inline">\(X\)</span> be a matrix such that <span class="math inline">\(\text{Col}(X)=\epsilon\)</span>. Thus, <span class="math inline">\(X\in\mathbb R^{n\times k}\)</span> for some <span class="math inline">\(k\in\mathbb N\)</span>. Then, observe that</p>
+<p><span class="math display">\[\begin{align*}
+\varepsilon &amp;= \text{Col}(X)\\
+&amp;= \text{Linear combinations of columns of }X\\
+&amp;= \left\{X\beta: \beta\in\mathbb R^k\right\}
+\end{align*}\]</span></p>
+<p>Thus, we can estimate <span class="math inline">\(\hat\mu\)</span> by finding <span class="math inline">\(\beta\in\mathbb R^p\)</span> such that <span class="math inline">\(\|Y-X\beta\|\)</span> is minimized. To find what this value of <span class="math inline">\(\beta\)</span> is, we need the following theorem:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(A\in\mathbb R^{n\times m}\)</span>. Then, <span class="math inline">\(\left(\text{Col}(A)\right)^\perp = \text{Null}\left(A^T\right)\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-42-contents" aria-controls="callout-42" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-42" class="callout-42-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>TBD</p>
+</div>
+</div>
+</div>
+<p>Let <span class="math inline">\(\hat\beta\)</span> be the value of <span class="math inline">\(\beta\)</span> that minimizes <span class="math inline">\(\|Y-X\beta\|\)</span>. Then, <span class="math inline">\(X\hat\beta\in\text{Col}(X)\)</span> and <span class="math inline">\(Y-X\hat\beta\in(\text{Col}(X))^\perp\)</span> by unique decomposition. Since <span class="math inline">\(\left(\text{Col}(X)\right)^\perp = \text{Null}\left(X^T\right)\)</span>, then <span class="math inline">\(Y-X\hat\beta\in\text{Null}\left(X^T\right)\)</span> so by definition of a null space, <span class="math inline">\(X^T(Y-X\hat\beta)=0\)</span>. Observe that</p>
+<p><span class="math display">\[\begin{align*}
+X^T(Y-X\hat\beta)=0 &amp;\implies X^TY - X^TX\hat\beta = 0\\
+&amp;\implies X^TY = X^TX\hat\beta
+\end{align*}\]</span></p>
+<p>We need the following theorem to continue:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(A\in\mathbb R^{n\times m}\)</span>. Then <span class="math inline">\(A^TA\)</span> is invertible if and only if <span class="math inline">\(A\)</span>’s columns are linearly independent.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-44-contents" aria-controls="callout-44" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-44" class="callout-44-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>TBD</p>
+</div>
+</div>
+</div>
+<p>Therefore, if <span class="math inline">\(X\)</span> is chosen such that <span class="math inline">\(X\)</span>’s columns are a basis of <span class="math inline">\(\varepsilon\)</span>, then</p>
+<p><span class="math display">\[\begin{align*}
+\hat\beta = (X^TX)^{-1}X^TY &amp;\implies X\hat\beta=X(X^TX)^{-1}X^TY
+\end{align*}\]</span></p>
+<p>Since <span class="math inline">\(X\hat\beta=\hat\mu=P_\varepsilon Y\)</span>, this means that <span class="math inline">\(P_\varepsilon=X(X^TX)^{-1}X^T\)</span> when <span class="math inline">\(X\)</span>’s columns are a basis of <span class="math inline">\(\varepsilon\)</span>.</p>
+<p>If <span class="math inline">\(\beta\in\mathbb R^p\)</span> is defined by the equation, <span class="math inline">\(\mu=X\beta\)</span>, then <span class="math inline">\(\hat\beta = (X^TX)^{-1}X^TY\)</span> can be considered an estimator of <span class="math inline">\(\beta\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Beta is unbiased
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\mathbb E\left[\hat\beta\right]=\beta\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-46-contents" aria-controls="callout-46" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-46" class="callout-46-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb E\left[\hat\beta\right] &amp;= \mathbb E\left[(X^TX)^{-1}X^TY\right]\\
+&amp;= (X^TX)^{-1}X^T\mathbb E\left[Y\right]\\
+&amp;= (X^TX)^{-1}X^T\mu\\
+&amp;= (X^TX)^{-1}X^TX\beta\\
+&amp;= (X^TX)^{-1}(X^TX)\beta\\
+&amp;= I\beta\\
+&amp;= \beta\\
+&amp;&amp;\blacksquare
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(Var\left[\hat\beta\right] = \sigma^2(X^TX)^{-1}\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-48-contents" aria-controls="callout-48" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-48" class="callout-48-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align*}
+Var\left[\hat\beta\right] &amp;= Var\left[(X^TX)^{-1}X^TY\right]\\
+&amp;= (X^TX)^{-1}X^TVar[Y]\left((X^TX)^{-1}X^T\right)^T\\
+&amp;= (X^TX)^{-1}X^T\sigma^2IX((X^TX)^{-1})^T\\
+&amp;= \sigma^2(X^TX)^{-1}X^TX((X^TX)^{T})^{-1}\\
+&amp;= \sigma^2(X^TX)^{-1}(X^TX)(X^TX)^{-1}\\
+&amp;= \sigma^2(X^TX)^{-1}I\\
+&amp;= \sigma^2(X^TX)^{-1}\\
+&amp;&amp;\blacksquare
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+<section id="covariance" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="covariance"><span class="header-section-number">1.6</span> Covariance</h2>
+<p>Let <span class="math inline">\(X,Y\)</span> be two random vectors with dimension <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> respectively. Then, the covariance between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is notated and defined as <span class="math display">\[Cov(X, Y) = \mathbb E\left[\left(X-\mathbb E[X]\right)\left(Y-\mathbb E[Y]\right)^T\right]\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Covariance Properties
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(X,Y\)</span> be two random vectors with dimension <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> respectively. Then <span class="math display">\[Cov(X,Y) = \mathbb E\left[XY^T\right] - \mathbb E[X]\left(\mathbb E[Y]\right)^T\]</span> Also, the <span class="math inline">\(i\)</span>th row and <span class="math inline">\(j\)</span>th column of <span class="math inline">\(Cov(X,Y)\)</span> matrix is <span class="math inline">\(Cov(X_i,Y_j)\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-50-contents" aria-controls="callout-50" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-50" class="callout-50-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>TBD</p>
+</div>
+</div>
+</div>
+<section id="back-to-estimators" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="back-to-estimators"><span class="header-section-number">1.6.1</span> Back to estimators</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem: Residuals and mean are uncorrelated
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\hat e = Y-\hat\mu\)</span>, then <span class="math inline">\(Cov(\hat e, \hat\mu)=0\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-52-contents" aria-controls="callout-52" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-52" class="callout-52-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Observe that</p>
+<p><span class="math display">\[\begin{align*}
+Cov(\hat e, \hat\mu) &amp;= \mathbb E\left[\hat e\hat \mu^T\right] - \mathbb E\left[\hat e\right]\left(\mathbb E\left[\hat\mu\right]\right)^T\\
+&amp;= \mathbb E\left[(Y-\hat\mu)(P_\varepsilon Y)^T\right] - \mathbb E\left[Y-\hat\mu\right]\mu^T\\
+&amp;= \mathbb E\left[(Y-P_\varepsilon Y)Y^TP_\varepsilon^T\right] - \left(\mathbb E[Y] - \mathbb E[\hat\mu]\right)\mu^T\\
+&amp;= \mathbb E\left[(I-P_\varepsilon)YY^TP_\varepsilon\right] - \left(\mu - \mu\right)\mu^T\\
+&amp;= \mathbb E\left[Q_\varepsilon YY^TP_\varepsilon  \right]- 0\mu^T\\
+&amp;= Q_\varepsilon\mathbb E\left[ YY^T  \right]P_\varepsilon - 0\\
+&amp;= Q_\varepsilon(\mathbb E\left[ YY^T  \right] - \mu\mu^T + \mu\mu^T)P_\varepsilon\\
+&amp;= Q_\varepsilon(Var[Y] + \mu\mu^T)P_\varepsilon\\
+&amp;= Q_\varepsilon(\sigma^2I + \mu\mu^T)P_\varepsilon\\
+&amp;= (Q_\varepsilon\sigma^2I + Q_\varepsilon\mu\mu^T)P_\varepsilon\\
+&amp;= (\sigma^2Q_\varepsilon + 0\mu^T)P_\varepsilon\\
+&amp;= (\sigma^2Q_\varepsilon)P_\varepsilon\\
+&amp;=\sigma^2(I-P_\varepsilon)P_\varepsilon\\
+&amp;=\sigma^2(IP_\varepsilon-P_\varepsilon P_\varepsilon)\\
+&amp;=\sigma^2(P_\varepsilon - P_\varepsilon^2)\\
+&amp;=\sigma^2(P_\varepsilon - P_\varepsilon)\\
+&amp;=\sigma^2*0\\
+&amp;=0\\
+&amp;&amp;\blacksquare
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="in-summary" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="in-summary"><span class="header-section-number">1.7</span> In Summary</h2>
+<p>If <span class="math inline">\(\varepsilon\)</span> is a subspace of <span class="math inline">\(\mathbb R^n\)</span> where <span class="math inline">\(dim(\varepsilon)=p&lt;n\)</span>, then let <span class="math inline">\(Y=\mu+e\)</span> where <span class="math inline">\(\mu\in\varepsilon\)</span> is a n-dimensional (constant) vector and <span class="math inline">\(e\sim(0,\sigma^2I)\)</span> is a n-dimensional random vector. Therefore, <span class="math inline">\(Y\)</span> is also a random vector. <span class="math inline">\(\hat\mu=P_\varepsilon Y\)</span>, <span class="math inline">\(\hat e=Y-\hat\mu=Q_\varepsilon Y\)</span>. <span class="math inline">\(\hat e\)</span> and <span class="math inline">\(\hat\mu\)</span> are uncorrelated. <span class="math inline">\(\widehat{\sigma^2}=\frac{\left\|\hat e\right\|^2}{n-p}\)</span>. Is an estimator for <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>If <span class="math inline">\(X\in\mathbb R^{n\times p}\)</span> is a matrix whose columns are a basis of <span class="math inline">\(\varepsilon\)</span>, then <span class="math inline">\(P_\varepsilon = X(X^TX)^{-1}X^T\)</span>. If <span class="math inline">\(X\)</span>’s columns are an orthonormal basis of <span class="math inline">\(\varepsilon\)</span>, then <span class="math inline">\(P_\varepsilon=XX^T\)</span>. There exists a vector, <span class="math inline">\(\beta\in\mathbb R^p\)</span>, such that <span class="math inline">\(\mu=X\beta\)</span>. Then, an estimator of <span class="math inline">\(\beta\)</span> can be defined such that <span class="math inline">\(\hat\mu = X\hat\beta\)</span>. <span class="math inline">\(\mathbb E\left[\hat\beta\right]=\beta\)</span> and <span class="math inline">\(Var\left[\hat\beta\right]=\sigma^2(X^TX)^{-1}\)</span>.</p>
+</section>
+</section>
+<section id="evaluating-estimators" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Evaluating Estimators</h1>
+<p>Now that we have an estimator, we want to know how good it is. One property we want is that the estimator is unbiased.</p>
+<blockquote class="blockquote">
+<p>An estimator, <span class="math inline">\(\hat\theta\)</span>, of a parameter, <span class="math inline">\(\theta\)</span> is <em>unbiased</em> if <span class="math display">\[\mathbb E\left[\hat\theta\right]=\theta\]</span></p>
+</blockquote>
+<p>The notion of unbiasedness extends easily from univariate random variables to random vectors and random matrices. However, not every property of univariate random variables functions this way. For instance, we sometimes want to minimize the variance of an estimator. Since the variance of a random vector is a matrix, how do we determine what “low variance” means.</p>
+<p>Instead of considering the variance of an estimator, we can consider a function of the estimator. Let <span class="math inline">\(c\in\mathbb R^n\)</span>. Then, define <span class="math inline">\(\theta=c^T\mu\in\mathbb R\)</span> as a univariate parameter. Then an estimator of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\hat\theta\)</span> is a univariate random variable. Now we can list criteria for an ideal estimator of <span class="math inline">\(\theta\)</span>.</p>
+<blockquote class="blockquote">
+<p>An estimator, <span class="math inline">\(\hat\theta\)</span>, of a parameter, <span class="math inline">\(\theta\)</span> is <em>linear</em> if there exists a vector, <span class="math inline">\(b\in\mathbb R^n\)</span> such that <span class="math inline">\(\hat\theta=b^TY\)</span></p>
+</blockquote>
+<p>Therefore, the ideal estimator of <span class="math inline">\(\theta\)</span>, let’s call <span class="math inline">\(\hat\theta^*\)</span> is one that satisfies the three properties:</p>
+<ol type="I">
+<li><span class="math inline">\(\hat\theta^*\)</span> is unbiased with respect to <span class="math inline">\(\theta\)</span>.</li>
+<li><span class="math inline">\(\hat\theta^*\)</span> is linear with respect to <span class="math inline">\(Y\)</span>.</li>
+<li>For any unbiased and linear estimator of <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\hat\theta\)</span>, <span class="math inline">\(Var\left[\hat\theta^*\right]\leq Var\left[\hat\theta\right]\)</span></li>
+</ol>
+<p>What is this ideal estimator? You will probably not be surprised to learn that this ideal estimator of <span class="math inline">\(c^T\mu\)</span> is <span class="math inline">\(c^T\hat\mu\)</span>. This is what we will prove in this section.</p>
+<p>First observe that</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb E\left[c^T\hat\mu\right] &amp;= c^T\mathbb E\left[\hat\mu\right]\\
+&amp;= c^T\mu\\
+&amp;= \theta
+\end{align*}\]</span></p>
+<p>Thus, <span class="math inline">\(c^T\hat\mu\)</span> is unbiased. Also observe that</p>
+<p><span class="math display">\[\begin{align*}
+c^T\hat\mu &amp;= c^TP_\varepsilon Y\\
+&amp;= (P_\varepsilon^T c)^TY\\
+&amp;= (P_\varepsilon c)^TY
+\end{align*}\]</span></p>
+<p>Since <span class="math inline">\(P_\varepsilon c\in\mathbb R^n\)</span>, this means that <span class="math inline">\(c^T\hat\mu\)</span> is linear with respect to <span class="math inline">\(Y\)</span>, where the choice of <span class="math inline">\(b\)</span> is <span class="math inline">\(P_\varepsilon c\)</span>.</p>
+<p>To show that this estimator minimizes the variance, we need to consider the class of linear and unbiased estimators for <span class="math inline">\(\theta\)</span>. Recall, if an estimator is linear and unbiased, there exists a <span class="math inline">\(b\in\mathbb R^n\)</span> such that <span class="math inline">\(\hat\theta=b^TY\)</span> and that <span class="math inline">\(\mathbb E\left[\hat\theta\right]=c^TY\)</span>. Since <span class="math inline">\(\mathbb E\left[b^TY\right]=b^T\mu\)</span>, <span class="math inline">\(\hat\theta\)</span> is unbiased if and only if <span class="math inline">\(b^T\mu=c^T\mu\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(b^T\mu=c^T\mu\)</span> if and only if <span class="math inline">\(P_\varepsilon b = P_\varepsilon c\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-54-contents" aria-controls="callout-54" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-54" class="callout-54-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First suppose <span class="math inline">\(P_\varepsilon b = P_\varepsilon c\)</span>. Then, observe that</p>
+<p><span class="math display">\[\begin{align*}
+P_\varepsilon b = P_\varepsilon c &amp;\implies \mu^TP_\varepsilon b = \mu^TP_\varepsilon c\\
+&amp;\implies (P_\varepsilon^T\mu)^Tb = (P_\varepsilon^T\mu)^Tc\\
+&amp;\implies (P_\varepsilon\mu)^Tb = (P_\varepsilon\mu)^Tc\\
+&amp;\implies (\mu)^Tb = (\mu)^Tc\\
+&amp;\implies \mu^Tb=\mu^Tc
+\end{align*}\]</span></p>
+<p>Now, suppose that <span class="math inline">\(b^T\mu=c^T\mu\)</span>. Then, observe that</p>
+<p><span class="math display">\[\begin{align*}
+b^T\mu=c^T\mu &amp;\implies b^T\mu-c^T\mu=0\\
+&amp;\implies (b^T-c^T)\mu=0
+\end{align*}\]</span></p>
+</div>
+</div>
+</div>
+<p>Now, we can prove that <span class="math inline">\(c^T\hat\mu\)</span> minimizes the variance of all linear and unbiased estimators.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\hat\theta\)</span> be a linear and unbiased estimator of <span class="math inline">\(\theta\)</span>. Then <span class="math inline">\(Var\left[\hat\theta\right]\leq Var\left[c^T\hat\mu\right]\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-56-contents" aria-controls="callout-56" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-56" class="callout-56-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since <span class="math inline">\(\hat\theta\)</span> is a linear and unbiased estimator, there exists <span class="math inline">\(b\in\mathbb R^n\)</span> such that <span class="math inline">\(\hat\theta=b^TY\)</span>. Thus,</p>
+<p><span class="math display">\[\begin{align*}
+Var\left[\hat\theta\right] &amp;= Var\left[b^TY\right]\\
+&amp;=b^TVar[Y]b\\
+&amp;=b^T\sigma^2Ib\\
+&amp;= \sigma^2b^TIb\\
+&amp;= \sigma^2b^Tb\\
+&amp;= \sigma^2\|b\|^2
+\end{align*}\]</span></p>
+<p>Since <span class="math inline">\(c^T\hat\mu=c^T(P_\varepsilon Y) = (P_\varepsilon c)^TY\)</span>, this means that <span class="math inline">\(Var\left[c^T\hat\mu\right]=\sigma^2\|P_\varepsilon c\|^2\)</span>. From the previous theorem, we know that <span class="math inline">\(\hat\theta\)</span> is an unbiased and linear estimator when <span class="math inline">\(P_\varepsilon c = P_\varepsilon b\)</span>, thus <span class="math inline">\(Var\left[c^T\hat\mu\right]=\sigma^2\|P_\varepsilon b\|^2\)</span>. Since <span class="math inline">\(\|P_\varepsilon b\|^2\leq\|b\|^2\)</span> for all <span class="math inline">\(b\in\mathbb R^n\)</span>, Then <span class="math inline">\(\sigma^2\|P_\varepsilon b\|^2\leq\sigma^2\|b\|^2\)</span>, so <span class="math inline">\(Var\left[\hat\theta\right]\leq Var\left[c^T\hat\mu\right]\)</span>, which is what we wanted to show.</p>
+</div>
+</div>
+</div>
 </section>
 
 
